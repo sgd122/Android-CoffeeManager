@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_home_fragment"
+        android:id="@+id/tv_settings_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="HOME"
+        android:text="Settings"
         android:textSize="30sp"
         android:gravity="center"
     />

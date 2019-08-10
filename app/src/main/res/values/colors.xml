@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#9dd0b5</color>
-    <color name="colorPrimaryDark">#4aad78</color>
+    <color name="colorPrimary">#83d7aa</color>
+    <color name="colorPrimaryDark">#2db16b</color>
     <color name="colorAccent">#434343</color>
 
     <color name="background_status_bar_transparent">#00000000</color>
 
-    <color name="colorGradientStart">#4aad78</color>
-    <color name="colorGradientCenter">#4aad78</color>
-    <color name="colorGradientEnd">#9dd0b5</color>
+    <color name="colorGradientStart">#2db16b</color>
+    <color name="colorGradientCenter">#2db16b</color>
+    <color name="colorGradientEnd">#83d7aa</color>
 
     <color name="color_text_white">#ffffff</color>
     <color name="color_text_greyish_brown">#434343</color>

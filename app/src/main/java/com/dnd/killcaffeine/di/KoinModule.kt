@@ -4,7 +4,6 @@
 package com.dnd.killcaffeine.di
 
 import com.dnd.killcaffeine.main.MainViewModel
-import com.dnd.killcaffeine.main.MainViewPagerAdapter
 import com.dnd.killcaffeine.main.home.MainHomeViewModel
 import com.dnd.killcaffeine.main.settings.MainSettingsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel

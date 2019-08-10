@@ -16,16 +16,14 @@
             android:id="@+id/coffeeImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_centerInParent="true" />
 
         <ImageView
             android:id="@+id/coffeeLogo"
             android:layout_width="20dip"
             android:layout_height="20dip"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 

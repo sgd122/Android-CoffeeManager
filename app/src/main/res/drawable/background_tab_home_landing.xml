@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item>
-        <shape android:shape="rectangle">
-
+<!-- Created by Lee Oh Hyoung on 2019-08-10 -->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="64dp"
+    android:height="100dp"
+    android:viewportWidth="64.0"
+    android:viewportHeight="100.0">
+    <path
+        android:pathData="M0,0 L0,100 L320, 0 Z"
+        android:strokeColor="#00000000"
+        android:strokeWidth="1">
+        <aapt:attr name="android:fillColor">
             <gradient
-                android:angle="225"
-                android:endColor="#4aad78"
-                android:startColor="#9dd0b5" />
-        </shape>
-    </item>
-
-    <item>
-        <rotate
-            android:fromDegrees="70"
-            android:pivotX="0%"
-            android:pivotY="100%"
-            android:toDegrees="-135">
-            <shape android:shape="rectangle">
-                <solid android:color="#fff" />
-            </shape>
-        </rotate>
-    </item>
-
-</layer-list>
+                android:endX="100"
+                android:endY="0"
+                android:startX="0"
+                android:startY="100"
+                android:type="linear">
+                <item
+                    android:color="#2db16b"
+                    android:offset="0.0" />
+                <item
+                    android:color="#2db16b"
+                    android:offset="0.3" />
+                <item
+                    android:color="#83d7aa"
+                    android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>

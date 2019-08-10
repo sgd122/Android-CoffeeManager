@@ -4,8 +4,4 @@
 package com.dnd.killcaffeine
 
 class RequestCode {
-
-    companion object{
-
-    }
 }

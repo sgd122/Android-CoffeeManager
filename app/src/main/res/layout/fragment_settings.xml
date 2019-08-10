@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.dnd.killcaffeine.main.settings.MainSettingsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_main_white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_marginStart="16dp"
+                android:text="설정"
+                android:textColor="@color/color_text_settings_green"
+                android:textSize="24sp"
+                android:fontFamily="@font/scdream9_black"
+                android:includeFontPadding="false"/>
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_set_my_caffeine_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragment_settings_component_height"
+                android:orientation="horizontal"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/background_radius_10dp_white_box"
+                android:elevation="2dp"
+                android:gravity="center|start">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="2dp"
+                    app:srcCompat="@drawable/icon_settings_my_caffeine"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="마이 카페인 설정"
+                    android:textSize="18sp"
+                    android:textColor="@color/color_text_greyish_brown"
+                    android:fontFamily="@font/spoqa_hansans"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="14dp"/>
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_settings_set_notification_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragment_settings_component_height"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_radius_10dp_white_box"
+                android:elevation="2dp"
+                android:gravity="center|start">
+
+                <ImageView
+                    android:id="@+id/fragment_settings_set_notification_image"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="2dp"
+                    app:srcCompat="@drawable/icon_settings_notifications"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="알림 설정"
+                    android:textSize="18sp"
+                    android:textColor="@color/color_text_greyish_brown"
+                    android:fontFamily="@font/spoqa_hansans"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="14dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/fragment_settings_set_notification_image"/>
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="22dp"
+                    android:track="@drawable/selector_switch_notification_button"
+                    android:thumb="@drawable/background_button_switch_notification_thumb"
+                    android:switchMinWidth="48dp"
+                    android:textOff="OFF"
+                    android:textOn="ON"
+                    android:thumbTextPadding="60dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_notice_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragment_settings_component_height"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_radius_10dp_white_box"
+                android:elevation="2dp"
+                android:gravity="center|start">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="2dp"
+                    app:srcCompat="@drawable/icon_settings_notice"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="공지사항"
+                    android:textSize="18sp"
+                    android:textColor="@color/color_text_greyish_brown"
+                    android:fontFamily="@font/spoqa_hansans"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="14dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_terms_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragment_settings_component_height"
+                android:orientation="horizontal"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/background_radius_10dp_white_box"
+                android:elevation="2dp"
+                android:gravity="center|start">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="2dp"
+                    app:srcCompat="@drawable/icon_settings_terms"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이용약관"
+                    android:textSize="18sp"
+                    android:textColor="@color/color_text_greyish_brown"
+                    android:fontFamily="@font/spoqa_hansans"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="14dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_version_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragment_settings_component_height"
+                android:orientation="horizontal"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/background_radius_10dp_white_box"
+                android:elevation="2dp"
+                android:gravity="center|start">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="2dp"
+                    app:srcCompat="@drawable/icon_settings_version"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="버전 정보"
+                    android:textSize="18sp"
+                    android:textColor="@color/color_text_greyish_brown"
+                    android:fontFamily="@font/spoqa_hansans"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="14dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

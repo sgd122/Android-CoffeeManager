@@ -3,5 +3,8 @@
  */
 package com.dnd.killcaffeine.main
 
-class MainViewModel {
+import com.dnd.killcaffeine.base.BaseViewModel
+
+class MainViewModel : BaseViewModel() {
+
 }

@@ -3,5 +3,8 @@
  */
 package com.dnd.killcaffeine.main.statistics
 
-class MainStatisticsViewModel {
+import com.dnd.killcaffeine.base.BaseViewModel
+
+class MainStatisticsViewModel : BaseViewModel() {
+
 }

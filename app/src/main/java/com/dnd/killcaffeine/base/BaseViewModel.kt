@@ -3,5 +3,13 @@
  */
 package com.dnd.killcaffeine.base
 
-class BaseViewModel {
+import androidx.lifecycle.ViewModel
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+
+abstract class BaseViewModel : ViewModel() {
+
+    private val mCompositeDisposable = CompositeDisposable()
+
+    fun addDisposable(disposable: Disposable?) = disposable?.let { mCompositeDisposable.add(it) }
 }

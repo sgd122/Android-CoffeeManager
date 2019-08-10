@@ -3,5 +3,8 @@
  */
 package com.dnd.killcaffeine.main.settings
 
-class MainSettingsViewModel {
+import com.dnd.killcaffeine.base.BaseViewModel
+
+class MainSettingsViewModel : BaseViewModel(){
+
 }

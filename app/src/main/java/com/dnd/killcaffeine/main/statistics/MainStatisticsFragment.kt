@@ -3,5 +3,27 @@
  */
 package com.dnd.killcaffeine.main.statistics
 
-class MainStatisticsFragment {
+import com.dnd.killcaffeine.R
+import com.dnd.killcaffeine.base.BaseFragment
+import com.dnd.killcaffeine.databinding.FragmentStatisticsBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+class MainStatisticsFragment : BaseFragment<FragmentStatisticsBinding, MainStatisticsViewModel>() {
+
+    companion object {
+        fun newInstance() = MainStatisticsFragment()
+    }
+
+    override val mViewModel: MainStatisticsViewModel by viewModel()
+    override val resourceId: Int
+        get() = R.layout.fragment_statistics
+
+    override fun initViewStart() {
+    }
+
+    override fun initDataBinding() {
+    }
+
+    override fun initViewFinal() {
+    }
 }

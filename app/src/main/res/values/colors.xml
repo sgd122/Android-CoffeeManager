@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+
+    <color name="colorPrimary">#83d7aa</color>
+    <color name="colorPrimaryDark">#2db16b</color>
+    <color name="colorAccent">#434343</color>
+
+    <color name="background_status_bar_transparent">#00000000</color>
+
+    <color name="colorGradientStart">#2db16b</color>
+    <color name="colorGradientCenter">#2db16b</color>
+    <color name="colorGradientEnd">#83d7aa</color>
+
+    <color name="color_text_white">#ffffff</color>
+    <color name="color_text_greyish_brown">#434343</color>
+    <color name="color_text_brownish_grey">#747474</color>
+
+    <color name="background_main_white">#f9f9f9</color>
+    <color name="color_text_settings_green">#4aad78</color>
+
+    <color name="background_color_tab_layout">#ffffff</color>
+    <color name="background_color_tab_selected">#fba676</color>
+    <color name="background_color_tab_un_selected">#747474</color>
+    <color name="background_color_tab_pressed">#747474</color>
+
+    <color name="background_color_show_more_button">#fba676</color>
+    <color name="background_color_notification_switch_button_inside">#c8e6d6</color>
+    <color name="background_color_notification_switch_button_outside">#4aad78</color>
+    <color name="background_color_notification_switch_button_thumb">#4aad78</color>
+
 </resources>

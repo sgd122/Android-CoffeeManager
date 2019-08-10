@@ -3,5 +3,7 @@
  */
 package com.dnd.killcaffeine.main.home
 
-class MainHomeViewModel {
+import com.dnd.killcaffeine.base.BaseViewModel
+
+class MainHomeViewModel : BaseViewModel() {
 }

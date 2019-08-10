@@ -7,19 +7,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.base.BaseFragment
+import com.dnd.killcaffeine.databinding.FragmentHomeBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainHomeFragment: BaseFragment() {
+class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+    companion object {
+        fun newInstance() = MainHomeFragment()
+    }
 
-        // binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_home, container, false)
+    override val mViewModel: MainHomeViewModel by viewModel()
+    override val resourceId: Int
+        get() = R.layout.fragment_home
 
-        //return binding.root
+    override fun initViewStart() {
+    }
+
+    override fun initDataBinding() {
+    }
+
+    override fun initViewFinal() {
     }
 }

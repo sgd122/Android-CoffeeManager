@@ -5,6 +5,8 @@ package com.dnd.killcaffeine.di
 
 import com.dnd.killcaffeine.main.MainViewModel
 import com.dnd.killcaffeine.main.home.MainHomeViewModel
+import com.dnd.killcaffeine.main.home.recyclerview.DecaffeineRecyclerViewAdpater
+import com.dnd.killcaffeine.main.home.recyclerview.RecentDrinkRecyclerViewAdpater
 import com.dnd.killcaffeine.main.settings.MainSettingsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel
 import com.dnd.killcaffeine.splash.SplashViewModel
@@ -30,4 +32,13 @@ val viewModelModule = module {
     }
 }
 
-val appModule =  listOf(viewModelModule)
+val adapterModule = module {
+    factory {
+        DecaffeineRecyclerViewAdpater()
+    }
+    factory {
+        RecentDrinkRecyclerViewAdpater()
+    }
+}
+
+val appModule =  listOf(viewModelModule, adapterModule)

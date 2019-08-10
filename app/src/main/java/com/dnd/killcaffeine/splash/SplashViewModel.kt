@@ -10,7 +10,7 @@ import com.dnd.killcaffeine.base.BaseViewModel
 
 class SplashViewModel : BaseViewModel() {
 
-    private val START_ACTIVITY_POST_DELAY: Long = 3000
+    private val START_ACTIVITY_POST_DELAY: Long = 2500
 
     private val _startActivityLiveData = MutableLiveData<Boolean>()
     val startActivityLiveData: LiveData<Boolean> get() = _startActivityLiveData

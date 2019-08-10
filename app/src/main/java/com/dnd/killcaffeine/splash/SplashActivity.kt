@@ -25,6 +25,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         mViewModel.startActivityLiveData.observe(this, Observer {
             it?.let {
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
         })
     }

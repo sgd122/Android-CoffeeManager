@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.main.home.MainHomeFragment
+import com.dnd.killcaffeine.main.settings.MainSettingsFragment
+import com.dnd.killcaffeine.main.statistics.MainStatisticsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,13 +19,14 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = MyViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(MainHomeFragment(), "Home")
-        adapter.addFragment(MainHomeFragment(), "Statistics")
-        adapter.addFragment(MainHomeFragment(), "Settings")
+        adapter.addFragment(MainStatisticsFragment(), "Statistics")
+        adapter.addFragment(MainSettingsFragment(), "Settings")
         viewpager.adapter = adapter
         tabs.setupWithViewPager(viewpager)
 
     }
 
+    /**뷰페이저 어댑터**/
     class MyViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager){
 
         private val fragmentList : MutableList<Fragment> = ArrayList()

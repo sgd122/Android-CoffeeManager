@@ -1,8 +1,6 @@
 package com.dnd.killcaffeine.main
 
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.base.BaseActivity

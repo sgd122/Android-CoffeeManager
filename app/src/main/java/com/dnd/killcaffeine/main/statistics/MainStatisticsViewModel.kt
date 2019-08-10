@@ -6,4 +6,5 @@ package com.dnd.killcaffeine.main.statistics
 import com.dnd.killcaffeine.base.BaseViewModel
 
 class MainStatisticsViewModel : BaseViewModel() {
+
 }

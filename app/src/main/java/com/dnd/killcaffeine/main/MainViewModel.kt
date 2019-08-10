@@ -6,4 +6,5 @@ package com.dnd.killcaffeine.main
 import com.dnd.killcaffeine.base.BaseViewModel
 
 class MainViewModel : BaseViewModel() {
+
 }

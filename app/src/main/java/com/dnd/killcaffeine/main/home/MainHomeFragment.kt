@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHomeBinding
+import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() {

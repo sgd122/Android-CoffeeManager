@@ -6,7 +6,6 @@ package com.dnd.killcaffeine.main.settings
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentSettingsBinding
-import com.dnd.killcaffeine.databinding.FragmentStatisticsBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainSettingsFragment : BaseFragment<FragmentSettingsBinding, MainSettingsViewModel>() {
@@ -26,5 +25,5 @@ class MainSettingsFragment : BaseFragment<FragmentSettingsBinding, MainSettingsV
     }
 
     override fun initViewFinal() {
-    }
+   }
 }

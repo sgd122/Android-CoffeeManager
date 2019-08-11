@@ -61,10 +61,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         mViewModel.decaffeineMenuLiveData.observe(this, Observer { result ->
             result?.let {
                 Log.d(TAG, "디카페인 메뉴 사이즈 : ${result.list.size}")
-                it.list.forEachIndexed { index, menu ->
-                    Log.d(TAG, "$index 번째 메뉴")
-                    Log.d(TAG, "$menu")
-                }
+                mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(it.list)
+
             } ?: Log.d(TAG, "디카페인 API call 실패")
         })
 
@@ -83,7 +81,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     }
 
     override fun initViewFinal() {
-        //mViewModel.getDecaffeineMenuList()
+        mViewModel.getDecaffeineMenuList()
 
         //mViewModel.getFranchiseMenuList()
     }

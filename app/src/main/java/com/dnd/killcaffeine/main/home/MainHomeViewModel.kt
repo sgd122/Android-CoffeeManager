@@ -31,8 +31,12 @@ class MainHomeViewModel : BaseViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 _decaffeineMenuLiveData.postValue(result)
+                result.list.forEach {
+                    Log.d(TAG, it.toString())
+                }
 
             }, {
+                Log.d(TAG, "디카페인 가져오기 실패")
                 Log.d(TAG, it?.message ?: "")
             }))
     }

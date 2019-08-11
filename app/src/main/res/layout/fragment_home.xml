@@ -36,14 +36,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.67"/>
+                        app:layout_constraintGuide_percent="0.66"/>
 
                     <TextView
                         android:id="@+id/fragment_home_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="40dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="32dp"
                         android:text="@string/app_name"
                         android:textSize="24sp"
                         android:textColor="@color/color_text_white"
@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="48dp"
                         android:text="일일 카페인 섭취량"
                         android:textSize="14sp"
                         android:textColor="@color/color_text_white"
@@ -92,7 +92,7 @@
                         android:id="@+id/fragment_home_daily_caffeine_intake_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="48dp"
                         android:text="125mg"
                         android:textColor="@color/color_text_white"
                         android:textSize="46sp"
@@ -105,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="48dp"
                         android:text="오늘 마신 음료를\n기록하면 카페인 양을\n확인할 수 있어요! "
                         android:textSize="20sp"
                         android:textColor="@color/color_text_white"
@@ -132,14 +132,13 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
-                android:layout_marginStart="16dp">
+                android:layout_marginTop="26dp">
 
                 <TextView
                     android:id="@+id/fragment_home_today_decaffeine_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="26dp"
                     android:text="오늘의 디카페인 음료"
                     android:textColor="@color/color_text_greyish_brown"
                     android:textSize="18sp"
@@ -182,14 +181,13 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
-                android:layout_marginStart="16dp">
+                android:layout_marginTop="26dp">
 
                 <TextView
                     android:id="@+id/fragment_home_coffee_recent_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="26dp"
                     android:text="최근 마신 음료"
                     android:textColor="@color/color_text_greyish_brown"
                     android:textSize="18sp"

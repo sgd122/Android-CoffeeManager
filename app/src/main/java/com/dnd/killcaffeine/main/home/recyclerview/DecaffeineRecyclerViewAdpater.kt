@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
+import com.bumptech.glide.request.RequestOptions
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.model.BaseRetrofit
 import com.dnd.killcaffeine.model.data.menu.Menu
@@ -34,6 +35,10 @@ class DecaffeineRecyclerViewAdpater : RecyclerView.Adapter<DecaffeineRecyclerVie
         mDecaffeineArrayList[position].run {
             with(holder){
                 Glide.with(holder.itemView.context)
+                    .setDefaultRequestOptions(RequestOptions().apply {
+                        placeholder(R.drawable.background_radius_10dp_white_box)
+                        error(R.drawable.background_radius_10dp_white_box)
+                    })
                     .load("${BaseRetrofit.BASE_URL}$menuImgUrl")
                     .into(coffeeImageView)
 

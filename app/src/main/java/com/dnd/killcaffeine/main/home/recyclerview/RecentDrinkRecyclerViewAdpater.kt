@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.model.BaseRetrofit
 import com.dnd.killcaffeine.model.data.menu.Menu
@@ -27,10 +28,19 @@ class RecentDrinkRecyclerViewAdpater : RecyclerView.Adapter<RecentDrinkRecyclerV
     override fun getItemCount(): Int  = mDRecentDrinkArrayList.size
 
     override fun onBindViewHolder(holder: RecentDrinkRecyclerViewHolder, position: Int) {
+        val imageUrl = BaseRetrofit.BASE_URL
+        when(imageUrl.startsWith("http://")){
+            true -> imageUrl.replace("http://", "https://")
+        }
+
         mDRecentDrinkArrayList[position].run {
             with(holder){
                 Glide.with(holder.itemView.context)
-                    .load("${BaseRetrofit.BASE_URL}$menuImgUrl")
+                    .setDefaultRequestOptions(RequestOptions().apply {
+                        placeholder(R.drawable.background_radius_10dp_white_box)
+                        error(R.drawable.background_radius_10dp_white_box)
+                    })
+                    .load("$imageUrl$menuImgUrl")
                     .into(coffeeImageView)
 
                 coffeeImageView.background = ContextCompat.getDrawable(itemView.context, R.drawable.background_list_item_radius_10dp_shape)

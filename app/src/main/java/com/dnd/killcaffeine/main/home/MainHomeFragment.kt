@@ -34,13 +34,13 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     private val mRecentRecyclerViewAdapter: RecentDrinkRecyclerViewAdpater by inject()
 
     override fun initViewStart() {
-//        mDecaffeineRecyclerViewAdapter.apply {
-//            setDecaffeineArrayList(insertMockData(activity?.applicationContext))
-//        }
+        mDecaffeineRecyclerViewAdapter.apply {
+            setDecaffeineArrayList(insertMockData(activity?.applicationContext))
+        }
 
-//        mRecentRecyclerViewAdapter.apply {
-//            setRecentDrinkArrayList(insertMockData(activity?.applicationContext))
-//        }
+        mRecentRecyclerViewAdapter.apply {
+            setRecentDrinkArrayList(insertMockData(activity?.applicationContext))
+        }
 
         getFragmentBinding().run {
             fragmentHomeTodayDecaffeineRecyclerView.apply {
@@ -90,15 +90,15 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     private fun insertMockData(context: Context?): ArrayList<Menu> {
         context?.let {
             return arrayListOf(
-                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
-                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
-                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
-                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
-                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
-                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
-                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
-                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
-                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false)
+                Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false)
             )
         } ?: return arrayListOf()
     }

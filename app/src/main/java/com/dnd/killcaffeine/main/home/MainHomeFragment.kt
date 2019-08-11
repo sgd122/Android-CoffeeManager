@@ -34,13 +34,13 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     private val mRecentRecyclerViewAdapter: RecentDrinkRecyclerViewAdpater by inject()
 
     override fun initViewStart() {
-        mDecaffeineRecyclerViewAdapter.apply {
-            setDecaffeineArrayList(insertMockData(activity?.applicationContext))
-        }
+//        mDecaffeineRecyclerViewAdapter.apply {
+//            setDecaffeineArrayList(insertMockData(activity?.applicationContext))
+//        }
 
-        mRecentRecyclerViewAdapter.apply {
-            setRecentDrinkArrayList(insertMockData(activity?.applicationContext))
-        }
+//        mRecentRecyclerViewAdapter.apply {
+//            setRecentDrinkArrayList(insertMockData(activity?.applicationContext))
+//        }
 
         getFragmentBinding().run {
             fragmentHomeTodayDecaffeineRecyclerView.apply {
@@ -62,6 +62,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             result?.let {
                 Log.d(TAG, "디카페인 메뉴 사이즈 : ${result.list.size}")
                 mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(it.list)
+                mRecentRecyclerViewAdapter.setRecentDrinkArrayList(it.list)
 
             } ?: Log.d(TAG, "디카페인 API call 실패")
         })
@@ -89,15 +90,15 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     private fun insertMockData(context: Context?): ArrayList<Menu> {
         context?.let {
             return arrayListOf(
-                Menu(1, "아메리카노", ContextCompat.getDrawable(context, R.drawable.app_icon), "스타벅스", 100, false),
-                Menu(1, "아메리카노", ContextCompat.getDrawable(context, R.drawable.app_icon), "스타벅스", 100, false),
-                Menu(1, "아메리카노", ContextCompat.getDrawable(context, R.drawable.app_icon), "스타벅스", 100, false),
-                Menu(1, "아메리카노", ContextCompat.getDrawable(context, R.drawable.app_icon), "스타벅스", 100, false),
-                Menu(1, "아메리카노", ContextCompat.getDrawable(context, R.drawable.app_icon), "스타벅스", 100, false),
-                Menu(1, "아메리카노", ContextCompat.getDrawable(context, R.drawable.app_icon), "스타벅스", 100, false),
-                Menu(1, "아메리카노", ContextCompat.getDrawable(context, R.drawable.app_icon), "스타벅스", 100, false),
-                Menu(1, "아메리카노", ContextCompat.getDrawable(context, R.drawable.app_icon), "스타벅스", 100, false),
-                Menu(1, "아메리카노", ContextCompat.getDrawable(context, R.drawable.app_icon), "스타벅스", 100, false)
+                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false),
+                Menu(1, "아메리카노", "R.drawable.app_icon", "스타벅스", 100, false)
             )
         } ?: return arrayListOf()
     }

@@ -9,10 +9,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
 import com.dnd.killcaffeine.R
+import com.dnd.killcaffeine.model.BaseRetrofit
 import com.dnd.killcaffeine.model.data.menu.Menu
+import com.google.android.material.shape.RoundedCornerTreatment
+import jp.wasabeef.glide.transformations.BitmapTransformation
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class DecaffeineRecyclerViewAdpater : RecyclerView.Adapter<DecaffeineRecyclerViewAdpater.DecaffeineRecyclerViewHolder>() {
 
@@ -27,7 +33,13 @@ class DecaffeineRecyclerViewAdpater : RecyclerView.Adapter<DecaffeineRecyclerVie
     override fun onBindViewHolder(holder: DecaffeineRecyclerViewHolder, position: Int) {
         mDecaffeineArrayList[position].run {
             with(holder){
-                Glide.with(holder.itemView.context).load(menuImgUrl).into(coffeeImageView)
+                Glide.with(holder.itemView.context)
+                    .load("${BaseRetrofit.BASE_URL}$menuImgUrl")
+                    .into(coffeeImageView)
+
+                coffeeImageView.background = ContextCompat.getDrawable(itemView.context, R.drawable.background_list_item_radius_10dp_shape)
+                coffeeImageView.clipToOutline = true
+
                 franchiseNameTextView.text = franchiseName
                 coffeeNameTextView.text = menuName
 

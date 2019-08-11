@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dnd.killcaffeine.R
+import com.dnd.killcaffeine.model.BaseRetrofit
 import com.dnd.killcaffeine.model.data.menu.Menu
 
 /*
@@ -27,7 +29,13 @@ class RecentDrinkRecyclerViewAdpater : RecyclerView.Adapter<RecentDrinkRecyclerV
     override fun onBindViewHolder(holder: RecentDrinkRecyclerViewHolder, position: Int) {
         mDRecentDrinkArrayList[position].run {
             with(holder){
-                Glide.with(holder.itemView.context).load(menuImgUrl).into(coffeeImageView)
+                Glide.with(holder.itemView.context)
+                    .load("${BaseRetrofit.BASE_URL}$menuImgUrl")
+                    .into(coffeeImageView)
+
+                coffeeImageView.background = ContextCompat.getDrawable(itemView.context, R.drawable.background_list_item_radius_10dp_shape)
+                coffeeImageView.clipToOutline = true
+
                 franchiseNameTextView.text = franchiseName
                 coffeeNameTextView.text = menuName
 

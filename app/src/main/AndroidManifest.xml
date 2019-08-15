@@ -31,6 +31,11 @@
             android:name=".main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".detail.DetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/DetailTheme"/>
     </application>
 
 </manifest>

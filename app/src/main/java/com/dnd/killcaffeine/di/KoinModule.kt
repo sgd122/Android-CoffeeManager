@@ -3,6 +3,7 @@
  */
 package com.dnd.killcaffeine.di
 
+import com.dnd.killcaffeine.detail.DetailViewModel
 import com.dnd.killcaffeine.main.MainViewModel
 import com.dnd.killcaffeine.main.home.MainHomeViewModel
 import com.dnd.killcaffeine.main.home.recyclerview.DecaffeineRecyclerViewAdpater
@@ -29,6 +30,9 @@ val viewModelModule = module {
     }
     viewModel {
         MainSettingsViewModel()
+    }
+    viewModel {
+        DetailViewModel()
     }
 }
 

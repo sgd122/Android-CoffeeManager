@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/activity_detail_toolbar"
+            layout="@layout/toolbar"/>
+
+        <TextView
+            android:id="@+id/activity_detail_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="Hello world"
+            android:textColor="@color/color_text_greyish_brown"
+            android:textSize="16sp"
+            android:textColorHint="@color/color_text_greyish_brown" />
+
+    </LinearLayout>
+
+</layout>

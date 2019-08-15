@@ -4,6 +4,7 @@
 package com.dnd.killcaffeine.main.home
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHomeBinding
+import com.dnd.killcaffeine.detail.DetailActivity
 import com.dnd.killcaffeine.main.home.recyclerview.DecaffeineRecyclerViewAdpater
 import com.dnd.killcaffeine.main.home.recyclerview.RecentDrinkRecyclerViewAdpater
 import com.dnd.killcaffeine.model.data.menu.Menu
@@ -40,6 +42,11 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
         mRecentRecyclerViewAdapter.apply {
             setRecentDrinkArrayList(insertMockData(activity?.applicationContext))
+            setOnRecentDrinkItemClickListener(object: RecentDrinkRecyclerViewAdpater.OnRecentDrinkItemClickListener {
+                override fun onItemClick(menu: Menu) {
+                    startActivity(Intent(activity?.applicationContext, DetailActivity::class.java).apply { putExtra("menu", menu) })
+                }
+            })
         }
 
         getFragmentBinding().run {

@@ -3,15 +3,21 @@
  */
 package com.dnd.killcaffeine.base
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(), BaseView {
 
     abstract val resourceId: Int
 
@@ -37,4 +43,34 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment() 
     }
 
     fun getFragmentBinding() = mBinding
+
+    override fun setToolbar(resourceId: Int?, title: String?) {
+        resourceId?.let { id ->
+            activity?.findViewById<Toolbar>(id)?.let { toolbar ->
+                title?.let { value -> toolbar.title = value }
+            }
+
+            activity?.actionBar?.also { actionBar ->
+                actionBar.setDisplayHomeAsUpEnabled(true)
+                actionBar.setDisplayHomeAsUpEnabled(true)
+            } ?: activity?.setActionBar(null); return@let
+        }
+    }
+
+    override fun setupKeyboardHide(view: View, activity: Activity?) {
+        if(view !is EditText || view !is Button){
+            view.setOnTouchListener { _, _ ->
+                activity?.let {
+                    val imm = it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(it.currentFocus?.windowToken, 0)
+                }
+                return@setOnTouchListener false
+            }
+        }
+        if(view is ViewGroup){
+            for(i in 0 until view.childCount){
+                setupKeyboardHide(view.getChildAt(i), activity)
+            }
+        }
+    }
 }

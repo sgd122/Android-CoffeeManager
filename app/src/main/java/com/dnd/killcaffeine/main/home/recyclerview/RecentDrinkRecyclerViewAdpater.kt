@@ -21,6 +21,11 @@ class RecentDrinkRecyclerViewAdpater : RecyclerView.Adapter<RecentDrinkRecyclerV
     private val mDRecentDrinkArrayList = ArrayList<Menu>()
 
     private var mOnItemClickListener: View.OnClickListener? = null
+    private var mOnRecentDrinkItemClickListener: OnRecentDrinkItemClickListener? = null
+    
+    interface OnRecentDrinkItemClickListener {
+        fun onItemClick(menu: Menu)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RecentDrinkRecyclerViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.list_item_coffee, parent, false))
@@ -49,9 +54,9 @@ class RecentDrinkRecyclerViewAdpater : RecyclerView.Adapter<RecentDrinkRecyclerV
                 franchiseNameTextView.text = franchiseName
                 coffeeNameTextView.text = menuName
 
-                /*itemView.setOnClickListener {
-                    Toast.makeText(itemView.context, "프랜차이즈 : $franchiseName", Toast.LENGTH_SHORT).show()
-                }*/
+                itemView.setOnClickListener {
+                    mOnRecentDrinkItemClickListener?.onItemClick(this@run)
+                }
             }
         }
 
@@ -70,6 +75,10 @@ class RecentDrinkRecyclerViewAdpater : RecyclerView.Adapter<RecentDrinkRecyclerV
 
     fun setItemOnClickListener(itemOnClickListener: View.OnClickListener){
         mOnItemClickListener = itemOnClickListener
+    }
+
+    fun setOnRecentDrinkItemClickListener(recentDrinkItemClickListener: OnRecentDrinkItemClickListener){
+        mOnRecentDrinkItemClickListener = recentDrinkItemClickListener
     }
 
     inner class RecentDrinkRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

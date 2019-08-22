@@ -3,5 +3,7 @@
  */
 package com.dnd.killcaffeine
 
-class RequestCode {
+object RequestCode {
+
+    const val DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE = "decaffeine_show_more"
 }

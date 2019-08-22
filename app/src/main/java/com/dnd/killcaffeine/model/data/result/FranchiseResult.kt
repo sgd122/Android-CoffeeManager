@@ -1,6 +1,7 @@
 package com.dnd.killcaffeine.model.data.result
 
 import com.dnd.killcaffeine.model.data.menu.FranchiseMenu
+import java.io.Serializable
 
 /*
  * Created by iohyeong on 2019-08-10..
@@ -8,4 +9,4 @@ import com.dnd.killcaffeine.model.data.menu.FranchiseMenu
 data class FranchiseResult(val success: Boolean,
                            val code: Int,
                            val msg: String,
-                           val list: ArrayList<FranchiseMenu>)
+                           val list: ArrayList<FranchiseMenu>): Serializable

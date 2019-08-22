@@ -8,22 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.Priority
-import com.bumptech.glide.request.RequestOptions
+import coil.api.load
+import coil.transform.RoundedCornersTransformation
 import com.dnd.killcaffeine.R
-import com.dnd.killcaffeine.model.BaseRetrofit
 import com.dnd.killcaffeine.model.data.menu.Menu
-import com.google.android.material.shape.RoundedCornerTreatment
-import jp.wasabeef.glide.transformations.BitmapTransformation
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class DecaffeineRecyclerViewAdpater : RecyclerView.Adapter<DecaffeineRecyclerViewAdpater.DecaffeineRecyclerViewHolder>() {
 
-    private val mDecaffeineArrayList = ArrayList<Menu>()
+    private val mDecaffeineArrayList:ArrayList<Menu> = ArrayList()
 
     private var mOnItemClickListener: View.OnClickListener? = null
 
@@ -34,16 +27,13 @@ class DecaffeineRecyclerViewAdpater : RecyclerView.Adapter<DecaffeineRecyclerVie
     override fun onBindViewHolder(holder: DecaffeineRecyclerViewHolder, position: Int) {
         mDecaffeineArrayList[position].run {
             with(holder){
-                Glide.with(holder.itemView.context)
-                    .setDefaultRequestOptions(RequestOptions().apply {
-                        placeholder(R.drawable.background_radius_10dp_white_box)
-                        error(R.drawable.background_radius_10dp_white_box)
-                    })
-                    .load("${BaseRetrofit.BASE_URL}$menuImgUrl")
-                    .into(coffeeImageView)
 
-                coffeeImageView.background = ContextCompat.getDrawable(itemView.context, R.drawable.background_list_item_radius_10dp_shape)
-                coffeeImageView.clipToOutline = true
+                coffeeImageView.load(R.drawable.app_icon){
+                    crossfade(true)
+                    placeholder(R.drawable.background_radius_10dp_white_box)
+                    error(R.drawable.background_radius_10dp_white_box)
+                    transformations(RoundedCornersTransformation(10.0f))
+                }
 
                 franchiseNameTextView.text = franchiseName
                 coffeeNameTextView.text = menuName

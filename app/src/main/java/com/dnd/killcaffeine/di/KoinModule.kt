@@ -7,7 +7,7 @@ import com.dnd.killcaffeine.detail.DetailViewModel
 import com.dnd.killcaffeine.main.MainViewModel
 import com.dnd.killcaffeine.main.home.MainHomeViewModel
 import com.dnd.killcaffeine.main.home.recyclerview.DecaffeineRecyclerViewAdpater
-import com.dnd.killcaffeine.main.home.recyclerview.RecentDrinkRecyclerViewAdpater
+import com.dnd.killcaffeine.main.home.recyclerview.RecentDrinkRecyclerViewAdapter
 import com.dnd.killcaffeine.main.settings.MainSettingsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel
 import com.dnd.killcaffeine.splash.SplashViewModel
@@ -41,7 +41,7 @@ val adapterModule = module {
         DecaffeineRecyclerViewAdpater()
     }
     factory {
-        RecentDrinkRecyclerViewAdpater()
+        RecentDrinkRecyclerViewAdapter()
     }
 }
 

@@ -2,4 +2,6 @@
 <resources>
     <dimen name="fragment_settings_component_height">64dp</dimen>
 
+    <dimen name="activity_today_recommend_column_spacing">52dp</dimen>
+    <dimen name="activity_today_recommend_column_spacing_half">26dp</dimen>
 </resources>

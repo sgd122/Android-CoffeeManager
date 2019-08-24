@@ -93,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="48dp"
-                        android:text="125mg"
+                        android:text="1125mg"
                         android:textColor="@color/color_text_white"
                         android:textSize="46sp"
                         android:fontFamily="@font/spoqa_hansans"

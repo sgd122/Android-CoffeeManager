@@ -10,7 +10,7 @@ import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivityTodayRecommendDrinkBinding
 import com.dnd.killcaffeine.main.home.recyclerview.DecaffeineRecyclerViewAdpater
 import com.dnd.killcaffeine.model.data.menu.Menu
-import com.dnd.killcaffeine.utils.RecyclerViewItemMargin
+import com.dnd.killcaffeine.utils.recyclerview_item_deco.RecyclerViewItemMargin
 import kotlinx.android.synthetic.main.activity_today_recommend_drink.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,7 +50,12 @@ class TodayRecommendDrinkActivity : BaseActivity<ActivityTodayRecommendDrinkBind
         activity_today_recommend_drink_recycler_view.apply {
             layoutManager = GridLayoutManager(this@TodayRecommendDrinkActivity, RECYCLER_VIEW_SPAN_COUNT)
             adapter = mDecaffeineRecyclerViewAdapter
-            addItemDecoration(RecyclerViewItemMargin(32, 0))
+            addItemDecoration(
+                RecyclerViewItemMargin(
+                    32,
+                    0
+                )
+            )
             //addItemDecoration(GridLayoutEqualColumnDecorationSpacing(this@TodayRecommendDrinkActivity, R.dimen.activity_today_recommend_column_spacing_half))
         }
     }

@@ -40,6 +40,10 @@
             android:name=".main.home.show_more.TodayRecommendDrinkActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".history.HistoryTodayActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
     </application>
 

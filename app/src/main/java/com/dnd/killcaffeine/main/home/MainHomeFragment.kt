@@ -3,6 +3,7 @@
  */
 package com.dnd.killcaffeine.main.home
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.Observer
@@ -13,6 +14,7 @@ import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHomeBinding
 import com.dnd.killcaffeine.detail.DetailActivity
+import com.dnd.killcaffeine.history.HistoryTodayActivity
 import com.dnd.killcaffeine.main.home.recyclerview.DecaffeineRecyclerViewAdpater
 import com.dnd.killcaffeine.main.home.recyclerview.RecentDrinkRecyclerViewAdapter
 import com.dnd.killcaffeine.main.home.show_more.TodayRecommendDrinkActivity
@@ -26,7 +28,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         fun newInstance() = MainHomeFragment()
     }
 
-    private val TAG = javaClass.name
+    private val TAG = "MainHomeFragment"
 
     override val mViewModel: MainHomeViewModel by viewModel()
     override val resourceId: Int
@@ -99,6 +101,10 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         // TODO : 프랜차이즈 메뉴 호출
         //mViewModel.getFranchiseMenuList()
 
+        getFragmentBinding().fragmentHomeFrameLayout.setOnClickListener {
+            startActivityForResult(Intent(activity?.applicationContext, HistoryTodayActivity::class.java), RequestCode.HISTORY_TODAY_REQUEST_CODE)
+        }
+
         getFragmentBinding().fragmentHomeTodayDecaffeineShowMoreButton.setOnClickListener {
 
             // TODO: 테스트 용도이므로 나중에 지워야됨
@@ -110,18 +116,31 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == RESULT_OK){
+            when(requestCode){
+                RequestCode.HISTORY_TODAY_REQUEST_CODE -> {
+                    // TODO 히스토리 추가되어서 돌아오는 경우에 최근 마신음료 리스트를 갱신해야됨.
+                    Log.d(TAG, "히스토리에서 돌아오기 성공!!")
+                }
+            }
+        }
+    }
+
     private fun insertMockData(): ArrayList<Menu> {
         return arrayListOf(
-            Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.background_list_item_radius_10dp_shape", "스타벅스", 100, false)
+            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false)
         )
     }
 }

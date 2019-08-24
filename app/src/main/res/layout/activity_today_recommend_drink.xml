@@ -52,9 +52,9 @@
             android:paddingStart="@dimen/activity_today_recommend_column_spacing"
             android:paddingEnd="@dimen/activity_today_recommend_column_spacing"
             android:paddingTop="@dimen/activity_today_recommend_column_spacing_half"
+            android:overScrollMode="never"
             app:spanCount="2"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            android:overScrollMode="never"
             tools:listitem="@layout/list_item_coffee"/>
 
     </LinearLayout>

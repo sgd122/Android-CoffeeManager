@@ -28,7 +28,7 @@ class DecaffeineRecyclerViewAdpater : RecyclerView.Adapter<DecaffeineRecyclerVie
         mDecaffeineArrayList[position].run {
             with(holder){
 
-                coffeeImageView.load(R.drawable.app_icon){
+                coffeeImageView.load(R.drawable.coffee_sample) {
                     crossfade(true)
                     placeholder(R.drawable.background_radius_10dp_white_box)
                     error(R.drawable.background_radius_10dp_white_box)

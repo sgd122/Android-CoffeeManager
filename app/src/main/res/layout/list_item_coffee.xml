@@ -6,13 +6,30 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
     android:background="@color/background_main_white">
-
-    <ImageView
-        android:id="@+id/list_item_coffee_image_view"
+    
+    <FrameLayout
         android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/app_icon"/>
+        android:layout_height="120dp">
+
+        <ImageView
+            android:id="@+id/list_item_coffee_image_view"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/app_icon"/>
+        
+        <TextView
+            android:id="@+id/list_item_coffee_caffeine_content"
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            android:background="@drawable/background_radius_10dp_brown_grey_caffeine_content"
+            android:text="0mg"
+            android:textSize="12sp"
+            android:textColor="@color/color_text_white"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:gravity="center_horizontal" />
+        
+    </FrameLayout>
 
     <TextView
         android:id="@+id/list_item_coffee_franchise_name_text_view"

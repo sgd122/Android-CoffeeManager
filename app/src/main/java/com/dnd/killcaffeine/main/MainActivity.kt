@@ -1,16 +1,15 @@
 package com.dnd.killcaffeine.main
 
-import androidx.core.content.ContextCompat
+import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
 import com.dnd.killcaffeine.R
+import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivityMainBinding
 import com.dnd.killcaffeine.main.home.MainHomeFragment
 import com.dnd.killcaffeine.main.settings.MainSettingsFragment
 import com.dnd.killcaffeine.main.statistics.MainStatisticsFragment
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -54,6 +53,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun initViewFinal() {
+        if(intent.hasExtra(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_SPLASH_TO_MAIN)){
+            val totalTodayIntake:Int = intent.getIntExtra(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_SPLASH_TO_MAIN, 0)
+
+            getFragment(TabComponent.HOME.ordinal).arguments =  Bundle().apply { // Bundle 에 담아서 Fragment 에게 전달
+                putInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, totalTodayIntake)
+            }
+        }
+
     }
 
     companion object {

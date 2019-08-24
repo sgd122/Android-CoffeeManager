@@ -4,6 +4,7 @@
 package com.dnd.killcaffeine.main.home
 
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.Observer
@@ -63,6 +64,9 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
                 layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.HORIZONTAL, false)
                 adapter = mRecentRecyclerViewAdapter
             }
+
+            val totalIntake: Int = arguments?.getInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, 0) ?: 0
+            fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, totalIntake.toString())
         }
     }
 
@@ -114,6 +118,12 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
                 putExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE, mDecaffeineArrayList)
             })
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

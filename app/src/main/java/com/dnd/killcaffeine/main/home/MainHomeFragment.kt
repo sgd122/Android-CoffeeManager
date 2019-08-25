@@ -39,6 +39,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     private val mDecaffeineArrayList: ArrayList<Menu> = ArrayList()
 
+    private var totalIntakeFromSplash: Int = 0 // Splash 에서 넘겨받은 일일카페인 섭취량
+
     override fun initViewStart() {
         mDecaffeineRecyclerViewAdapter.apply {
             setDecaffeineArrayList(insertMockData())
@@ -64,8 +66,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
                 adapter = mRecentRecyclerViewAdapter
             }
 
-            val totalIntake: Int = arguments?.getInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, 0) ?: 0
-            fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, totalIntake.toString())
+            totalIntakeFromSplash = arguments?.getInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, 0) ?: 0
+            fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, totalIntakeFromSplash.toString())
         }
     }
 
@@ -105,7 +107,9 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         //mViewModel.getFranchiseMenuList()
 
         getFragmentBinding().fragmentHomeFrameLayout.setOnClickListener {
-            startActivityForResult(Intent(activity?.applicationContext, HistoryTodayActivity::class.java), RequestCode.HISTORY_TODAY_REQUEST_CODE)
+            startActivityForResult(Intent(activity?.applicationContext, HistoryTodayActivity::class.java).apply {
+                putExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER, totalIntakeFromSplash)
+            }, RequestCode.HISTORY_TODAY_REQUEST_CODE)
         }
 
         getFragmentBinding().fragmentHomeTodayDecaffeineShowMoreButton.setOnClickListener {
@@ -125,8 +129,9 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         if(resultCode == RESULT_OK){
             when(requestCode){
                 RequestCode.HISTORY_TODAY_REQUEST_CODE -> {
-                    // TODO 히스토리 추가되어서 돌아오는 경우에 최근 마신음료 리스트를 갱신해야됨.
-                    Log.d(TAG, "히스토리에서 돌아오기 성공!!")
+                    // TODO 히스토리 추가되어서 돌아오는 경우에 최근 마신음료 리스트, 일일 카페인 섭취량 갱신해야됨.
+                    val refreshedValue:Int = data?.getIntExtra(RequestCode.TODAY_CAFFEINE_INTAKE_HISTORY_REGISTER_TO_MAIN, totalIntakeFromSplash) ?: totalIntakeFromSplash
+                    getFragmentBinding().fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, refreshedValue.toString())
                 }
             }
         }

@@ -36,9 +36,6 @@ class HistoryTodayRegisterActivity : BaseActivity<ActivityHistoryTodayRegisterBi
 
     override fun initViewFinal() {
         activity_history_today_back_button.setOnClickListener {
-            setResult(Activity.RESULT_OK, Intent().apply {
-                putExtra("TEXT", "Register에서 넘겨받기 성공")
-            })
             finish()
         }
     }

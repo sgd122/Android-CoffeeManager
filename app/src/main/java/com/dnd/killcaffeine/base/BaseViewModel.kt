@@ -21,8 +21,13 @@ abstract class BaseViewModel : ViewModel() {
 
     fun addDisposable(disposable: Disposable?) = disposable?.let { mCompositeDisposable.add(it) }
 
-    fun showSnackbar(description: String){
-        _snackbarLiveData.postValue(description)
+    override fun onCleared() {
+        mCompositeDisposable.dispose()
+        super.onCleared()
+    }
+
+    fun showSnackbar(message: String){
+        _snackbarLiveData.postValue(message)
     }
 
     fun showSnackbar(stringResId: Int){

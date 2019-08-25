@@ -34,6 +34,18 @@ class HistoryTodayViewModel : BaseViewModel() {
             }))
     }
 
+    fun insertHistoryToRoomDatabase(history: History, historyDatabase: HistoryDatabase){
+        addDisposable(historyDatabase.historyDao.insertHistory(history)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                _insertHistoryLiveData.call()
+
+            }, {
+                showSnackbar(it.message ?: "히스토리 등록에 실패하였습니다.")
+            }))
+    }
+
     fun insertHistoryListToRoomDatabase(historyList: List<History>, historyDatabase: HistoryDatabase){
         addDisposable(historyDatabase.historyDao.insertHistoryList(historyList)
             .subscribeOn(Schedulers.io())

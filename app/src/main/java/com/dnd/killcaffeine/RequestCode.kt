@@ -10,6 +10,10 @@ object RequestCode {
     const val HISTORY_TODAY_REQUEST_CODE = 100
     const val HISTORY_REGISTER_REQUEST_CODE = 101
 
+    const val HISTORY_REGISTER_SUCCESS_MENU = "history_register_success_menu"
+    const val TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER = "today_caffeine_intake_main_to_history_register"
+    const val TODAY_CAFFEINE_INTAKE_HISTORY_REGISTER_TO_MAIN = "today_caffeine_intake_history_register_to_main"
+
     const val TOTAL_TODAY_CAFFEINE_INTAKE_SPLASH_TO_MAIN = "total_today_caffeine_intake"
     const val TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT = "total_today_caffeine_intake_to_fragment"
 }

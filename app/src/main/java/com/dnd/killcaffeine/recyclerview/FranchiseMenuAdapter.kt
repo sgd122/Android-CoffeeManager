@@ -18,7 +18,11 @@ class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.Franchise
 
     private val mFranchiseMenuArrayList: ArrayList<Menu> = ArrayList()
 
-    private var mOnItemClickListener: View.OnClickListener? = null
+    private var mOnFranchiseClickListener: OnFranchiseMenuClickListener? = null
+
+    interface OnFranchiseMenuClickListener {
+        fun onclick(menu: Menu)
+    }
 
     override fun getItemCount(): Int = mFranchiseMenuArrayList.size
 
@@ -41,6 +45,11 @@ class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.Franchise
 
                 franchiseNameTextView.text = franchiseName
                 coffeeNameTextView.text = menuName
+                caffeineIntake.text = itemView.resources.getString(R.string.history_caffeine_intake, caffeine.toString())
+
+                itemView.setOnClickListener {
+                    mOnFranchiseClickListener?.onclick(this@run)
+                }
             }
         }
 
@@ -57,8 +66,8 @@ class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.Franchise
         notifyDataSetChanged()
     }
 
-    fun setItemOnClickListener(itemOnClickListener: View.OnClickListener) {
-        mOnItemClickListener = itemOnClickListener
+    fun setItemOnClickListener(onFranchiseClickListener: OnFranchiseMenuClickListener) {
+        mOnFranchiseClickListener = onFranchiseClickListener
     }
 
     inner class FranchiseMenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

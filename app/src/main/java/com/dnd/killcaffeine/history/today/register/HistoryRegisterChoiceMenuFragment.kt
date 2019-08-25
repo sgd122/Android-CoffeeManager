@@ -3,8 +3,12 @@
  */
 package com.dnd.killcaffeine.history.today.register
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dnd.killcaffeine.R
+import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHistoryRegisterChoiceMenuBinding
 import com.dnd.killcaffeine.model.data.menu.Menu
@@ -34,8 +38,19 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
             addItemDecoration(SpacesItemDecoration(32))
         }
 
+        // TODO 테스트 용도이므로 나중에 지워야함
         mFranchiseMenuAdapter.setFranchiseMenuArrayList(insertMockData())
 
+        mFranchiseMenuAdapter.setItemOnClickListener(object: FranchiseMenuAdapter.OnFranchiseMenuClickListener {
+            override fun onclick(menu: Menu) {
+                activity?.let {
+                    it.setResult(RESULT_OK, Intent().apply {
+                        putExtra(RequestCode.HISTORY_REGISTER_SUCCESS_MENU, menu)
+                    })
+                    it.finish()
+                }
+            }
+        })
     }
 
     override fun initDataBinding() {
@@ -49,16 +64,16 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
     // TODO 테스트 용도이므로 나중에 지워야함
     private fun insertMockData(): ArrayList<Menu> {
         return arrayListOf(
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false)
+            Menu(1, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
+            Menu(1, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false)
         )
     }
 }

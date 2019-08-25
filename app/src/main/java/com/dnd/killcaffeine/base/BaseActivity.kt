@@ -5,6 +5,7 @@ package com.dnd.killcaffeine.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -84,6 +85,26 @@ abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatAc
                 setupKeyboardHide(view.getChildAt(i), activity)
             }
         }
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
+    override fun startActivityForResult(intent: Intent?, requestCode: Int) {
+        super.startActivityForResult(intent, requestCode)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
+    override fun startActivity(intent: Intent?) {
+        super.startActivity(intent)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 
     private fun snackbarObserving(){

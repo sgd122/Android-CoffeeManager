@@ -5,6 +5,7 @@ package com.dnd.killcaffeine.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.dnd.killcaffeine.R
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(), BaseView {
@@ -76,6 +78,16 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
                 setupKeyboardHide(view.getChildAt(i), activity)
             }
         }
+    }
+
+    override fun startActivity(intent: Intent?) {
+        super.startActivity(intent)
+        activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
+    override fun startActivityForResult(intent: Intent?, requestCode: Int) {
+        super.startActivityForResult(intent, requestCode)
+        activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 
     private fun snackbarObserving(){

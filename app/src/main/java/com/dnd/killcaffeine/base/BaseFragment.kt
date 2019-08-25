@@ -12,10 +12,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(), BaseView {
 
@@ -35,6 +38,7 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
         mBinding = DataBindingUtil.inflate(inflater, resourceId, container, false)
         mBinding.lifecycleOwner = this
 
+        snackbarObserving()
         initViewStart()
         initDataBinding()
         initViewFinal()
@@ -72,5 +76,23 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
                 setupKeyboardHide(view.getChildAt(i), activity)
             }
         }
+    }
+
+    private fun snackbarObserving(){
+        mViewModel.snackbarLiveData.observe(this, Observer { string ->
+            activity?.findViewById<View>(android.R.id.content)?.let { view ->
+                val snackbar: Snackbar = Snackbar.make(view, string, Snackbar.LENGTH_SHORT)
+                snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)?.maxLines = 5
+                snackbar.show()
+            }
+        })
+
+        mViewModel.snackbarResIdLiveData.observe(this, Observer { resId ->
+            activity?.findViewById<View>(android.R.id.content)?.let { view ->
+                val snackbar: Snackbar = Snackbar.make(view, resId, Snackbar.LENGTH_SHORT)
+                snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)?.maxLines = 5
+                snackbar.show()
+            }
+        })
     }
 }

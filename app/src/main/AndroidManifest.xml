@@ -48,6 +48,10 @@
             android:name=".history.today.HistoryTodayRegisterActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".main.settings.terms.MainSettingsTermsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
     </application>
 

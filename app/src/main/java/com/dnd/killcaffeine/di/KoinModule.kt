@@ -17,6 +17,7 @@ import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
 import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
 import com.dnd.killcaffeine.main.home.show_more.TodayRecommendDrinkViewModel
 import com.dnd.killcaffeine.main.settings.MainSettingsViewModel
+import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel
 import com.dnd.killcaffeine.model.data.history.HistoryDatabase
 import com.dnd.killcaffeine.recyclerview.FranchiseMenuAdapter
@@ -62,6 +63,9 @@ val viewModelModule = module {
     }
     viewModel {
         HistoryRegisterChoiceMenuViewModel()
+    }
+    viewModel {
+        MainSettingsTermsViewModel()
     }
 }
 

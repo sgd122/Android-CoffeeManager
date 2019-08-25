@@ -5,7 +5,6 @@ package com.dnd.killcaffeine.history
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +12,12 @@ import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivityHistoryTodayBinding
-import com.dnd.killcaffeine.recyclerview.HistoryTodayAdapter
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterActivity
 import com.dnd.killcaffeine.model.data.history.History
 import com.dnd.killcaffeine.model.data.history.HistoryDatabase
 import com.dnd.killcaffeine.model.data.menu.Menu
+import com.dnd.killcaffeine.recyclerview.HistoryTodayAdapter
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_history_today.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,7 +39,7 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
     override fun initViewStart() {
         if(intent.hasExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER)){
             mTodayCaffeineFromMainFragment = intent.getIntExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER, 0)
-            Log.d(TAG, "홈프레그먼트에서 받아온 카페인 : $mTodayCaffeineFromMainFragment")
+            Logger.d("홈프레그먼트에서 받아온 카페인 : $mTodayCaffeineFromMainFragment")
         }
 
         activity_today_history_recycler_view.apply {
@@ -56,7 +56,7 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
                 list.forEach { history ->
                     mTodayCaffeineIntakeCalculation += history.caffeine
                 }
-                Log.d(TAG, "새롭게 계산한 카페인 : $mTodayCaffeineIntakeCalculation")
+                Logger.d("새롭게 계산한 카페인 : $mTodayCaffeineIntakeCalculation")
             }
         })
 
@@ -95,7 +95,7 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
                 RequestCode.HISTORY_REGISTER_REQUEST_CODE -> {
                     val menu: Menu? = data?.getSerializableExtra(RequestCode.HISTORY_REGISTER_SUCCESS_MENU) as? Menu
                     menu?.let {
-                        Log.d(TAG, it.toString())
+                        Logger.d(it.toString())
 
                         History(0, it.menuName, it.franchiseName, it.caffeine).run {
                             mHistoryTodayAdapter.addHistory(this)

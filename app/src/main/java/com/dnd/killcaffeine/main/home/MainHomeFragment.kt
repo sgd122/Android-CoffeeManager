@@ -5,7 +5,6 @@ package com.dnd.killcaffeine.main.home
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +18,7 @@ import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
 import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
 import com.dnd.killcaffeine.main.home.show_more.TodayRecommendDrinkActivity
 import com.dnd.killcaffeine.model.data.menu.Menu
+import com.orhanobut.logger.Logger
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -88,15 +88,15 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
         mViewModel.franchiseMenuLiveData.observe(this, Observer { result ->
             result?.let {
-                Log.d(TAG, "프랜차이즈 메뉴 사이즈 : ${result.list.size}")
+                Logger.d("프랜차이즈 메뉴 사이즈 : ${result.list.size}")
                 it.list.forEachIndexed { index, franchise ->
-                    Log.d(TAG, "$index 번째 프랜차이즈 : ${franchise.franchiseName}")
-                    Log.d(TAG, "[메뉴]")
+                    Logger.d("$index 번째 프랜차이즈 : ${franchise.franchiseName}")
+                    Logger.d("[메뉴]")
                     franchise.menu.forEach { menu ->
-                        Log.d(TAG, "$menu")
+                        Logger.d("$menu")
                     }
                 }
-            } ?: Log.d(TAG, "프랜차이즈 API call 실패")
+            } ?: Logger.d("프랜차이즈 API call 실패")
         })
     }
 

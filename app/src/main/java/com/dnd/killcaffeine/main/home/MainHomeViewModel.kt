@@ -3,19 +3,17 @@
  */
 package com.dnd.killcaffeine.main.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
 import com.dnd.killcaffeine.model.data.result.DecaffeineResult
 import com.dnd.killcaffeine.model.data.result.FranchiseResult
 import com.dnd.killcaffeine.model.remote.CoffeeManagerService
+import com.orhanobut.logger.Logger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class MainHomeViewModel : BaseViewModel() {
-
-    private val TAG = javaClass.name
 
     private val _decaffeineMenuLiveData = MutableLiveData<DecaffeineResult>()
     val decaffeineMenuLiveData: LiveData<DecaffeineResult> get() = _decaffeineMenuLiveData
@@ -25,19 +23,19 @@ class MainHomeViewModel : BaseViewModel() {
 
 
     fun getDecaffeineMenuList(){
-        Log.d(TAG, "디카페인 진입")
+        Logger.d("디카페인 진입")
         addDisposable(CoffeeManagerService.getDecaffineMenuList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 _decaffeineMenuLiveData.postValue(result)
                 result.list.forEach {
-                    Log.d(TAG, it.toString())
+                    Logger.d(it.toString())
                 }
 
             }, {
-                Log.d(TAG, "디카페인 가져오기 실패")
-                Log.d(TAG, it?.message ?: "")
+                Logger.d("디카페인 가져오기 실패")
+                Logger.d(it?.message ?: "")
             }))
     }
 
@@ -49,7 +47,7 @@ class MainHomeViewModel : BaseViewModel() {
                 _franchiseMenuLiveData.postValue(result)
 
             }, {
-                Log.d(TAG, it?.message ?: "")
+                Logger.d(it?.message ?: "")
             }))
     }
 }

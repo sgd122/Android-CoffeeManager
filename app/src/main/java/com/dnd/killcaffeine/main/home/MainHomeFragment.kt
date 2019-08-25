@@ -4,7 +4,6 @@
 package com.dnd.killcaffeine.main.home
 
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.Observer
@@ -16,8 +15,8 @@ import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHomeBinding
 import com.dnd.killcaffeine.detail.DetailActivity
 import com.dnd.killcaffeine.history.HistoryTodayActivity
-import com.dnd.killcaffeine.main.home.recyclerview.DecaffeineRecyclerViewAdpater
-import com.dnd.killcaffeine.main.home.recyclerview.RecentDrinkRecyclerViewAdapter
+import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
+import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
 import com.dnd.killcaffeine.main.home.show_more.TodayRecommendDrinkActivity
 import com.dnd.killcaffeine.model.data.menu.Menu
 import org.koin.android.ext.android.inject
@@ -35,8 +34,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     override val resourceId: Int
         get() = R.layout.fragment_home
 
-    private val mDecaffeineRecyclerViewAdapter: DecaffeineRecyclerViewAdpater by inject()
-    private val mRecentRecyclerViewAdapter: RecentDrinkRecyclerViewAdapter by inject()
+    private val mDecaffeineRecyclerViewAdapter: DecaffeineAdpater by inject()
+    private val mRecentRecyclerViewAdapter: RecentDrinkAdapter by inject()
 
     private val mDecaffeineArrayList: ArrayList<Menu> = ArrayList()
 
@@ -47,7 +46,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
         mRecentRecyclerViewAdapter.apply {
             setRecentDrinkArrayList(insertMockData())
-            setOnRecentDrinkItemClickListener(object: RecentDrinkRecyclerViewAdapter.OnRecentDrinkItemClickListener {
+            setOnRecentDrinkItemClickListener(object: RecentDrinkAdapter.OnRecentDrinkItemClickListener {
                 override fun onItemClick(menu: Menu) {
                     startActivity(Intent(activity?.applicationContext, DetailActivity::class.java).apply { putExtra("menu", menu) })
                 }
@@ -118,12 +117,6 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
                 putExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE, mDecaffeineArrayList)
             })
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

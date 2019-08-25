@@ -46,16 +46,16 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activity_today_recommend_drink_recycler_view"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingStart="@dimen/activity_today_recommend_column_spacing"
-            android:paddingEnd="@dimen/activity_today_recommend_column_spacing"
+            android:layout_gravity="center"
+            android:paddingStart="@dimen/activity_today_recommend_column_spacing_half"
+            android:paddingEnd="@dimen/activity_today_recommend_column_spacing_half"
             android:paddingTop="@dimen/activity_today_recommend_column_spacing_half"
             android:overScrollMode="never"
             app:spanCount="2"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/list_item_coffee"/>
+            tools:listitem="@layout/list_item_franchise_menu"/>
 
     </LinearLayout>
 

@@ -8,13 +8,14 @@ import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivityTodayRecommendDrinkBinding
-import com.dnd.killcaffeine.main.home.recyclerview.DecaffeineRecyclerViewAdpater
 import com.dnd.killcaffeine.model.data.menu.Menu
-import com.dnd.killcaffeine.utils.recyclerview_item_deco.RecyclerViewItemMargin
+import com.dnd.killcaffeine.recyclerview.FranchiseMenuAdapter
+import com.dnd.killcaffeine.recyclerview.decoration.GridLayoutEqualColumnDecorationSpacing
+import com.dnd.killcaffeine.recyclerview.decoration.RecyclerViewItemMargin
+import com.dnd.killcaffeine.recyclerview.decoration.SpacesItemDecoration
 import kotlinx.android.synthetic.main.activity_today_recommend_drink.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.ClassCastException
 
 class TodayRecommendDrinkActivity : BaseActivity<ActivityTodayRecommendDrinkBinding, TodayRecommendDrinkViewModel>() {
 
@@ -28,7 +29,7 @@ class TodayRecommendDrinkActivity : BaseActivity<ActivityTodayRecommendDrinkBind
         get() = R.layout.activity_today_recommend_drink
 
     override val mViewModel: TodayRecommendDrinkViewModel by viewModel()
-    private val mDecaffeineRecyclerViewAdapter: DecaffeineRecyclerViewAdpater by inject()
+    private val mDecaffeineRecyclerViewAdapter: FranchiseMenuAdapter by inject()
 
     override fun initViewStart() {
 
@@ -36,27 +37,21 @@ class TodayRecommendDrinkActivity : BaseActivity<ActivityTodayRecommendDrinkBind
         when(intent.hasExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE)) {
             true -> {
                 try {
-                    mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(intent.getSerializableExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE) as ArrayList<Menu>)
+                    mDecaffeineRecyclerViewAdapter.setFranchiseMenuArrayList(intent.getSerializableExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE) as ArrayList<Menu>)
                 } catch (e: ClassCastException){
                     e.printStackTrace()
-                    mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(ArrayList())
+                    mDecaffeineRecyclerViewAdapter.setFranchiseMenuArrayList(ArrayList())
                 }
             }
             false -> {
-                mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(ArrayList())
+                mDecaffeineRecyclerViewAdapter.setFranchiseMenuArrayList(ArrayList())
             }
         }
 
         activity_today_recommend_drink_recycler_view.apply {
             layoutManager = GridLayoutManager(this@TodayRecommendDrinkActivity, RECYCLER_VIEW_SPAN_COUNT)
             adapter = mDecaffeineRecyclerViewAdapter
-            addItemDecoration(
-                RecyclerViewItemMargin(
-                    32,
-                    0
-                )
-            )
-            //addItemDecoration(GridLayoutEqualColumnDecorationSpacing(this@TodayRecommendDrinkActivity, R.dimen.activity_today_recommend_column_spacing_half))
+            addItemDecoration(SpacesItemDecoration(32))
         }
     }
 

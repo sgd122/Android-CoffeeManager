@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_main_white"
+        android:padding="16dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_radius_10dp_white_box"
+            android:elevation="6dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/icon_search_magni_class"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:gravity="center|start"
+                android:background="@android:color/transparent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:inputType="text"
+                android:textSize="14sp"
+                android:textColor="@color/color_text_greyish_brown"
+                android:textCursorDrawable="@drawable/edit_text_cursor_drawable"
+                android:hint="Search"
+                android:textColorHint="@color/color_text_edit_text_hint"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:fontFamily="@font/spoqa_han_sans_regular"
+                android:includeFontPadding="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:background="@drawable/background_radius_10dp_white_box"
+            android:padding="24dp"
+            android:elevation="6dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_1"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/background_layer_history_register_franchise"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_2" />
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_2"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_1"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_3"/>
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_3"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_2"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_4"/>
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_4"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_3"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_5"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_6" />
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_6"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_5"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_7"/>
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_7"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_6"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_8"/>
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_8"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_7"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_9"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_10" />
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_10"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_9"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_11"/>
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_11"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_10"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_12"/>
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_12"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_11"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_13"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_14" />
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_14"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_13"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_15"/>
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_15"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_14"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_history_choice_franchise_16"/>
+
+                <ImageView
+                    android:id="@+id/fragment_history_choice_franchise_16"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/franchise_sample"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_history_choice_franchise_15"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

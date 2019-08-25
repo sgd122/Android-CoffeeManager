@@ -95,4 +95,32 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
             }
         })
     }
+
+    internal fun showSnackbar(message: String, duration: Int = Snackbar.LENGTH_SHORT){
+        activity?.findViewById<View>(android.R.id.content)?.let { view ->
+
+            val snackbar: Snackbar = if(duration != Snackbar.LENGTH_SHORT || duration != Snackbar.LENGTH_LONG || duration != Snackbar.LENGTH_INDEFINITE){
+                Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+            } else {
+                Snackbar.make(view, message, duration)
+            }
+
+            snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)?.maxLines = 5
+            snackbar.show()
+        }
+    }
+
+    internal fun showSnackbar(stringRes: Int, duration: Int = Snackbar.LENGTH_SHORT){
+        activity?.findViewById<View>(android.R.id.content)?.let { view ->
+
+            val snackbar: Snackbar = if(duration != Snackbar.LENGTH_SHORT || duration != Snackbar.LENGTH_LONG || duration != Snackbar.LENGTH_INDEFINITE){
+                Snackbar.make(view, stringRes, Snackbar.LENGTH_SHORT)
+            } else {
+                Snackbar.make(view, stringRes, duration)
+            }
+
+            snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)?.maxLines = 5
+            snackbar.show()
+        }
+    }
 }

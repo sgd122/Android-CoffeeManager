@@ -4,24 +4,30 @@
 package com.dnd.killcaffeine.history
 
 import android.app.Activity
+import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dnd.killcaffeine.R
+import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
-import com.dnd.killcaffeine.databinding.ActivityTodayHistoryBinding
-import com.dnd.killcaffeine.history.recyclerview.HistoryTodayAdapter
+import com.dnd.killcaffeine.databinding.ActivityHistoryTodayBinding
+import com.dnd.killcaffeine.recyclerview.HistoryTodayAdapter
+import com.dnd.killcaffeine.history.today.HistoryTodayRegisterActivity
 import com.dnd.killcaffeine.model.data.history.History
 import com.dnd.killcaffeine.model.data.history.HistoryDatabase
-import kotlinx.android.synthetic.main.activity_today_history.*
+import kotlinx.android.synthetic.main.activity_history_today.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HistoryTodayActivity : BaseActivity<ActivityTodayHistoryBinding, HistoryTodayViewModel>() {
+class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTodayViewModel>() {
+
+    private val TAG = "HistoryTodayActivity"
 
     override val mViewModel: HistoryTodayViewModel by viewModel()
     override val resourceId: Int
-        get() = R.layout.activity_today_history
+        get() = R.layout.activity_history_today
 
     private val mHistoryTodayAdapter: HistoryTodayAdapter by inject()
     private val mHistoryDatabase: HistoryDatabase by inject()
@@ -59,6 +65,25 @@ class HistoryTodayActivity : BaseActivity<ActivityTodayHistoryBinding, HistoryTo
             setResult(Activity.RESULT_OK)
             finish()
         }
+
+        activity_today_history_floating_action_button.setOnClickListener {
+            startActivityForResult(Intent(applicationContext, HistoryTodayRegisterActivity::class.java), RequestCode.HISTORY_REGISTER_REQUEST_CODE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == Activity.RESULT_OK){
+            when(requestCode){
+                RequestCode.HISTORY_REGISTER_REQUEST_CODE -> {
+                    val message = data?.getStringExtra("TEXT") ?: ""
+                    Log.d(TAG, message)
+                }
+            }
+        }
+
+
     }
 
     private fun insertMockHistory(): ArrayList<History> {

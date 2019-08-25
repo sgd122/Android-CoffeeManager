@@ -44,6 +44,10 @@
             android:name=".history.HistoryTodayActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".history.today.HistoryTodayRegisterActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
     </application>
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/background_oval_history_register_franchise"/>
+    <item android:drawable="@drawable/franchise_sample"/>
+
+</layer-list>

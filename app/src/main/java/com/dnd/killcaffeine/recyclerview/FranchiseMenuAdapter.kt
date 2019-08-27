@@ -12,11 +12,13 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.dnd.killcaffeine.R
+import com.dnd.killcaffeine.model.BaseRetrofit
 import com.dnd.killcaffeine.model.data.menu.Menu
 
 class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.FranchiseMenuViewHolder>() {
 
     private val mFranchiseMenuArrayList: ArrayList<Menu> = ArrayList()
+    private val baseUrl: String = BaseRetrofit.BASE_URL
 
     private var mOnFranchiseClickListener: OnFranchiseMenuClickListener? = null
 
@@ -35,24 +37,7 @@ class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.Franchise
     )
 
     override fun onBindViewHolder(holder: FranchiseMenuViewHolder, position: Int) {
-        mFranchiseMenuArrayList[position].run {
-            with(holder) {
-                coffeeImageView.load(R.drawable.coffee_sample) {
-                    crossfade(true)
-                    placeholder(R.drawable.background_radius_10dp_white_box)
-                    error(R.drawable.background_radius_10dp_white_box)
-                }
-
-                franchiseNameTextView.text = franchiseName
-                coffeeNameTextView.text = menuName
-                caffeineIntake.text = itemView.resources.getString(R.string.history_caffeine_intake, caffeine.toString())
-
-                itemView.setOnClickListener {
-                    mOnFranchiseClickListener?.onclick(this@run)
-                }
-            }
-        }
-
+        holder.bindTo(mFranchiseMenuArrayList[position])
     }
 
     fun setFranchiseMenuArrayList(list: ArrayList<Menu>) {
@@ -71,9 +56,25 @@ class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.Franchise
     }
 
     inner class FranchiseMenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val coffeeImageView: ImageView = itemView.findViewById(R.id.list_item_franchise_menu_image_view)
-        val franchiseNameTextView: TextView = itemView.findViewById(R.id.list_item_franchise_name_text_view)
-        val coffeeNameTextView: TextView = itemView.findViewById(R.id.list_item_franchise_menu_text_view)
-        val caffeineIntake: TextView = itemView.findViewById(R.id.list_item_franchise_menu_caffeine_content)
+        private val coffeeImageView: ImageView = itemView.findViewById(R.id.list_item_franchise_menu_image_view)
+        private val franchiseNameTextView: TextView = itemView.findViewById(R.id.list_item_franchise_name_text_view)
+        private val coffeeNameTextView: TextView = itemView.findViewById(R.id.list_item_franchise_menu_text_view)
+        private val caffeineIntake: TextView = itemView.findViewById(R.id.list_item_franchise_menu_caffeine_content)
+
+        fun bindTo(menu: Menu){
+            coffeeImageView.load("$baseUrl${menu.menuImgUrl}") {
+                crossfade(true)
+                placeholder(R.drawable.background_radius_10dp_white_box)
+                error(R.drawable.background_radius_10dp_white_box)
+            }
+
+            franchiseNameTextView.text = menu.franchiseName
+            coffeeNameTextView.text = menu.menuName
+            caffeineIntake.text = itemView.resources.getString(R.string.history_caffeine_intake, menu.caffeine.toString())
+
+            itemView.setOnClickListener {
+                mOnFranchiseClickListener?.onclick(menu)
+            }
+        }
     }
 }

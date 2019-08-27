@@ -12,7 +12,7 @@ import com.dnd.killcaffeine.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class HistoryTodayViewModel : BaseViewModel() {
+class HistoryTodayViewModel(private val mHistoryDatabase: HistoryDatabase) : BaseViewModel() {
 
     private val _historyListLiveData = MutableLiveData<ArrayList<History>>()
     val historyListLiveData: LiveData<ArrayList<History>> get() = _historyListLiveData
@@ -23,8 +23,8 @@ class HistoryTodayViewModel : BaseViewModel() {
     private val _failureHistoryLiveData = SingleLiveEvent<Any>()
     val failureHistoryLiveData: LiveData<Any> get() = _failureHistoryLiveData
 
-    fun loadHistoryListFromRoomDatabase(historyDatabase: HistoryDatabase){
-        addDisposable(historyDatabase.historyDao.getAllHistory()
+    fun loadHistoryListFromRoomDatabase(){
+        addDisposable(mHistoryDatabase.historyDao.getAllHistory()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->
@@ -34,8 +34,8 @@ class HistoryTodayViewModel : BaseViewModel() {
             }))
     }
 
-    fun insertHistoryToRoomDatabase(history: History, historyDatabase: HistoryDatabase){
-        addDisposable(historyDatabase.historyDao.insertHistory(history)
+    fun insertHistoryToRoomDatabase(history: History){
+        addDisposable(mHistoryDatabase.historyDao.insertHistory(history)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -46,8 +46,8 @@ class HistoryTodayViewModel : BaseViewModel() {
             }))
     }
 
-    fun insertHistoryListToRoomDatabase(historyList: List<History>, historyDatabase: HistoryDatabase){
-        addDisposable(historyDatabase.historyDao.insertHistoryList(historyList)
+    fun insertHistoryListToRoomDatabase(historyList: List<History>){
+        addDisposable(mHistoryDatabase.historyDao.insertHistoryList(historyList)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

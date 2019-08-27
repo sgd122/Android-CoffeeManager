@@ -23,11 +23,7 @@ class HistoryTodayAdapter : RecyclerView.Adapter<HistoryTodayAdapter.HistoryToda
     }
 
     override fun onBindViewHolder(holder: HistoryTodayViewHolder, position: Int) {
-        mHistoryArrayList[position].run {
-            holder.historyMenu.text = menuName
-            holder.historyFranchise.text = franchiseName
-            holder.historyCaffeineIntake.text = holder.itemView.resources.getString(R.string.history_caffeine_intake, caffeine.toString())
-        }
+        holder.bindTo(mHistoryArrayList[position])
     }
 
     fun setHistoryList(list: ArrayList<History>){
@@ -52,8 +48,14 @@ class HistoryTodayAdapter : RecyclerView.Adapter<HistoryTodayAdapter.HistoryToda
     }
 
     inner class HistoryTodayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val historyMenu: TextView = itemView.findViewById(R.id.list_item_history_menu)
-        val historyFranchise: TextView = itemView.findViewById(R.id.list_item_history_franchise)
-        val historyCaffeineIntake: TextView = itemView.findViewById(R.id.list_item_history_caffeine_intake)
+        private val historyMenu: TextView = itemView.findViewById(R.id.list_item_history_menu)
+        private val historyFranchise: TextView = itemView.findViewById(R.id.list_item_history_franchise)
+        private val historyCaffeineIntake: TextView = itemView.findViewById(R.id.list_item_history_caffeine_intake)
+
+        fun bindTo(history: History){
+            historyMenu.text = history.menuName
+            historyFranchise.text = history.franchiseName
+            historyCaffeineIntake.text = itemView.resources.getString(R.string.history_caffeine_intake, history.caffeine.toString())
+        }
     }
 }

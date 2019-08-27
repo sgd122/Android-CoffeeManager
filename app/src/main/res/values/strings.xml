@@ -15,4 +15,20 @@
 
     </string>
 
+    <string name="list_item_notice_write_time_example">2019.08.10</string>
+    <string name="list_item_notice_title_example">
+        [공지] 카페인 입력을 더 쉽게 이용하실 수 있어요!
+    </string>
+
+    <string name="list_item_notice_detail_example">
+        아래 시간에 서비스 점검이 있을 예정입니다.\n\n
+        [작업일시]\n
+        2019.08.10 (일) 23:50 ~. 2019.08.11 (월) 00:30 (40분) 전면중단)\n
+        [작업내용]\n
+        신규 DB서버로 교체 및 서비스 전환 작업\n\n
+        해당 작업은 작업상태에 따라 단축되거나 연장될 수도 있어요.\n
+        보다 나은 서비스로 커피매니저를 사용하실 수 있도록 노력하겠습니다~\n
+        감사합니다!
+    </string>
+
 </resources>

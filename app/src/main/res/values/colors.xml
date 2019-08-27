@@ -16,6 +16,7 @@
     <color name="color_text_greyish_brown">#434343</color>
     <color name="color_text_brownish_grey">#747474</color>
     <color name="color_text_brownish_grey_opacity_80_percent">#CC747474</color>
+    <color name="color_text_brownish_grey_opacity_20_percent">#33747474</color>
     <color name="color_text_settings_green">#4aad78</color>
     <color name="color_text_edit_text_hint">#61000000</color>
 

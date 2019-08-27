@@ -18,6 +18,7 @@ import com.dnd.killcaffeine.model.data.menu.Menu
 class RecentDrinkAdapter : RecyclerView.Adapter<RecentDrinkAdapter.RecentDrinkRecyclerViewHolder>() {
 
     private val mDRecentDrinkArrayList:ArrayList<Menu> = ArrayList()
+    private val baseUrl: String = BaseRetrofit.BASE_URL
 
     private var mOnItemClickListener: View.OnClickListener? = null
     private var mOnRecentDrinkItemClickListener: OnRecentDrinkItemClickListener? = null
@@ -26,35 +27,13 @@ class RecentDrinkAdapter : RecyclerView.Adapter<RecentDrinkAdapter.RecentDrinkRe
         fun onItemClick(menu: Menu)
     }
 
+    override fun getItemCount(): Int  = mDRecentDrinkArrayList.size
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RecentDrinkRecyclerViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.list_item_coffee, parent, false))
 
-    override fun getItemCount(): Int  = mDRecentDrinkArrayList.size
-
     override fun onBindViewHolder(holder: RecentDrinkRecyclerViewHolder, position: Int) {
-        val imageUrl = BaseRetrofit.BASE_URL
-        when(imageUrl.startsWith("http://")){
-            true -> imageUrl.replace("http://", "https://")
-        }
-
-        mDRecentDrinkArrayList[position].run {
-            with(holder){
-                //load("$imageUrl$menuImgUrl")
-                coffeeImageView.load(R.drawable.coffee_sample) {
-                    crossfade(true)
-                    placeholder(R.drawable.background_radius_10dp_white_box)
-                    error(R.drawable.background_radius_10dp_white_box)
-                }
-
-                franchiseNameTextView.text = franchiseName
-                coffeeNameTextView.text = menuName
-
-                itemView.setOnClickListener {
-                    mOnRecentDrinkItemClickListener?.onItemClick(this@run)
-                }
-            }
-        }
-
+        holder.bindTo(mDRecentDrinkArrayList[position])
     }
 
     fun setRecentDrinkArrayList(list : ArrayList<Menu>){
@@ -77,8 +56,25 @@ class RecentDrinkAdapter : RecyclerView.Adapter<RecentDrinkAdapter.RecentDrinkRe
     }
 
     inner class RecentDrinkRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val coffeeImageView: ImageView = itemView.findViewById(R.id.list_item_coffee_image_view)
-        val franchiseNameTextView: TextView = itemView.findViewById(R.id.list_item_coffee_franchise_name_text_view)
-        val coffeeNameTextView: TextView = itemView.findViewById(R.id.list_item_coffee_name_text_view)
+        private val coffeeImageView: ImageView = itemView.findViewById(R.id.list_item_coffee_image_view)
+        private val franchiseNameTextView: TextView = itemView.findViewById(R.id.list_item_coffee_franchise_name_text_view)
+        private val coffeeNameTextView: TextView = itemView.findViewById(R.id.list_item_coffee_name_text_view)
+        private val caffeineIntake: TextView = itemView.findViewById(R.id.list_item_coffee_caffeine_content)
+
+        fun bindTo(menu: Menu){
+            coffeeImageView.load("$baseUrl${menu.menuImgUrl}") {
+                crossfade(true)
+                placeholder(R.drawable.background_radius_10dp_white_box)
+                error(R.drawable.background_radius_10dp_white_box)
+            }
+
+            franchiseNameTextView.text = menu.franchiseName
+            coffeeNameTextView.text = menu.menuName
+            caffeineIntake.text = itemView.resources.getString(R.string.history_caffeine_intake, menu.caffeine.toString())
+
+            itemView.setOnClickListener {
+                mOnRecentDrinkItemClickListener?.onItemClick(menu)
+            }
+        }
     }
 }

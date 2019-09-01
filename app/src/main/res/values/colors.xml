@@ -29,6 +29,7 @@
     <color name="background_color_tab_pressed">#747474</color>
 
     <color name="background_color_history_add_button">#FFA36D</color>
+    <color name="background_color_personal_save_button">#FFA36D</color>
 
     <color name="background_color_show_more_button">#fba676</color>
     <color name="background_color_notification_switch_button_inside">#c8e6d6</color>

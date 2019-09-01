@@ -17,6 +17,7 @@ import com.dnd.killcaffeine.main.settings.MainSettingsViewModel
 import com.dnd.killcaffeine.main.settings.notice.MainSettingsNoticeViewModel
 import com.dnd.killcaffeine.main.settings.notice.fragment.NoticeDetailViewModel
 import com.dnd.killcaffeine.main.settings.notice.fragment.NoticeListViewModel
+import com.dnd.killcaffeine.main.settings.personal.MainPersonalSettingViewModel
 import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel
 import com.dnd.killcaffeine.model.data.history.HistoryDatabase
@@ -80,6 +81,9 @@ val viewModelModule = module {
     }
     viewModel {
         NoticeDetailViewModel()
+    }
+    viewModel {
+        MainPersonalSettingViewModel()
     }
 }
 

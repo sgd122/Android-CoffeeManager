@@ -5,6 +5,7 @@
 
     <string name="main_home_fragment_total_intake">%smg</string>
     <string name="history_caffeine_intake">%smg</string>
+    <string name="main_settings_personal_weight_form">%skg</string>
 
     <string name="activity_settings_terms_description">
         커피매니저 이용약관\n\n본 약관은 2018년 8월 10일부터 적용됩니다.\n\n\n제 1조 목적\n

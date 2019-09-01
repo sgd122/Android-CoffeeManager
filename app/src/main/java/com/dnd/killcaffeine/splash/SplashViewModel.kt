@@ -11,10 +11,12 @@ import com.dnd.killcaffeine.model.data.history.HistoryDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class SplashViewModel : BaseViewModel() {
+class SplashViewModel(private val mHistoryDatabase: HistoryDatabase) : BaseViewModel() {
 
-    private val START_ACTIVITY_POST_DELAY: Long = 2000
-    private val INVALID_INTAKE_RESULT: Int = -1
+    companion object {
+        private const val START_ACTIVITY_POST_DELAY: Long = 2000
+        private const val INVALID_INTAKE_RESULT: Int = -1
+    }
 
     private val _startActivityLiveData = MutableLiveData<Boolean>()
     val startActivityLiveData: LiveData<Boolean> get() = _startActivityLiveData
@@ -29,8 +31,8 @@ class SplashViewModel : BaseViewModel() {
         }, START_ACTIVITY_POST_DELAY)
     }
 
-    fun loadTotalTodayCaffeineIntake(historyDatabase: HistoryDatabase){
-        addDisposable(historyDatabase.historyDao.getAllHistory()
+    fun loadTotalTodayCaffeineIntake(){
+        addDisposable(mHistoryDatabase.historyDao.getAllHistory()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->

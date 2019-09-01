@@ -3,8 +3,6 @@
  */
 package com.dnd.killcaffeine.history.today
 
-import android.app.Activity
-import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.base.BaseActivity

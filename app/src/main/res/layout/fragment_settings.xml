@@ -31,7 +31,7 @@
                 android:includeFontPadding="false"/>
 
             <LinearLayout
-                android:id="@+id/fragment_settings_set_my_caffeine_button"
+                android:id="@+id/fragment_settings_set_personal_button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/fragment_settings_component_height"
                 android:background="@drawable/background_radius_10dp_white_box"

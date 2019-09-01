@@ -115,7 +115,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         getFragmentBinding().fragmentHomeTodayDecaffeineShowMoreButton.setOnClickListener {
 
             // TODO: 테스트 용도이므로 나중에 지워야됨
-            mDecaffeineArrayList.addAll(insertMockData())
+            //mDecaffeineArrayList.addAll(insertMockData())
 
             startActivity(Intent(activity?.applicationContext, TodayRecommendDrinkActivity::class.java).apply {
                 putExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE, mDecaffeineArrayList)

@@ -2,6 +2,7 @@ package com.dnd.killcaffeine.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
@@ -21,7 +22,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override val mViewModel: MainViewModel by viewModel()
 
     override fun initViewStart() {
-        supportFragmentManager.beginTransaction().replace(R.id.activity_main_container, getFragment(0)).commitNow()
+        supportFragmentManager.beginTransaction().add(R.id.activity_main_container, getFragment(0)).commitNow()
 
         activity_main_tab_layout.apply {
             addTab(newTab().setIcon(getTabIcon(TabComponent.HOME.ordinal)))
@@ -41,7 +42,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                             else -> throw IllegalStateException("올바르지 않은 접근입니다")
                         }.also {
                             it.commit()
-                            it.addToBackStack(null)
                         }
                     }
                 }
@@ -60,7 +60,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 putInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, totalTodayIntake)
             }
         }
+    }
 
+    override fun onBackPressed() {
+        if(mViewModel.onBackPressed()){
+            super.onBackPressed()
+        }
     }
 
     companion object {

@@ -9,6 +9,7 @@ import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivityTodayRecommendDrinkBinding
 import com.dnd.killcaffeine.model.data.menu.Menu
+import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
 import com.dnd.killcaffeine.recyclerview.FranchiseMenuAdapter
 import com.dnd.killcaffeine.recyclerview.decoration.GridLayoutEqualColumnDecorationSpacing
 import com.dnd.killcaffeine.recyclerview.decoration.RecyclerViewItemMargin
@@ -29,7 +30,7 @@ class TodayRecommendDrinkActivity : BaseActivity<ActivityTodayRecommendDrinkBind
         get() = R.layout.activity_today_recommend_drink
 
     override val mViewModel: TodayRecommendDrinkViewModel by viewModel()
-    private val mDecaffeineRecyclerViewAdapter: FranchiseMenuAdapter by inject()
+    private val mDecaffeineRecyclerViewAdapter: DecaffeineAdpater by inject()
 
     override fun initViewStart() {
 
@@ -37,14 +38,14 @@ class TodayRecommendDrinkActivity : BaseActivity<ActivityTodayRecommendDrinkBind
         when(intent.hasExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE)) {
             true -> {
                 try {
-                    mDecaffeineRecyclerViewAdapter.setFranchiseMenuArrayList(intent.getSerializableExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE) as ArrayList<Menu>)
+                    mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(intent.getSerializableExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE) as ArrayList<Menu>)
                 } catch (e: ClassCastException){
                     e.printStackTrace()
-                    mDecaffeineRecyclerViewAdapter.setFranchiseMenuArrayList(ArrayList())
+                    mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(ArrayList())
                 }
             }
             false -> {
-                mDecaffeineRecyclerViewAdapter.setFranchiseMenuArrayList(ArrayList())
+                mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(ArrayList())
             }
         }
 

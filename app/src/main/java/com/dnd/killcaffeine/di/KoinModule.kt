@@ -6,30 +6,36 @@ package com.dnd.killcaffeine.di
 import androidx.room.Room
 import com.dnd.killcaffeine.detail.DetailViewModel
 import com.dnd.killcaffeine.history.HistoryTodayViewModel
-import com.dnd.killcaffeine.recyclerview.HistoryTodayAdapter
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterViewModel
 import com.dnd.killcaffeine.history.today.register.HistoryRegisterChoiceFranchiseViewModel
 import com.dnd.killcaffeine.history.today.register.HistoryRegisterChoiceMenuViewModel
 import com.dnd.killcaffeine.history.today.register.HistoryRegisterChoiceTypeViewModel
 import com.dnd.killcaffeine.main.MainViewModel
 import com.dnd.killcaffeine.main.home.MainHomeViewModel
-import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
-import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
 import com.dnd.killcaffeine.main.home.show_more.TodayRecommendDrinkViewModel
 import com.dnd.killcaffeine.main.settings.MainSettingsViewModel
+import com.dnd.killcaffeine.main.settings.notice.MainSettingsNoticeViewModel
+import com.dnd.killcaffeine.main.settings.notice.fragment.NoticeDetailViewModel
+import com.dnd.killcaffeine.main.settings.notice.fragment.NoticeListViewModel
+import com.dnd.killcaffeine.main.settings.personal.MainPersonalSettingViewModel
 import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel
 import com.dnd.killcaffeine.model.data.history.HistoryDatabase
-import com.dnd.killcaffeine.recyclerview.FranchiseMenuAdapter
+import com.dnd.killcaffeine.recyclerview.*
 import com.dnd.killcaffeine.splash.SplashViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+val databaseModule = module {
+    single {
+        Room.databaseBuilder(androidApplication(), HistoryDatabase::class.java, "History-db").build()
+    }
+}
 
 val viewModelModule = module {
     viewModel {
-        SplashViewModel()
+        SplashViewModel(get())
     }
     viewModel {
         MainViewModel()
@@ -50,7 +56,7 @@ val viewModelModule = module {
         TodayRecommendDrinkViewModel()
     }
     viewModel {
-        HistoryTodayViewModel()
+        HistoryTodayViewModel(get())
     }
     viewModel {
         HistoryTodayRegisterViewModel()
@@ -67,6 +73,18 @@ val viewModelModule = module {
     viewModel {
         MainSettingsTermsViewModel()
     }
+    viewModel {
+        MainSettingsNoticeViewModel()
+    }
+    viewModel {
+        NoticeListViewModel()
+    }
+    viewModel {
+        NoticeDetailViewModel()
+    }
+    viewModel {
+        MainPersonalSettingViewModel()
+    }
 }
 
 val adapterModule = module {
@@ -82,12 +100,9 @@ val adapterModule = module {
     factory {
         FranchiseMenuAdapter()
     }
-}
-
-val databaseModule = module {
-    single {
-        Room.databaseBuilder(androidApplication(), HistoryDatabase::class.java, "History-db").build()
+    factory {
+        NoticeAdapter()
     }
 }
 
-val appModule =  listOf(viewModelModule, adapterModule, databaseModule)
+val appModule =  listOf(databaseModule, viewModelModule, adapterModule)

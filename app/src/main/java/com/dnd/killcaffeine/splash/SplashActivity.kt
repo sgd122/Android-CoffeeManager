@@ -10,8 +10,6 @@ import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivitySplashBinding
 import com.dnd.killcaffeine.main.MainActivity
-import com.dnd.killcaffeine.model.data.history.HistoryDatabase
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
@@ -20,7 +18,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         get() = R.layout.activity_splash
 
     override val mViewModel: SplashViewModel by viewModel()
-    private val mHistoryDatabase: HistoryDatabase by inject()
 
     private var caffeineIntake: Int = 0
 
@@ -46,6 +43,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     }
 
     override fun initViewFinal() {
-        mViewModel.loadTotalTodayCaffeineIntake(mHistoryDatabase)
+        mViewModel.loadTotalTodayCaffeineIntake()
     }
 }

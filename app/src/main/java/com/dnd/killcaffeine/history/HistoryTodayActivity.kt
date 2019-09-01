@@ -14,7 +14,6 @@ import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivityHistoryTodayBinding
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterActivity
 import com.dnd.killcaffeine.model.data.history.History
-import com.dnd.killcaffeine.model.data.history.HistoryDatabase
 import com.dnd.killcaffeine.model.data.menu.Menu
 import com.dnd.killcaffeine.recyclerview.HistoryTodayAdapter
 import com.orhanobut.logger.Logger
@@ -31,7 +30,6 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
         get() = R.layout.activity_history_today
 
     private val mHistoryTodayAdapter: HistoryTodayAdapter by inject()
-    private val mHistoryDatabase: HistoryDatabase by inject()
 
     private var mTodayCaffeineFromMainFragment: Int = 0
     private var mTodayCaffeineIntakeCalculation: Int = 0
@@ -61,7 +59,7 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
         })
 
         mViewModel.insertHistoryLiveData.observe(this, Observer {
-            mViewModel.loadHistoryListFromRoomDatabase(mHistoryDatabase)
+            mViewModel.loadHistoryListFromRoomDatabase()
         })
 
         mViewModel.failureHistoryLiveData.observe(this, Observer {
@@ -70,7 +68,7 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
     }
 
     override fun initViewFinal() {
-        mViewModel.loadHistoryListFromRoomDatabase(mHistoryDatabase)
+        mViewModel.loadHistoryListFromRoomDatabase()
 
         activity_today_history_back_button.setOnClickListener {
             transferDataWhenRegister()
@@ -99,7 +97,7 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
 
                         History(0, it.menuName, it.franchiseName, it.caffeine).run {
                             mHistoryTodayAdapter.addHistory(this)
-                            mViewModel.insertHistoryToRoomDatabase(this, mHistoryDatabase)
+                            mViewModel.insertHistoryToRoomDatabase(this)
                         }
                     }
                 }

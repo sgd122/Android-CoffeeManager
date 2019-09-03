@@ -11,6 +11,7 @@ import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHistoryRegisterChoiceMenuBinding
+import com.dnd.killcaffeine.dialog.WarningDialog
 import com.dnd.killcaffeine.model.data.menu.Menu
 import com.dnd.killcaffeine.recyclerview.FranchiseMenuAdapter
 import com.dnd.killcaffeine.recyclerview.decoration.SpacesItemDecoration
@@ -43,12 +44,7 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
 
         mFranchiseMenuAdapter.setItemOnClickListener(object: FranchiseMenuAdapter.OnFranchiseMenuClickListener {
             override fun onclick(menu: Menu) {
-                activity?.let {
-                    it.setResult(RESULT_OK, Intent().apply {
-                        putExtra(RequestCode.HISTORY_REGISTER_SUCCESS_MENU, menu)
-                    })
-                    it.finish()
-                }
+                showWarningDialog(menu)
             }
         })
     }
@@ -59,6 +55,20 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
 
     override fun initViewFinal() {
 
+    }
+
+    private fun showWarningDialog(menu: Menu){
+        activity?.applicationContext?.let { context ->
+            WarningDialog(context).show()
+        }
+
+        // Dialog 의 onClick 에서 아래 내용을 구현.
+        /*activity?.let {
+            it.setResult(RESULT_OK, Intent().apply {
+                putExtra(RequestCode.HISTORY_REGISTER_SUCCESS_MENU, menu)
+            })
+            it.finish()
+        }*/
     }
 
     // TODO 테스트 용도이므로 나중에 지워야함

@@ -19,6 +19,7 @@
     <color name="color_text_brownish_grey_opacity_20_percent">#33747474</color>
     <color name="color_text_settings_green">#4aad78</color>
     <color name="color_text_edit_text_hint">#61000000</color>
+    <color name="color_text_dialog_warning_title">#f15555</color>
 
     <color name="background_main_white">#f9f9f9</color>
     <color name="background_white_2">#ffffff</color>

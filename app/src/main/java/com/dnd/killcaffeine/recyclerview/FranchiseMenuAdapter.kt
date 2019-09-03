@@ -14,6 +14,7 @@ import coil.api.load
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.model.BaseRetrofit
 import com.dnd.killcaffeine.model.data.menu.Menu
+import com.orhanobut.logger.Logger
 
 class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.FranchiseMenuViewHolder>() {
 
@@ -62,7 +63,9 @@ class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.Franchise
         private val caffeineIntake: TextView = itemView.findViewById(R.id.list_item_franchise_menu_caffeine_content)
 
         fun bindTo(menu: Menu){
-            coffeeImageView.load("$baseUrl${menu.menuImgUrl}") {
+            //Logger.d("$baseUrl${menu.menuImgUrl}")
+
+            coffeeImageView.load(R.drawable.coffee_sample) {
                 crossfade(true)
                 placeholder(R.drawable.background_radius_10dp_white_box)
                 error(R.drawable.background_radius_10dp_white_box)

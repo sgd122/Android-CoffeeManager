@@ -58,17 +58,14 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
     }
 
     private fun showWarningDialog(menu: Menu){
-        activity?.applicationContext?.let { context ->
-            WarningDialog(context).show()
+        activity?.let { activity ->
+            WarningDialog(activity, View.OnClickListener {
+                activity.setResult(RESULT_OK, Intent().apply {
+                    putExtra(RequestCode.HISTORY_REGISTER_SUCCESS_MENU, menu)
+                })
+                activity.finish()
+            }).show()
         }
-
-        // Dialog 의 onClick 에서 아래 내용을 구현.
-        /*activity?.let {
-            it.setResult(RESULT_OK, Intent().apply {
-                putExtra(RequestCode.HISTORY_REGISTER_SUCCESS_MENU, menu)
-            })
-            it.finish()
-        }*/
     }
 
     // TODO 테스트 용도이므로 나중에 지워야함

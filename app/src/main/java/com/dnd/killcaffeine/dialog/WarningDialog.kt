@@ -8,13 +8,19 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.Window
+import android.widget.ImageView
+import android.widget.LinearLayout
 import com.dnd.killcaffeine.R
+import com.orhanobut.logger.Logger
+import kotlin.random.Random
 import kotlin.system.exitProcess
 
 class WarningDialog(context: Context, onClickListener: View.OnClickListener? = null) : Dialog(context) {
 
+    private var mOnClickListener: View.OnClickListener? = null
+
     init {
-        setCancelable(true)
+        setCancelable(false)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
 
         window?.run {
@@ -22,8 +28,23 @@ class WarningDialog(context: Context, onClickListener: View.OnClickListener? = n
         } ?: exitProcess(0)
 
         setContentView(R.layout.dialog_caffeine_warning)
-        findViewById<View>(R.id.dialog_warning_parent_layout).setOnClickListener {
-            cancel()
+
+        mOnClickListener = onClickListener
+
+        // 다이얼로그 클릭시 사라짐
+        findViewById<View>(R.id.dialog_warning_parent_layout).setOnClickListener { view ->
+            mOnClickListener?.onClick(view)
+            dismiss()
         }
+
+        // 경고 이미지 랜덤설정
+        findViewById<ImageView>(R.id.dialog_warning_image_view).setImageResource(iconRandomSelection())
+    }
+
+    private fun iconRandomSelection(): Int = when(Random.nextInt(3)) {
+        0 -> R.drawable.icon_warning_1
+        1 -> R.drawable.icon_warning_2
+        2 -> R.drawable.icon_warning_3
+        else -> R.drawable.icon_warning_1
     }
 }

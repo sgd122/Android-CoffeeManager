@@ -21,9 +21,9 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:hint="Hello world"
-            android:textColor="@color/color_text_greyish_brown"
+            android:textColor="@color/color_text_grayish_brown"
             android:textSize="16sp"
-            android:textColorHint="@color/color_text_greyish_brown" />
+            android:textColorHint="@color/color_text_grayish_brown" />
 
     </LinearLayout>
 

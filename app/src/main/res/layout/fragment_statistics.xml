@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PAGE 2"
-            android:textColor="@color/color_text_greyish_brown"
+            android:textColor="@color/color_text_grayish_brown"
             android:textSize="36sp"
             android:textStyle="bold"/>
 

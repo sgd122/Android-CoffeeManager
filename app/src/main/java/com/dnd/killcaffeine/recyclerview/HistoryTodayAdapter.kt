@@ -9,15 +9,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dnd.killcaffeine.R
-import com.dnd.killcaffeine.model.data.history.History
+import com.dnd.killcaffeine.model.data.menu.Menu
 
 class HistoryTodayAdapter : RecyclerView.Adapter<HistoryTodayAdapter.HistoryTodayViewHolder>() {
 
-    private val mHistoryArrayList: ArrayList<History> = ArrayList()
+    private val mHistoryArrayList: ArrayList<Menu> = ArrayList()
     private var mOnHistoryClickListener: OnHistoryClickListener? = null
 
     interface OnHistoryClickListener {
-        fun onClick(history: History)
+        fun onClick(menu: Menu)
     }
 
     override fun getItemCount(): Int = mHistoryArrayList.size
@@ -31,19 +31,19 @@ class HistoryTodayAdapter : RecyclerView.Adapter<HistoryTodayAdapter.HistoryToda
         holder.bindTo(mHistoryArrayList[position])
     }
 
-    fun setHistoryList(list: ArrayList<History>){
+    fun setHistoryList(list: ArrayList<Menu>){
         mHistoryArrayList.clear()
         mHistoryArrayList.addAll(list)
         notifyDataSetChanged()
     }
 
-    fun addHistory(history: History){
-        mHistoryArrayList.add(history)
+    fun addHistory(menu: Menu){
+        mHistoryArrayList.add(menu)
         notifyDataSetChanged()
     }
 
-    fun deleteHistory(history: History){
-        mHistoryArrayList.remove(history)
+    fun deleteHistory(menu: Menu){
+        mHistoryArrayList.remove(menu)
         notifyDataSetChanged()
     }
 
@@ -61,13 +61,13 @@ class HistoryTodayAdapter : RecyclerView.Adapter<HistoryTodayAdapter.HistoryToda
         private val historyFranchise: TextView = itemView.findViewById(R.id.list_item_history_franchise)
         private val historyCaffeineIntake: TextView = itemView.findViewById(R.id.list_item_history_caffeine_intake)
 
-        fun bindTo(history: History){
-            historyMenu.text = history.menuName
-            historyFranchise.text = history.franchiseName
-            historyCaffeineIntake.text = itemView.resources.getString(R.string.history_caffeine_intake, history.caffeine.toString())
+        fun bindTo(menu: Menu){
+            historyMenu.text = menu.menuName
+            historyFranchise.text = menu.franchiseName
+            historyCaffeineIntake.text = itemView.resources.getString(R.string.history_caffeine_intake, menu.caffeine.toString())
 
             itemView.setOnClickListener {
-                mOnHistoryClickListener?.onClick(history)
+                mOnHistoryClickListener?.onClick(menu)
             }
         }
     }

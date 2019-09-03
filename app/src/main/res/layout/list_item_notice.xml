@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/list_item_notice_title_example"
-        android:textColor="@color/color_text_greyish_brown"
+        android:textColor="@color/color_text_grayish_brown"
         android:textSize="14sp"
         android:fontFamily="@font/spoqa_han_sans_bold"
         android:includeFontPadding="false"/>

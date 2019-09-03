@@ -7,11 +7,11 @@ import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
-import com.dnd.killcaffeine.model.data.history.HistoryDatabase
+import com.dnd.killcaffeine.model.data.menu.MenuDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class SplashViewModel(private val mHistoryDatabase: HistoryDatabase) : BaseViewModel() {
+class SplashViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewModel() {
 
     companion object {
         private const val START_ACTIVITY_POST_DELAY: Long = 2000
@@ -32,7 +32,7 @@ class SplashViewModel(private val mHistoryDatabase: HistoryDatabase) : BaseViewM
     }
 
     fun loadTotalTodayCaffeineIntake(){
-        addDisposable(mHistoryDatabase.historyDao.getAllHistory()
+        addDisposable(mMenuDatabase.menuDao.getAllMenu()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->

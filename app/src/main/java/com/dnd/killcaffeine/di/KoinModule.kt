@@ -20,7 +20,7 @@ import com.dnd.killcaffeine.main.settings.notice.fragment.NoticeListViewModel
 import com.dnd.killcaffeine.main.settings.personal.MainPersonalSettingViewModel
 import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel
-import com.dnd.killcaffeine.model.data.history.HistoryDatabase
+import com.dnd.killcaffeine.model.data.menu.MenuDatabase
 import com.dnd.killcaffeine.recyclerview.*
 import com.dnd.killcaffeine.splash.SplashViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -28,8 +28,8 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val databaseModule = module {
-    single {
-        Room.databaseBuilder(androidApplication(), HistoryDatabase::class.java, "History-db").build()
+    single{
+        Room.databaseBuilder(androidApplication(), MenuDatabase::class.java, "Menu-db").build()
     }
 }
 

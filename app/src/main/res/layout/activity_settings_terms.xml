@@ -61,7 +61,7 @@
                     android:gravity="center|start"
                     android:text="@string/activity_settings_terms_description"
                     android:textSize="16sp"
-                    android:textColor="@color/color_text_greyish_brown"
+                    android:textColor="@color/color_text_grayish_brown"
                     android:fontFamily="@font/spoqa_han_sans_regular"
                     android:includeFontPadding="false"/>
 

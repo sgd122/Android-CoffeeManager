@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="@color/color_text_greyish_brown"
+            android:textColor="@color/color_text_grayish_brown"
             android:textSize="14sp"
             android:gravity="center|start"
             android:fontFamily="@font/spoqa_han_sans_bold"
@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="@color/color_text_greyish_brown"
+                    android:textColor="@color/color_text_grayish_brown"
                     android:gravity="center|start"
                     android:fontFamily="@font/spoqa_han_sans_regular"
                     android:includeFontPadding="false" />

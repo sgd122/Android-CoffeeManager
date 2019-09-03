@@ -38,7 +38,7 @@
                 android:layout_marginEnd="16dp"
                 android:inputType="text"
                 android:textSize="14sp"
-                android:textColor="@color/color_text_greyish_brown"
+                android:textColor="@color/color_text_grayish_brown"
                 android:textCursorDrawable="@drawable/edit_text_cursor_drawable"
                 android:hint="Search"
                 android:textColorHint="@color/color_text_edit_text_hint"

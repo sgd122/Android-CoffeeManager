@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dialog_warning_description"
-        android:textColor="@color/color_text_greyish_brown"
+        android:textColor="@color/color_text_grayish_brown"
         android:textSize="16sp"
         android:gravity="center"
         android:fontFamily="@font/spoqa_han_sans_bold"

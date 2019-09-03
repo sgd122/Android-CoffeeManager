@@ -16,7 +16,6 @@ import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivityHistoryTodayBinding
 import com.dnd.killcaffeine.dialog.HistoryDeleteWarningDialog
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterActivity
-import com.dnd.killcaffeine.model.data.history.History
 import com.dnd.killcaffeine.model.data.menu.Menu
 import com.dnd.killcaffeine.recyclerview.HistoryTodayAdapter
 import com.orhanobut.logger.Logger
@@ -39,10 +38,10 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
 
     override fun initViewStart() {
         mHistoryTodayAdapter.setOnHistoryClickListener(object: HistoryTodayAdapter.OnHistoryClickListener{
-            override fun onClick(history: History) {
+            override fun onClick(menu: Menu) {
 
                 // 아이템 클릭하면 다이얼로그 띄우기
-                showHistoryDeleteDialog(history)
+                showHistoryDeleteDialog(menu)
             }
         })
 
@@ -62,8 +61,8 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
             list?.let {
                 mHistoryTodayAdapter.setHistoryList(it)
                 mTodayCaffeineIntakeCalculation = 0
-                list.forEach { history ->
-                    mTodayCaffeineIntakeCalculation += history.caffeine
+                list.forEach { menu ->
+                    mTodayCaffeineIntakeCalculation += menu.caffeine
                 }
                 Logger.d("새롭게 계산한 카페인 : $mTodayCaffeineIntakeCalculation")
             }
@@ -78,8 +77,6 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
         })
 
         mViewModel.deleteHistoryLiveData.observe(this, Observer { history ->
-            Logger.d("히스토리 삭제 성")
-
             mHistoryTodayAdapter.deleteHistory(history)
             mTodayCaffeineIntakeCalculation -= history.caffeine
 
@@ -90,7 +87,7 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
         mViewModel.loadHistoryListFromRoomDatabase()
 
         activity_today_history_back_button.setOnClickListener {
-            transferDataWhenRegister()
+            sendCaffeineToHome()
             finish()
         }
 
@@ -100,7 +97,7 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
     }
 
     override fun finish() {
-        transferDataWhenRegister()
+        sendCaffeineToHome()
         super.finish()
     }
 
@@ -112,19 +109,16 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
                 RequestCode.HISTORY_REGISTER_REQUEST_CODE -> {
                     val menu: Menu? = data?.getSerializableExtra(RequestCode.HISTORY_REGISTER_SUCCESS_MENU) as? Menu
                     menu?.let {
-                        Logger.d(it.toString())
 
-                        History(0, it.menuName, it.franchiseName, it.caffeine).run {
-                            mHistoryTodayAdapter.addHistory(this)
-                            mViewModel.insertHistoryToRoomDatabase(this)
-                        }
+                        mHistoryTodayAdapter.addHistory(it)
+                        mViewModel.insertHistoryToRoomDatabase(it)
                     }
                 }
             }
         }
     }
 
-    private fun transferDataWhenRegister(){
+    private fun sendCaffeineToHome(){
         when(mTodayCaffeineFromMainFragment != mTodayCaffeineIntakeCalculation){
             true -> {
                 setResult(Activity.RESULT_OK, Intent().apply {
@@ -135,33 +129,32 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
         }
     }
 
-    private fun showHistoryDeleteDialog(history: History){
+    private fun showHistoryDeleteDialog(menu: Menu){
         HistoryDeleteWarningDialog(this, View.OnClickListener {
-            Toast.makeText(applicationContext, "아이템 삭제 다이얼로그", Toast.LENGTH_LONG).show()
 
-            mViewModel.deleteHistoryFromRoomDatabase(history)
+            mViewModel.deleteHistoryFromRoomDatabase(menu)
 
         }).show()
     }
 
-    private fun insertMockHistory(): ArrayList<History> {
+    private fun insertMockHistory(): ArrayList<Menu> {
         return arrayListOf(
-            History(0, "아이스 아메리카노", "스타벅스", 150),
-            History(0, "카페 라떼", "이디야", 100),
-            History(0, "에스프레소", "빽다방", 180),
-            History(0, "카푸치노", "엔젤리너스", 120),
-            History(0, "자바칩 프라푸치노", "스타벅스", 100),
-            History(0, "바닐라 라떼", "더벤티", 120),
-            History(0, "디카페인 아메리카노", "탐앤탐스", 30),
-            History(0, "얼그레이 버블티", "공차", 50),
-            History(0, "아이스 아메리카노", "스타벅스", 150),
-            History(0, "카페 라떼", "이디야", 100),
-            History(0, "에스프레소", "빽다방", 180),
-            History(0, "카푸치노", "엔젤리너스", 120),
-            History(0, "자바칩 프라푸치노", "스타벅스", 100),
-            History(0, "바닐라 라떼", "더벤티", 120),
-            History(0, "디카페인 아메리카노", "탐앤탐스", 30),
-            History(0, "얼그레이 버블티", "공차", 50)
+            Menu(0, "아이스 아메리카노", "R.drawable.app_icon", "스타벅스", 150, false),
+            Menu(0, "카페 라떼", "R.drawable.app_icon","이디야", 100, false),
+            Menu(0, "에스프레소", "R.drawable.app_icon","빽다방", 180, false),
+            Menu(0, "카푸치노", "R.drawable.app_icon","엔젤리너스", 120, false),
+            Menu(0, "자바칩 프라푸치노", "R.drawable.app_icon","스타벅스", 100, false),
+            Menu(0, "바닐라 라떼", "R.drawable.app_icon","더벤티", 120, false),
+            Menu(0, "디카페인 아메리카노", "R.drawable.app_icon","탐앤탐스", 30, false),
+            Menu(0, "얼그레이 버블티", "R.drawable.app_icon","공차", 50, false),
+            Menu(0, "아이스 아메리카노", "R.drawable.app_icon","스타벅스", 150, false),
+            Menu(0, "카페 라떼", "R.drawable.app_icon","이디야", 100, false),
+            Menu(0, "에스프레소", "R.drawable.app_icon","빽다방", 180, false),
+            Menu(0, "카푸치노", "R.drawable.app_icon","엔젤리너스", 120, false),
+            Menu(0, "자바칩 프라푸치노", "R.drawable.app_icon","스타벅스", 100, false),
+            Menu(0, "바닐라 라떼", "R.drawable.app_icon","더벤티", 120, false),
+            Menu(0, "디카페인 아메리카노", "R.drawable.app_icon","탐앤탐스", 30, false),
+            Menu(0, "얼그레이 버블티", "R.drawable.app_icon","공차", 50, false)
         )
     }
 }

@@ -6,16 +6,16 @@ package com.dnd.killcaffeine.history
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
-import com.dnd.killcaffeine.model.data.history.History
-import com.dnd.killcaffeine.model.data.history.HistoryDatabase
+import com.dnd.killcaffeine.model.data.menu.Menu
+import com.dnd.killcaffeine.model.data.menu.MenuDatabase
 import com.dnd.killcaffeine.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class HistoryTodayViewModel(private val mHistoryDatabase: HistoryDatabase) : BaseViewModel() {
+class HistoryTodayViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewModel() {
 
-    private val _historyListLiveData = MutableLiveData<ArrayList<History>>()
-    val historyListLiveData: LiveData<ArrayList<History>> get() = _historyListLiveData
+    private val _historyListLiveData = MutableLiveData<ArrayList<Menu>>()
+    val historyListLiveData: LiveData<ArrayList<Menu>> get() = _historyListLiveData
 
     private val _insertHistoryLiveData = SingleLiveEvent<Any>()
     val insertHistoryLiveData: LiveData<Any> get() = _insertHistoryLiveData
@@ -23,22 +23,22 @@ class HistoryTodayViewModel(private val mHistoryDatabase: HistoryDatabase) : Bas
     private val _failureHistoryLiveData = SingleLiveEvent<Any>()
     val failureHistoryLiveData: LiveData<Any> get() = _failureHistoryLiveData
 
-    private val _deleteHistoryLiveData = MutableLiveData<History>()
-    val deleteHistoryLiveData: LiveData<History> get() = _deleteHistoryLiveData
+    private val _deleteHistoryLiveData = MutableLiveData<Menu>()
+    val deleteHistoryLiveData: LiveData<Menu> get() = _deleteHistoryLiveData
 
     fun loadHistoryListFromRoomDatabase(){
-        addDisposable(mHistoryDatabase.historyDao.getAllHistory()
+        addDisposable(mMenuDatabase.menuDao.getAllMenu()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->
-                _historyListLiveData.postValue(list as ArrayList<History>)
+                _historyListLiveData.postValue(list as ArrayList<Menu>)
             }, {
                 _failureHistoryLiveData.call()
             }))
     }
 
-    fun insertHistoryToRoomDatabase(history: History){
-        addDisposable(mHistoryDatabase.historyDao.insertHistory(history)
+    fun insertHistoryToRoomDatabase(menu: Menu){
+        addDisposable(mMenuDatabase.menuDao.insertMenu(menu)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -49,8 +49,8 @@ class HistoryTodayViewModel(private val mHistoryDatabase: HistoryDatabase) : Bas
             }))
     }
 
-    fun insertHistoryListToRoomDatabase(historyList: List<History>){
-        addDisposable(mHistoryDatabase.historyDao.insertHistoryList(historyList)
+    fun insertHistoryListToRoomDatabase(menuList: List<Menu>){
+        addDisposable(mMenuDatabase.menuDao.insertMenuList(menuList)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -62,13 +62,13 @@ class HistoryTodayViewModel(private val mHistoryDatabase: HistoryDatabase) : Bas
         )
     }
 
-    fun deleteHistoryFromRoomDatabase(history: History){
-        addDisposable(mHistoryDatabase.historyDao.deleteHistory(history)
+    fun deleteHistoryFromRoomDatabase(menu: Menu){
+        addDisposable(mMenuDatabase.menuDao.deleteMenu(menu)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
 
-                _deleteHistoryLiveData.postValue(history)
+                _deleteHistoryLiveData.postValue(menu)
 
             }, {
                 showSnackbar(it.message ?: "히스토리 삭제에 실패하였습니다.")

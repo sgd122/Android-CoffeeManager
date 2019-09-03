@@ -14,6 +14,11 @@ import com.dnd.killcaffeine.model.data.history.History
 class HistoryTodayAdapter : RecyclerView.Adapter<HistoryTodayAdapter.HistoryTodayViewHolder>() {
 
     private val mHistoryArrayList: ArrayList<History> = ArrayList()
+    private var mOnHistoryClickListener: OnHistoryClickListener? = null
+
+    interface OnHistoryClickListener {
+        fun onClick(history: History)
+    }
 
     override fun getItemCount(): Int = mHistoryArrayList.size
 
@@ -47,6 +52,10 @@ class HistoryTodayAdapter : RecyclerView.Adapter<HistoryTodayAdapter.HistoryToda
         notifyDataSetChanged()
     }
 
+    fun setOnHistoryClickListener(onHistoryClickListener: OnHistoryClickListener){
+        mOnHistoryClickListener = onHistoryClickListener
+    }
+
     inner class HistoryTodayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val historyMenu: TextView = itemView.findViewById(R.id.list_item_history_menu)
         private val historyFranchise: TextView = itemView.findViewById(R.id.list_item_history_franchise)
@@ -56,6 +65,10 @@ class HistoryTodayAdapter : RecyclerView.Adapter<HistoryTodayAdapter.HistoryToda
             historyMenu.text = history.menuName
             historyFranchise.text = history.franchiseName
             historyCaffeineIntake.text = itemView.resources.getString(R.string.history_caffeine_intake, history.caffeine.toString())
+
+            itemView.setOnClickListener {
+                mOnHistoryClickListener?.onClick(history)
+            }
         }
     }
 }

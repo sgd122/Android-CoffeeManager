@@ -9,13 +9,11 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.Window
 import android.widget.ImageView
-import android.widget.LinearLayout
 import com.dnd.killcaffeine.R
-import com.orhanobut.logger.Logger
 import kotlin.random.Random
 import kotlin.system.exitProcess
 
-class WarningDialog(context: Context, onClickListener: View.OnClickListener? = null) : Dialog(context) {
+class HistoryRegisterWarningDialog(context: Context, onClickListener: View.OnClickListener? = null) : Dialog(context) {
 
     private var mOnClickListener: View.OnClickListener? = null
 
@@ -27,7 +25,7 @@ class WarningDialog(context: Context, onClickListener: View.OnClickListener? = n
             setBackgroundDrawable(ColorDrawable(0))
         } ?: exitProcess(0)
 
-        setContentView(R.layout.dialog_caffeine_warning)
+        setContentView(R.layout.dialog_history_register_warning)
 
         mOnClickListener = onClickListener
 

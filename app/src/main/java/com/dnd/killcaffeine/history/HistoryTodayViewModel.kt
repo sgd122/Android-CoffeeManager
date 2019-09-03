@@ -23,6 +23,9 @@ class HistoryTodayViewModel(private val mHistoryDatabase: HistoryDatabase) : Bas
     private val _failureHistoryLiveData = SingleLiveEvent<Any>()
     val failureHistoryLiveData: LiveData<Any> get() = _failureHistoryLiveData
 
+    private val _deleteHistoryLiveData = MutableLiveData<History>()
+    val deleteHistoryLiveData: LiveData<History> get() = _deleteHistoryLiveData
+
     fun loadHistoryListFromRoomDatabase(){
         addDisposable(mHistoryDatabase.historyDao.getAllHistory()
             .subscribeOn(Schedulers.io())
@@ -57,5 +60,18 @@ class HistoryTodayViewModel(private val mHistoryDatabase: HistoryDatabase) : Bas
 
             })
         )
+    }
+
+    fun deleteHistoryFromRoomDatabase(history: History){
+        addDisposable(mHistoryDatabase.historyDao.deleteHistory(history)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+                _deleteHistoryLiveData.postValue(history)
+
+            }, {
+                showSnackbar(it.message ?: "히스토리 삭제에 실패하였습니다.")
+            }))
     }
 }

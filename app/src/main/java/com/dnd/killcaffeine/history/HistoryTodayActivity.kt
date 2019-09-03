@@ -5,6 +5,8 @@ package com.dnd.killcaffeine.history
 
 import android.app.Activity
 import android.content.Intent
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +14,7 @@ import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivityHistoryTodayBinding
+import com.dnd.killcaffeine.dialog.HistoryDeleteWarningDialog
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterActivity
 import com.dnd.killcaffeine.model.data.history.History
 import com.dnd.killcaffeine.model.data.menu.Menu
@@ -35,6 +38,14 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
     private var mTodayCaffeineIntakeCalculation: Int = 0
 
     override fun initViewStart() {
+        mHistoryTodayAdapter.setOnHistoryClickListener(object: HistoryTodayAdapter.OnHistoryClickListener{
+            override fun onClick(history: History) {
+
+                // 아이템 클릭하면 다이얼로그 띄우기
+                showHistoryDeleteDialog(history)
+            }
+        })
+
         if(intent.hasExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER)){
             mTodayCaffeineFromMainFragment = intent.getIntExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER, 0)
             Logger.d("홈프레그먼트에서 받아온 카페인 : $mTodayCaffeineFromMainFragment")
@@ -64,6 +75,14 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
 
         mViewModel.failureHistoryLiveData.observe(this, Observer {
             mHistoryTodayAdapter.setHistoryList(insertMockHistory())
+        })
+
+        mViewModel.deleteHistoryLiveData.observe(this, Observer { history ->
+            Logger.d("히스토리 삭제 성")
+
+            mHistoryTodayAdapter.deleteHistory(history)
+            mTodayCaffeineIntakeCalculation -= history.caffeine
+
         })
     }
 
@@ -114,6 +133,15 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
             }
             false -> setResult(Activity.RESULT_OK)
         }
+    }
+
+    private fun showHistoryDeleteDialog(history: History){
+        HistoryDeleteWarningDialog(this, View.OnClickListener {
+            Toast.makeText(applicationContext, "아이템 삭제 다이얼로그", Toast.LENGTH_LONG).show()
+
+            mViewModel.deleteHistoryFromRoomDatabase(history)
+
+        }).show()
     }
 
     private fun insertMockHistory(): ArrayList<History> {

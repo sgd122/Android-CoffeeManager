@@ -11,7 +11,7 @@ import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHistoryRegisterChoiceMenuBinding
-import com.dnd.killcaffeine.dialog.WarningDialog
+import com.dnd.killcaffeine.dialog.HistoryRegisterWarningDialog
 import com.dnd.killcaffeine.model.data.menu.Menu
 import com.dnd.killcaffeine.recyclerview.FranchiseMenuAdapter
 import com.dnd.killcaffeine.recyclerview.decoration.SpacesItemDecoration
@@ -59,7 +59,7 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
 
     private fun showWarningDialog(menu: Menu){
         activity?.let { activity ->
-            WarningDialog(activity, View.OnClickListener {
+            HistoryRegisterWarningDialog(activity, View.OnClickListener {
                 activity.setResult(RESULT_OK, Intent().apply {
                     putExtra(RequestCode.HISTORY_REGISTER_SUCCESS_MENU, menu)
                 })

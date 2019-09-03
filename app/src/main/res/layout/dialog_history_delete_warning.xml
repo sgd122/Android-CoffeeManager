@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:paddingTop="16dp"
+    android:gravity="center|top"
+    android:background="@drawable/background_radius_10dp_main_white_box">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_history_delete_description"
+        android:textColor="@color/color_text_greyish_brown"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:fontFamily="@font/spoqa_han_sans_bold"
+        android:includeFontPadding="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:background="@color/color_text_greyish_brown">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_delete_warning_cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/background_dialog_left_cancel_button"
+            android:text="취소"
+            android:textSize="16sp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"/>
+
+        <Button
+            android:id="@+id/dialog_delete_warning_confirm_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/background_dialog_right_confirm_button"
+            android:text="확인"
+            android:textSize="16sp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

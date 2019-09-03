@@ -8,13 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.model.BaseRetrofit
-import com.dnd.killcaffeine.model.data.menu.Menu
-import com.orhanobut.logger.Logger
+import com.dnd.killcaffeine.model.data.room.menu.Menu
 
 class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.FranchiseMenuViewHolder>() {
 

@@ -6,8 +6,8 @@ package com.dnd.killcaffeine.history
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
-import com.dnd.killcaffeine.model.data.menu.Menu
-import com.dnd.killcaffeine.model.data.menu.MenuDatabase
+import com.dnd.killcaffeine.model.data.room.menu.Menu
+import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
 import com.dnd.killcaffeine.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,9 +20,6 @@ class HistoryTodayViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewM
     private val _insertHistoryLiveData = SingleLiveEvent<Any>()
     val insertHistoryLiveData: LiveData<Any> get() = _insertHistoryLiveData
 
-    private val _failureHistoryLiveData = SingleLiveEvent<Any>()
-    val failureHistoryLiveData: LiveData<Any> get() = _failureHistoryLiveData
-
     private val _deleteHistoryLiveData = MutableLiveData<Menu>()
     val deleteHistoryLiveData: LiveData<Menu> get() = _deleteHistoryLiveData
 
@@ -33,7 +30,7 @@ class HistoryTodayViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewM
             .subscribe({ list ->
                 _historyListLiveData.postValue(list as ArrayList<Menu>)
             }, {
-                _failureHistoryLiveData.call()
+                _historyListLiveData.postValue(ArrayList())
             }))
     }
 

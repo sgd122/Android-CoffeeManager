@@ -8,11 +8,8 @@ import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivityTodayRecommendDrinkBinding
-import com.dnd.killcaffeine.model.data.menu.Menu
+import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
-import com.dnd.killcaffeine.recyclerview.FranchiseMenuAdapter
-import com.dnd.killcaffeine.recyclerview.decoration.GridLayoutEqualColumnDecorationSpacing
-import com.dnd.killcaffeine.recyclerview.decoration.RecyclerViewItemMargin
 import com.dnd.killcaffeine.recyclerview.decoration.SpacesItemDecoration
 import kotlinx.android.synthetic.main.activity_today_recommend_drink.*
 import org.koin.android.ext.android.inject

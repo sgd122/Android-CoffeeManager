@@ -7,8 +7,8 @@ import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
-import com.dnd.killcaffeine.model.data.menu.Menu
-import com.dnd.killcaffeine.model.data.menu.MenuDatabase
+import com.dnd.killcaffeine.model.data.room.menu.Menu
+import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

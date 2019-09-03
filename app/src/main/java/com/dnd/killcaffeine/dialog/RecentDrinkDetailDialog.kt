@@ -10,7 +10,7 @@ import android.view.View
 import android.view.Window
 import android.widget.TextView
 import com.dnd.killcaffeine.R
-import com.dnd.killcaffeine.model.data.menu.Menu
+import com.dnd.killcaffeine.model.data.room.menu.Menu
 import kotlin.system.exitProcess
 
 class RecentDrinkDetailDialog(context: Context, menu: Menu) : Dialog(context) {

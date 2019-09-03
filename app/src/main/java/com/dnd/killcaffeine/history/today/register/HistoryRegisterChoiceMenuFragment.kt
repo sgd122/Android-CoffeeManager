@@ -12,7 +12,7 @@ import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHistoryRegisterChoiceMenuBinding
 import com.dnd.killcaffeine.dialog.HistoryRegisterWarningDialog
-import com.dnd.killcaffeine.model.data.menu.Menu
+import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.recyclerview.FranchiseMenuAdapter
 import com.dnd.killcaffeine.recyclerview.decoration.SpacesItemDecoration
 import org.koin.android.ext.android.inject

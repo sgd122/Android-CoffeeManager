@@ -10,11 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import coil.transform.RoundedCornersTransformation
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.model.BaseRetrofit
-import com.dnd.killcaffeine.model.data.menu.Menu
-import com.orhanobut.logger.Logger
+import com.dnd.killcaffeine.model.data.room.menu.Menu
 
 class DecaffeineAdpater : RecyclerView.Adapter<DecaffeineAdpater.DecaffeineRecyclerViewHolder>() {
 

@@ -2,7 +2,6 @@ package com.dnd.killcaffeine.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
@@ -10,7 +9,7 @@ import com.dnd.killcaffeine.databinding.ActivityMainBinding
 import com.dnd.killcaffeine.main.home.MainHomeFragment
 import com.dnd.killcaffeine.main.settings.MainSettingsFragment
 import com.dnd.killcaffeine.main.statistics.MainStatisticsFragment
-import com.dnd.killcaffeine.model.data.menu.Menu
+import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel

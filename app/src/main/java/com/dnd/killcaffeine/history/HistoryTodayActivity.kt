@@ -6,7 +6,6 @@ package com.dnd.killcaffeine.history
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +15,7 @@ import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivityHistoryTodayBinding
 import com.dnd.killcaffeine.dialog.HistoryDeleteWarningDialog
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterActivity
-import com.dnd.killcaffeine.model.data.menu.Menu
+import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.recyclerview.HistoryTodayAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_history_today.*
@@ -70,10 +69,6 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
 
         mViewModel.insertHistoryLiveData.observe(this, Observer {
             mViewModel.loadHistoryListFromRoomDatabase()
-        })
-
-        mViewModel.failureHistoryLiveData.observe(this, Observer {
-            mHistoryTodayAdapter.setHistoryList(insertMockHistory())
         })
 
         mViewModel.deleteHistoryLiveData.observe(this, Observer { history ->

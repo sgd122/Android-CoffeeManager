@@ -32,11 +32,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".detail.DetailActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/DetailTheme"/>
-        <activity
             android:name=".main.home.show_more.TodayRecommendDrinkActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

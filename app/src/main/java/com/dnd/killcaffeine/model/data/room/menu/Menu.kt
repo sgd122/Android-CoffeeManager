@@ -1,4 +1,4 @@
-package com.dnd.killcaffeine.model.data.menu
+package com.dnd.killcaffeine.model.data.room.menu
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

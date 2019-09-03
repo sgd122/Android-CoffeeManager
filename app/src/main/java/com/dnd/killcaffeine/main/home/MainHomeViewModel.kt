@@ -6,8 +6,8 @@ package com.dnd.killcaffeine.main.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
-import com.dnd.killcaffeine.model.data.menu.Menu
-import com.dnd.killcaffeine.model.data.menu.MenuDatabase
+import com.dnd.killcaffeine.model.data.room.menu.Menu
+import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
 import com.dnd.killcaffeine.model.data.result.DecaffeineResult
 import com.dnd.killcaffeine.model.remote.CoffeeManagerService
 import com.orhanobut.logger.Logger

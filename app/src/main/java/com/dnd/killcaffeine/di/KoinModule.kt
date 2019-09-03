@@ -4,7 +4,6 @@
 package com.dnd.killcaffeine.di
 
 import androidx.room.Room
-import com.dnd.killcaffeine.detail.DetailViewModel
 import com.dnd.killcaffeine.history.HistoryTodayViewModel
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterViewModel
 import com.dnd.killcaffeine.history.today.register.HistoryRegisterChoiceFranchiseViewModel
@@ -20,7 +19,8 @@ import com.dnd.killcaffeine.main.settings.notice.fragment.NoticeListViewModel
 import com.dnd.killcaffeine.main.settings.personal.MainPersonalSettingViewModel
 import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel
-import com.dnd.killcaffeine.model.data.menu.MenuDatabase
+import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
+import com.dnd.killcaffeine.model.data.room.personal.PersonalDatabase
 import com.dnd.killcaffeine.recyclerview.*
 import com.dnd.killcaffeine.splash.SplashViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -29,7 +29,12 @@ import org.koin.dsl.module
 
 val databaseModule = module {
     single{
-        Room.databaseBuilder(androidApplication(), MenuDatabase::class.java, "Menu-db").build()
+        Room.databaseBuilder(androidApplication(), MenuDatabase::class.java, "Menu-db")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+    single{
+        Room.databaseBuilder(androidApplication(), PersonalDatabase::class.java, "Personal-db").build()
     }
 }
 
@@ -48,9 +53,6 @@ val viewModelModule = module {
     }
     viewModel {
         MainSettingsViewModel()
-    }
-    viewModel {
-        DetailViewModel()
     }
     viewModel {
         TodayRecommendDrinkViewModel()
@@ -83,7 +85,7 @@ val viewModelModule = module {
         NoticeDetailViewModel()
     }
     viewModel {
-        MainPersonalSettingViewModel()
+        MainPersonalSettingViewModel(get())
     }
 }
 

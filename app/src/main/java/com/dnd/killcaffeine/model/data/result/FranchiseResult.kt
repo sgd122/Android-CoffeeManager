@@ -1,6 +1,6 @@
 package com.dnd.killcaffeine.model.data.result
 
-import com.dnd.killcaffeine.model.data.menu.FranchiseMenu
+import com.dnd.killcaffeine.model.data.FranchiseMenu
 import java.io.Serializable
 
 /*

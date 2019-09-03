@@ -12,14 +12,12 @@ import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHomeBinding
-import com.dnd.killcaffeine.detail.DetailActivity
 import com.dnd.killcaffeine.dialog.RecentDrinkDetailDialog
 import com.dnd.killcaffeine.history.HistoryTodayActivity
 import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
 import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
 import com.dnd.killcaffeine.main.home.show_more.TodayRecommendDrinkActivity
-import com.dnd.killcaffeine.model.data.menu.Menu
-import com.orhanobut.logger.Logger
+import com.dnd.killcaffeine.model.data.room.menu.Menu
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

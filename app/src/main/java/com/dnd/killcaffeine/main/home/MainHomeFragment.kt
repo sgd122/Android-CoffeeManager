@@ -39,9 +39,15 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     private val mDecaffeineArrayList: ArrayList<Menu> = ArrayList()
 
-    private var totalIntakeFromSplash: Int = 0 // Splash 에서 넘겨받은 일일카페인 섭취량
-
     override fun initViewStart() {
+        (arguments?.getInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, 0) ?: 0).run {
+            mViewModel.setTotalCaffeineIntake(this)
+        }
+        (arguments?.getSerializable(RequestCode.TOTAL_TODAY_MENU_LIST_MAIN_TO_FRAGMENT) as ArrayList<Menu>).run {
+            mViewModel.setSavedMenuList(this)
+        }
+
+
         mDecaffeineRecyclerViewAdapter.apply {
             setDecaffeineArrayList(insertMockData())
         }
@@ -66,8 +72,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
                 adapter = mRecentRecyclerViewAdapter
             }
 
-            totalIntakeFromSplash = arguments?.getInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, 0) ?: 0
-            fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, totalIntakeFromSplash.toString())
+            fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, mViewModel.getTotalCaffeineIntake().toString())
         }
     }
 
@@ -81,41 +86,31 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
                     mDecaffeineArrayList.addAll(this)
 
                     // 최근에 마신 음료
-                    mRecentRecyclerViewAdapter.setRecentDrinkArrayList(this)
+                    mViewModel.getSavedMenuList()?.let { menuList ->
+                        mRecentRecyclerViewAdapter.setRecentDrinkArrayList(menuList)
+                    }
                 }
             }
         })
 
-        mViewModel.franchiseMenuLiveData.observe(this, Observer { result ->
-            result?.let {
-                Logger.d("프랜차이즈 메뉴 사이즈 : ${result.list.size}")
-                it.list.forEachIndexed { index, franchise ->
-                    Logger.d("$index 번째 프랜차이즈 : ${franchise.franchiseName}")
-                    Logger.d("[메뉴]")
-                    franchise.menu.forEach { menu ->
-                        Logger.d("$menu")
-                    }
-                }
-            } ?: Logger.d("프랜차이즈 API call 실패")
+        mViewModel.refreshedHistoryLiveData.observe(this, Observer { list ->
+            list?.let {
+                mViewModel.setSavedMenuList(list)
+            }
+
         })
     }
 
     override fun initViewFinal() {
         mViewModel.getDecaffeineMenuList()
 
-        // TODO : 프랜차이즈 메뉴 호출
-        //mViewModel.getFranchiseMenuList()
-
         getFragmentBinding().fragmentHomeFrameLayout.setOnClickListener {
             startActivityForResult(Intent(activity?.applicationContext, HistoryTodayActivity::class.java).apply {
-                putExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER, totalIntakeFromSplash)
+                putExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER, mViewModel.getTotalCaffeineIntake())
             }, RequestCode.HISTORY_TODAY_REQUEST_CODE)
         }
 
         getFragmentBinding().fragmentHomeTodayDecaffeineShowMoreButton.setOnClickListener {
-
-            // TODO: 테스트 용도이므로 나중에 지워야됨
-            //mDecaffeineArrayList.addAll(insertMockData())
 
             startActivity(Intent(activity?.applicationContext, TodayRecommendDrinkActivity::class.java).apply {
                 putExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE, mDecaffeineArrayList)
@@ -130,7 +125,9 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             when(requestCode){
                 RequestCode.HISTORY_TODAY_REQUEST_CODE -> {
                     // TODO 히스토리 추가되어서 돌아오는 경우에 최근 마신음료 리스트, 일일 카페인 섭취량 갱신해야됨.
-                    val refreshedValue:Int = data?.getIntExtra(RequestCode.TODAY_CAFFEINE_INTAKE_HISTORY_REGISTER_TO_MAIN, totalIntakeFromSplash) ?: totalIntakeFromSplash
+                    val refreshedValue:Int = data?.getIntExtra(RequestCode.TODAY_CAFFEINE_INTAKE_HISTORY_REGISTER_TO_MAIN, mViewModel.getTotalCaffeineIntake()) ?: mViewModel.getTotalCaffeineIntake()
+
+                    mViewModel.refreshHistoryFromRoomDatabase()
                     getFragmentBinding().fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, refreshedValue.toString())
                 }
             }

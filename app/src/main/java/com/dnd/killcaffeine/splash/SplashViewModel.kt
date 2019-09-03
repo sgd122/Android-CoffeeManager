@@ -7,6 +7,7 @@ import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
+import com.dnd.killcaffeine.model.data.menu.Menu
 import com.dnd.killcaffeine.model.data.menu.MenuDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -18,15 +19,20 @@ class SplashViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewModel()
         private const val INVALID_INTAKE_RESULT: Int = -1
     }
 
-    private val _startActivityLiveData = MutableLiveData<Boolean>()
-    val startActivityLiveData: LiveData<Boolean> get() = _startActivityLiveData
+    private val _startActivityLiveData = MutableLiveData<Pair<Int, ArrayList<Menu>>>()
+    val startActivityLiveData: LiveData<Pair<Int, ArrayList<Menu>>> get() = _startActivityLiveData
 
-    private val _caffeineIntakeLiveData = MutableLiveData<Int>()
-    val caffeineIntakeLiveData: LiveData<Int> get() = _caffeineIntakeLiveData
+    private val _loadSavedHistoryLiveData = MutableLiveData<ArrayList<Menu>>()
+    val loadSavedHistoryLiveData: LiveData<ArrayList<Menu>> get() = _loadSavedHistoryLiveData
 
-    fun startMainActivityAfterPostDelay(){
+    fun startMainActivityAfterPostDelay(menuList : ArrayList<Menu>){
         Handler().postDelayed({
-            _startActivityLiveData.value = true
+            var totalCaffeine = 0
+            menuList.forEach {
+                totalCaffeine += it.caffeine
+            }
+
+            _startActivityLiveData.postValue(Pair(totalCaffeine, menuList))
 
         }, START_ACTIVITY_POST_DELAY)
     }
@@ -37,15 +43,11 @@ class SplashViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewModel()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->
                 list?.let {
-                    var totalIntake = 0
-                    it.forEach {  history ->
-                        totalIntake += history.caffeine
-                    }
+                    _loadSavedHistoryLiveData.value = it as ArrayList
 
-                    _caffeineIntakeLiveData.value = totalIntake
                 }
             }, {
-                _caffeineIntakeLiveData.value = INVALID_INTAKE_RESULT
+                _loadSavedHistoryLiveData.value = ArrayList()
             }))
     }
 }

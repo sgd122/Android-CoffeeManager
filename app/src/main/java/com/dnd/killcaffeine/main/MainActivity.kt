@@ -10,6 +10,7 @@ import com.dnd.killcaffeine.databinding.ActivityMainBinding
 import com.dnd.killcaffeine.main.home.MainHomeFragment
 import com.dnd.killcaffeine.main.settings.MainSettingsFragment
 import com.dnd.killcaffeine.main.statistics.MainStatisticsFragment
+import com.dnd.killcaffeine.model.data.menu.Menu
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -55,9 +56,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun initViewFinal() {
         if(intent.hasExtra(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_SPLASH_TO_MAIN)){
             val totalTodayIntake:Int = intent.getIntExtra(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_SPLASH_TO_MAIN, 0)
+            val menuList: ArrayList<Menu> = intent.getSerializableExtra(RequestCode.TOTAL_TODAY_MENU_LIST_SPLASH_TO_MAIN) as ArrayList<Menu>
 
             getFragment(TabComponent.HOME.ordinal).arguments =  Bundle().apply { // Bundle 에 담아서 Fragment 에게 전달
                 putInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, totalTodayIntake)
+                putSerializable(RequestCode.TOTAL_TODAY_MENU_LIST_MAIN_TO_FRAGMENT, menuList)
             }
         }
     }

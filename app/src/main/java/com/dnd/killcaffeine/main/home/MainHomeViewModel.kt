@@ -6,24 +6,26 @@ package com.dnd.killcaffeine.main.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
+import com.dnd.killcaffeine.model.data.menu.Menu
+import com.dnd.killcaffeine.model.data.menu.MenuDatabase
 import com.dnd.killcaffeine.model.data.result.DecaffeineResult
-import com.dnd.killcaffeine.model.data.result.FranchiseResult
 import com.dnd.killcaffeine.model.remote.CoffeeManagerService
 import com.orhanobut.logger.Logger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MainHomeViewModel : BaseViewModel() {
+class MainHomeViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewModel() {
 
     private val _decaffeineMenuLiveData = MutableLiveData<DecaffeineResult>()
     val decaffeineMenuLiveData: LiveData<DecaffeineResult> get() = _decaffeineMenuLiveData
 
-    private val _franchiseMenuLiveData = MutableLiveData<FranchiseResult>()
-    val franchiseMenuLiveData: LiveData<FranchiseResult> get() = _franchiseMenuLiveData
+    private val _refreshedHistoryLiveData = MutableLiveData<ArrayList<Menu>>()
+    val refreshedHistoryLiveData: LiveData<ArrayList<Menu>> get() = _refreshedHistoryLiveData
 
+    private var totalIntakeFromSplash: Int = 0 // Splash 에서 넘겨받은 일일카페인 섭취량
+    private var savedMenuList: ArrayList<Menu>? = null
 
     fun getDecaffeineMenuList(){
-        Logger.d("디카페인 진입")
         addDisposable(CoffeeManagerService.getDecaffineMenuList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -34,20 +36,31 @@ class MainHomeViewModel : BaseViewModel() {
                 }
 
             }, {
-                Logger.d("디카페인 가져오기 실패")
-                Logger.d(it?.message ?: "")
+                showSnackbar("디카페인 정보를 불러오는데 실패했습니다.")
             }))
     }
 
-    fun getFranchiseMenuList(){
-        addDisposable(CoffeeManagerService.getFranchiseMenuList()
+    fun refreshHistoryFromRoomDatabase(){
+        addDisposable(mMenuDatabase.menuDao.getAllMenu()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
-                _franchiseMenuLiveData.postValue(result)
+            .subscribe({
+                _refreshedHistoryLiveData.postValue(it as ArrayList<Menu>)
 
             }, {
-                Logger.d(it?.message ?: "")
+                _refreshedHistoryLiveData.postValue(ArrayList())
             }))
     }
+
+    fun setTotalCaffeineIntake(total : Int) {
+        totalIntakeFromSplash = total
+    }
+
+    fun setSavedMenuList(list: ArrayList<Menu>){
+        savedMenuList = list
+    }
+
+    fun getTotalCaffeineIntake(): Int = totalIntakeFromSplash
+
+    fun getSavedMenuList(): ArrayList<Menu>? = savedMenuList
 }

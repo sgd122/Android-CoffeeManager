@@ -13,6 +13,7 @@ import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHomeBinding
 import com.dnd.killcaffeine.detail.DetailActivity
+import com.dnd.killcaffeine.dialog.RecentDrinkDetailDialog
 import com.dnd.killcaffeine.history.HistoryTodayActivity
 import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
 import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
@@ -56,7 +57,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             setRecentDrinkArrayList(insertMockData())
             setOnRecentDrinkItemClickListener(object: RecentDrinkAdapter.OnRecentDrinkItemClickListener {
                 override fun onItemClick(menu: Menu) {
-                    startActivity(Intent(activity?.applicationContext, DetailActivity::class.java).apply { putExtra("menu", menu) })
+                    showRecentDrinkDetailDialog(menu)
                 }
             })
         }
@@ -95,7 +96,10 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
         mViewModel.refreshedHistoryLiveData.observe(this, Observer { list ->
             list?.let {
+
+               // 히스토리 내역이 변경되었다면, 리스트 갱신
                 mViewModel.setSavedMenuList(list)
+                mRecentRecyclerViewAdapter.setRecentDrinkArrayList(list)
             }
 
         })
@@ -131,6 +135,12 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
                     getFragmentBinding().fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, refreshedValue.toString())
                 }
             }
+        }
+    }
+
+    private fun showRecentDrinkDetailDialog(menu: Menu){
+        activity?.let {
+            RecentDrinkDetailDialog(it, menu).show()
         }
     }
 

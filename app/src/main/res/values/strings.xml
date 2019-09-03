@@ -9,8 +9,11 @@
 
     <string name="dialog_warning_title">카페인의 위험성</string>
     <string name="dialog_warning_description">카페인 과잉 섭취시\n혈압상승을 일으키며\n지속적일 경우\n동맥경화를 유발합니다!</string>
-
     <string name="dialog_history_delete_description">해당 히스토리를 삭제 하시겠습니까?</string>
+    <string name="dialog_recent_drink_menu_name">메뉴 :</string>
+    <string name="dialog_recent_drink_franchise_name">프랜차이즈 :</string>
+    <string name="dialog_recent_drink_caffeine">카페인 :</string>
+    <string name="dialog_recent_drink_caffeine_form">%smg</string>
 
     <string name="activity_settings_terms_description">
         커피매니저 이용약관\n\n본 약관은 2018년 8월 10일부터 적용됩니다.\n\n\n제 1조 목적\n

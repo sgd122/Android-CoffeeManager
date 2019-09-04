@@ -41,6 +41,7 @@ ext{
     okhttpVersion = '3.14.1'
     room_version = '2.2.0-alpha02'
     koin_version = '2.0.1'
+    preference_version = '1.1.0-rc01'
 }
 
 dependencies {
@@ -79,6 +80,9 @@ dependencies {
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-core-ext:$koin_version"
     testImplementation "org.koin:koin-test:$koin_version"
+
+    // Preferences
+    implementation "androidx.preference:preference-ktx:$preference_version"
 
     // Coil
     implementation 'io.coil-kt:coil:0.6.1'

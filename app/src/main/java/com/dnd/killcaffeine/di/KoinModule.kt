@@ -3,6 +3,7 @@
  */
 package com.dnd.killcaffeine.di
 
+import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.dnd.killcaffeine.history.HistoryTodayViewModel
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterViewModel
@@ -20,10 +21,10 @@ import com.dnd.killcaffeine.main.settings.personal.MainPersonalSettingViewModel
 import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel
 import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
-import com.dnd.killcaffeine.model.data.room.personal.PersonalDatabase
 import com.dnd.killcaffeine.recyclerview.*
 import com.dnd.killcaffeine.splash.SplashViewModel
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -33,8 +34,8 @@ val databaseModule = module {
             .fallbackToDestructiveMigration()
             .build()
     }
-    single{
-        Room.databaseBuilder(androidApplication(), PersonalDatabase::class.java, "Personal-db").build()
+    single {
+        PreferenceManager.getDefaultSharedPreferences(androidContext())
     }
 }
 

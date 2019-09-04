@@ -13,12 +13,16 @@ import androidx.lifecycle.Observer
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.base.BaseActivity
 import com.dnd.killcaffeine.databinding.ActivitySettingsPersonalBinding
-import com.dnd.killcaffeine.model.data.room.personal.Personal
-import com.orhanobut.logger.Logger
+import com.dnd.killcaffeine.model.data.PersonalBodyType
 import kotlinx.android.synthetic.main.activity_settings_personal.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding, MainPersonalSettingViewModel>(){
+
+    companion object {
+        const val WEIGHT_INPUT_LENGTH: Int = 3
+        const val WEIGHt_OUTPUT_LENGTH: Int = 5
+    }
 
     override val mViewModel: MainPersonalSettingViewModel by viewModel()
     override val resourceId: Int
@@ -34,15 +38,31 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
         mViewModel.insertPersonalLiveData.observe(this, Observer {
             finish()
         })
+
+        mViewModel.savedPersonalLiveData.observe(this, Observer { personal ->
+            personal?.let {
+                when(it.bodyType){
+                    PersonalBodyType.ADULT -> activity_settings_personal_radio_group.check(mViewModel.radioButtonIdList[0])
+                    PersonalBodyType.PREGNANT -> activity_settings_personal_radio_group.check(mViewModel.radioButtonIdList[1])
+                    PersonalBodyType.TEEN_OLD -> activity_settings_personal_radio_group.check(mViewModel.radioButtonIdList[2])
+                }
+
+                setupSavedPersonal(activity_settings_personal_weight_edit_text, personal.weight)
+                setupRecommendEditText(personal.weight)
+            }
+        })
     }
 
     override fun initViewFinal() {
+        mViewModel.getPersonalInfo()
 
+        // 라디오 그룹 체크리스너
         activity_settings_personal_radio_group.setOnCheckedChangeListener { _, _ ->
             clearWeightEditText()
             clearRecommendEditText()
         }
 
+        // EditText 포커스, 템플릿 설정
         activity_settings_personal_weight_edit_text.let { editText ->
 
             setupViewFocusOut(editText)
@@ -98,14 +118,14 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
                 true -> {
                     editText.setText("")
                     clearRecommendEditText()
-                    editText.filters= arrayOf(InputFilter.LengthFilter(3))
+                    editText.filters= arrayOf(InputFilter.LengthFilter(WEIGHT_INPUT_LENGTH))
                 }
                 false -> {
                     mViewModel.setPersonalWeight(when(editText.text.toString() == ""){
                         true -> 0
                         false -> editText.text.toString().toInt()
                     })
-                    editText.filters = arrayOf(InputFilter.LengthFilter(5))
+                    editText.filters = arrayOf(InputFilter.LengthFilter(WEIGHt_OUTPUT_LENGTH))
                     editText.setText(getString(R.string.main_settings_personal_weight_form, mViewModel.getPersonalWeight().toString()))
                     setupRecommendEditText(mViewModel.getPersonalWeight())
                 }
@@ -119,6 +139,15 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
 
     private fun clearRecommendEditText(){
         activity_settings_personal_recommend_caffeine_text_view.text = ""
+    }
+
+    private fun setupSavedPersonal(editText: EditText, weight: Int){
+
+        editText.setText("")
+        editText.filters= arrayOf(InputFilter.LengthFilter(WEIGHt_OUTPUT_LENGTH))
+        editText.setText(getString(R.string.main_settings_personal_weight_form, weight.toString()))
+
+        setupRecommendEditText(weight)
     }
 
     private fun setupRecommendEditText(weight: Int){

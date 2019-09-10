@@ -87,6 +87,11 @@ abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatAc
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mViewModel
+    }
+
     override fun finish() {
         super.finish()
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)

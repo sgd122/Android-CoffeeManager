@@ -50,8 +50,8 @@
         android:id="@+id/list_item_coffee_name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Iced 토피넛라떼"
-        android:textSize="16sp"
+        android:text="메뉴이름메뉴이름메뉴이름메뉴이름메뉴이름"
+        android:textSize="12sp"
         android:textColor="@color/color_text_grayish_brown"
         android:fontFamily="@font/spoqa_han_sans_bold"
         android:includeFontPadding="false"/>

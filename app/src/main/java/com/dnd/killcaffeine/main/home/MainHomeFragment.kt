@@ -4,14 +4,11 @@
 package com.dnd.killcaffeine.main.home
 
 import android.app.Activity.RESULT_OK
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.ServiceConnection
-import android.os.IBinder
+import android.content.*
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dnd.killcaffeine.BroadcastReceiverKey
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
@@ -33,8 +30,6 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         fun newInstance() = MainHomeFragment()
     }
 
-    private val TAG = "MainHomeFragment"
-
     override val mViewModel: MainHomeViewModel by viewModel()
     override val resourceId: Int
         get() = R.layout.fragment_home
@@ -44,13 +39,9 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     private val mDecaffeineArrayList: ArrayList<Menu> = ArrayList()
 
-    private var mCommentService: CommentService? = null
-    private var mCommentServiceConnection: ServiceConnection? = null
-    private var mCommentServiceBounded = false
+    private var mCommentReceiver: BroadcastReceiver? = null
 
     override fun initViewStart() {
-
-
         (arguments?.getInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, 0) ?: 0).run {
             mViewModel.setTotalCaffeineIntake(this)
         }
@@ -108,16 +99,14 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             list?.let {
 
                // 히스토리 내역이 변경되었다면, 리스트 갱신
-                mViewModel.setSavedMenuList(list)
-                mRecentRecyclerViewAdapter.setRecentDrinkArrayList(list)
+                mViewModel.setSavedMenuList(it)
+                mRecentRecyclerViewAdapter.setRecentDrinkArrayList(it)
             }
 
         })
     }
 
     override fun initViewFinal() {
-        bindCommentService()
-
         mViewModel.getDecaffeineMenuList()
 
         getFragmentBinding().fragmentHomeFrameLayout.setOnClickListener {
@@ -153,29 +142,15 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     override fun onStart() {
         super.onStart()
 
-        Logger.d("HomeFragment 의 onStart 에서 mCommentService: $mCommentService")
-        mCommentService?.let { service ->
-            Logger.d("MainHomeFragment에서의 TodayComment: ${service.getRandomComment()}")
-        }
-
-        if(mCommentServiceBounded){
-            mCommentService?.let { service ->
-                Logger.d("MainHomeFragment에서의 TodayComment: ${service.getRandomComment()}")
-            }
-        }
+        registerCommentReceiver()
+        startCommentService()
     }
 
     override fun onStop() {
         super.onStop()
 
-        unbindCommentService()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        unbindCommentService()
-
+        unregisterCommentReceiver()
+        stopCommentService()
     }
 
     private fun showRecentDrinkDetailDialog(menu: Menu){
@@ -196,35 +171,23 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         }
     }
 
-    private fun setupCommentServiceConnection(): ServiceConnection {
-        return object: ServiceConnection {
-            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-                val mBinder: CommentService.LocalBinder? = service as? CommentService.LocalBinder
-                mCommentService = mBinder?.getService()
-                mCommentServiceBounded = true
-            }
+    private fun registerCommentReceiver(){
+        mCommentReceiver = object: BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                intent?.getStringExtra(BroadcastReceiverKey.COMMENT_SERVICE_RANDOM)?.let { comment ->
+                    Logger.d("HomeFragment 에서 받은 Comment : $comment")
 
-            override fun onServiceDisconnected(name: ComponentName?) {
-                mCommentServiceBounded = false
+                    getFragmentBinding().fragmentHomeTodayCommentTextView.text = comment
+                }
             }
         }
+
+        activity?.registerReceiver(mCommentReceiver, IntentFilter(BroadcastReceiverKey.COMMENT_SERVICE_BROADCAST))
     }
 
-    private fun bindCommentService(){
-        activity?.run {
-            val intent = Intent(applicationContext, CommentService::class.java)
-            mCommentServiceConnection = setupCommentServiceConnection()
-
-            mCommentServiceConnection?.let { conn ->
-                bindService(intent, conn, Context.BIND_AUTO_CREATE) // 코멘트 서비스 바인딩
-            }
-        }
-    }
-
-    private fun unbindCommentService(){
-        if(mCommentServiceBounded && mCommentServiceConnection != null){
-            activity?.unbindService(mCommentServiceConnection!!)
-            mCommentServiceBounded = false
+    private fun unregisterCommentReceiver(){
+        mCommentReceiver?.let { receiver ->
+            activity?.unregisterReceiver(receiver)
         }
     }
 

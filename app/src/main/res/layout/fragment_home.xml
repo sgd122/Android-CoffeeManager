@@ -53,7 +53,7 @@
                         app:layout_constraintLeft_toLeftOf="parent"/>
 
                     <TextView
-                        android:id="@+id/fragment_home_today_ment"
+                        android:id="@+id/fragment_home_today_comment_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -85,7 +85,7 @@
                         android:textColor="@color/color_text_white"
                         android:fontFamily="@font/spoqa_han_sans_bold"
                         android:includeFontPadding="false"
-                        app:layout_constraintTop_toBottomOf="@id/fragment_home_today_ment"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_home_today_comment_text_view"
                         app:layout_constraintLeft_toLeftOf="parent"/>
 
                     <TextView

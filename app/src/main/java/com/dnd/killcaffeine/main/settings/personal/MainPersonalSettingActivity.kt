@@ -21,7 +21,7 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
 
     companion object {
         const val WEIGHT_INPUT_LENGTH: Int = 3
-        const val WEIGHt_OUTPUT_LENGTH: Int = 5
+        const val WEIGHT_OUTPUT_LENGTH: Int = 5
     }
 
     override val mViewModel: MainPersonalSettingViewModel by viewModel()
@@ -36,6 +36,8 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
 
     override fun initDataBinding() {
         mViewModel.insertPersonalLiveData.observe(this, Observer {
+
+            // TODO: StartActivityForResult 에 대한 Result 설정
             finish()
         })
 
@@ -125,7 +127,7 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
                         true -> 0
                         false -> editText.text.toString().toInt()
                     })
-                    editText.filters = arrayOf(InputFilter.LengthFilter(WEIGHt_OUTPUT_LENGTH))
+                    editText.filters = arrayOf(InputFilter.LengthFilter(WEIGHT_OUTPUT_LENGTH))
                     editText.setText(getString(R.string.main_settings_personal_weight_form, mViewModel.getPersonalWeight().toString()))
                     setupRecommendEditText(mViewModel.getPersonalWeight())
                 }
@@ -144,7 +146,7 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
     private fun setupSavedPersonal(editText: EditText, weight: Int){
 
         editText.setText("")
-        editText.filters= arrayOf(InputFilter.LengthFilter(WEIGHt_OUTPUT_LENGTH))
+        editText.filters= arrayOf(InputFilter.LengthFilter(WEIGHT_OUTPUT_LENGTH))
         editText.setText(getString(R.string.main_settings_personal_weight_form, weight.toString()))
 
         setupRecommendEditText(weight)

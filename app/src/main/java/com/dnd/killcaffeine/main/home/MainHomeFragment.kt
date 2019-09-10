@@ -4,7 +4,11 @@
 package com.dnd.killcaffeine.main.home
 
 import android.app.Activity.RESULT_OK
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
+import android.os.IBinder
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +22,8 @@ import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
 import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
 import com.dnd.killcaffeine.main.home.show_more.TodayRecommendDrinkActivity
 import com.dnd.killcaffeine.model.data.room.menu.Menu
+import com.dnd.killcaffeine.service.CommentService
+import com.orhanobut.logger.Logger
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,7 +44,13 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     private val mDecaffeineArrayList: ArrayList<Menu> = ArrayList()
 
+    private var mCommentService: CommentService? = null
+    private var mCommentServiceConnection: ServiceConnection? = null
+    private var mCommentServiceBounded = false
+
     override fun initViewStart() {
+
+
         (arguments?.getInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, 0) ?: 0).run {
             mViewModel.setTotalCaffeineIntake(this)
         }
@@ -104,6 +116,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     }
 
     override fun initViewFinal() {
+        bindCommentService()
+
         mViewModel.getDecaffeineMenuList()
 
         getFragmentBinding().fragmentHomeFrameLayout.setOnClickListener {
@@ -136,9 +150,81 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        Logger.d("HomeFragment 의 onStart 에서 mCommentService: $mCommentService")
+        mCommentService?.let { service ->
+            Logger.d("MainHomeFragment에서의 TodayComment: ${service.getRandomComment()}")
+        }
+
+        if(mCommentServiceBounded){
+            mCommentService?.let { service ->
+                Logger.d("MainHomeFragment에서의 TodayComment: ${service.getRandomComment()}")
+            }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        unbindCommentService()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        unbindCommentService()
+
+    }
+
     private fun showRecentDrinkDetailDialog(menu: Menu){
         activity?.let {
             RecentDrinkDetailDialog(it, menu).show()
+        }
+    }
+
+    private fun startCommentService(){
+        activity?.run {
+            startService(Intent(applicationContext, CommentService::class.java))
+        }
+    }
+
+    private fun stopCommentService(){
+        activity?.run {
+            stopService(Intent(applicationContext, CommentService::class.java))
+        }
+    }
+
+    private fun setupCommentServiceConnection(): ServiceConnection {
+        return object: ServiceConnection {
+            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                val mBinder: CommentService.LocalBinder? = service as? CommentService.LocalBinder
+                mCommentService = mBinder?.getService()
+                mCommentServiceBounded = true
+            }
+
+            override fun onServiceDisconnected(name: ComponentName?) {
+                mCommentServiceBounded = false
+            }
+        }
+    }
+
+    private fun bindCommentService(){
+        activity?.run {
+            val intent = Intent(applicationContext, CommentService::class.java)
+            mCommentServiceConnection = setupCommentServiceConnection()
+
+            mCommentServiceConnection?.let { conn ->
+                bindService(intent, conn, Context.BIND_AUTO_CREATE) // 코멘트 서비스 바인딩
+            }
+        }
+    }
+
+    private fun unbindCommentService(){
+        if(mCommentServiceBounded && mCommentServiceConnection != null){
+            activity?.unbindService(mCommentServiceConnection!!)
+            mCommentServiceBounded = false
         }
     }
 

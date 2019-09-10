@@ -41,4 +41,11 @@
         감사합니다!
     </string>
 
+    <string name="home_fragment_today_warning_comment_1">충분한 수면은 카페인을 줄이는 데 도움이 돼요!1</string>
+    <string name="home_fragment_today_warning_comment_2">충분한 수면은 카페인을 줄이는 데 도움이 돼요!2</string>
+    <string name="home_fragment_today_warning_comment_3">충분한 수면은 카페인을 줄이는 데 도움이 돼요!3</string>
+    <string name="home_fragment_today_warning_comment_4">충분한 수면은 카페인을 줄이는 데 도움이 돼요!4</string>
+    <string name="home_fragment_today_warning_comment_5">충분한 수면은 카페인을 줄이는 데 도움이 돼요!5</string>
+
+
 </resources>

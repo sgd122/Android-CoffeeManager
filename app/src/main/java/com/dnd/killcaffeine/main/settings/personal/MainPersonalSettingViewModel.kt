@@ -23,8 +23,8 @@ class MainPersonalSettingViewModel(private val mSharedPref: SharedPreferences) :
     companion object {
 
         private fun ADULT_RECOMMEND(weight: Int): Int = weight * 6
-        private const val PREGNANT_RECOMMEND: Int = 200
-        private const val TEEN_AND_OLD_RECOMMEND: Int = 100
+        const val PREGNANT_RECOMMEND: Int = 200
+        const val TEEN_AND_OLD_RECOMMEND: Int = 100
     }
 
     private val _insertPersonalLiveData = SingleLiveEvent<Any>()

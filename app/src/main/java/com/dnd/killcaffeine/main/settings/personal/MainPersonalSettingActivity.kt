@@ -56,10 +56,12 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
     }
 
     override fun initViewFinal() {
+
         mViewModel.getPersonalInfo()
 
         // 라디오 그룹 체크리스너
-        activity_settings_personal_radio_group.setOnCheckedChangeListener { _, _ ->
+        activity_settings_personal_radio_group.setOnCheckedChangeListener { _, id ->
+            setupRecommendHint(id)
             clearWeightEditText()
             clearRecommendEditText()
         }
@@ -155,5 +157,22 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
     private fun setupRecommendEditText(weight: Int){
         val recommend:Int = mViewModel.recommendIntakeCalculation(activity_settings_personal_radio_group.checkedRadioButtonId, weight)
         activity_settings_personal_recommend_caffeine_text_view.text = getString(R.string.main_settings_personal_recommend_form, recommend.toString())
+    }
+
+    private fun setupRecommendHint(buttonId: Int){
+        when(buttonId) {
+            mViewModel.radioButtonIdList[0] -> {
+                val hint: String = getString(R.string.main_settings_personal_adult_recommend_hint_form)
+                activity_settings_personal_recommend_caffeine_text_view.hint = hint
+            }
+            mViewModel.radioButtonIdList[1] -> {
+                val hint: String = getString(R.string.main_settings_personal_recommend_form, MainPersonalSettingViewModel.PREGNANT_RECOMMEND.toString())
+                activity_settings_personal_recommend_caffeine_text_view.hint = hint
+            }
+            mViewModel.radioButtonIdList[2] -> {
+                val hint: String = getString(R.string.main_settings_personal_recommend_form, MainPersonalSettingViewModel.TEEN_AND_OLD_RECOMMEND.toString())
+                activity_settings_personal_recommend_caffeine_text_view.hint = hint
+            }
+        }
     }
 }

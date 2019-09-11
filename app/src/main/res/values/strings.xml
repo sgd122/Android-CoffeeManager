@@ -9,6 +9,7 @@
     <string name="history_caffeine_intake">%smg</string>
     <string name="main_settings_personal_weight_form">%skg</string>
     <string name="main_settings_personal_recommend_form">%smg</string>
+    <string name="main_settings_personal_adult_recommend_hint_form">체중 x 6</string>
 
     <string name="dialog_warning_title">카페인의 위험성</string>
     <string name="dialog_warning_description">카페인 과잉 섭취시\n혈압상승을 일으키며\n지속적일 경우\n동맥경화를 유발합니다!</string>

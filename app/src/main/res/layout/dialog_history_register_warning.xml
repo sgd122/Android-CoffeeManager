@@ -2,7 +2,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/dialog_warning_parent_layout"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -10,34 +9,71 @@
     android:minHeight="326dp"
     android:gravity="center_horizontal"
     android:layout_gravity="center"
-    android:padding="32dp"
-    android:background="@drawable/background_radius_10dp_white_box">
+    android:background="@drawable/background_radius_10dp_white_box"
+    android:elevation="6dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dialog_warning_title"
-        android:textSize="18sp"
-        android:textColor="@color/color_text_dialog_warning_title"
-        android:fontFamily="@font/spoqa_han_sans_bold"
-        android:includeFontPadding="false"/>
-
-    <ImageView
-        android:id="@+id/dialog_warning_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/icon_warning_1"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dialog_warning_description"
-        android:textColor="@color/color_text_grayish_brown"
-        android:textSize="16sp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:fontFamily="@font/spoqa_han_sans_bold"
-        android:includeFontPadding="false" />
+        android:padding="32dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_warning_title"
+            android:textSize="18sp"
+            android:textColor="@color/color_text_dialog_warning_title"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"/>
+
+        <ImageView
+            android:id="@+id/dialog_warning_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/icon_warning_1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_warning_description"
+            android:textColor="@color/color_text_grayish_brown"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_history_register_warning_cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/background_dialog_left_cancel_button"
+            android:text="@string/dialog_history_register_warning_cancel"
+            android:textSize="16sp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"/>
+
+        <Button
+            android:id="@+id/dialog_history_register_warning_confirm_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/background_dialog_right_confirm_button"
+            android:text="@string/dialog_history_register_warning_confirm"
+            android:textSize="16sp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"/>
+    </LinearLayout>
 
 </LinearLayout>

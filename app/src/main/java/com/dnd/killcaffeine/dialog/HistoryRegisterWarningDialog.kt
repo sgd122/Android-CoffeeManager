@@ -29,8 +29,13 @@ class HistoryRegisterWarningDialog(context: Context, onClickListener: View.OnCli
 
         mOnClickListener = onClickListener
 
-        // 다이얼로그 클릭시 사라짐
-        findViewById<View>(R.id.dialog_warning_parent_layout).setOnClickListener { view ->
+        // 취소버튼
+        findViewById<View>(R.id.dialog_history_register_warning_cancel_button).setOnClickListener {
+            dismiss()
+        }
+
+        // 추가버튼
+        findViewById<View>(R.id.dialog_history_register_warning_confirm_button).setOnClickListener { view ->
             mOnClickListener?.onClick(view)
             dismiss()
         }

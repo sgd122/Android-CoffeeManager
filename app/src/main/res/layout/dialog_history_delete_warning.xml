@@ -57,8 +57,6 @@
             android:textSize="16sp"
             android:fontFamily="@font/spoqa_han_sans_bold"
             android:includeFontPadding="false"/>
-
-
     </LinearLayout>
 
 

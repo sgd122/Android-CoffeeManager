@@ -10,6 +10,7 @@ import com.dnd.killcaffeine.databinding.FragmentSettingsBinding
 import com.dnd.killcaffeine.main.settings.notice.MainSettingsNoticeActivity
 import com.dnd.killcaffeine.main.settings.personal.MainPersonalSettingActivity
 import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsActivity
+import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainSettingsFragment : BaseFragment<FragmentSettingsBinding, MainSettingsViewModel>() {
@@ -31,17 +32,17 @@ class MainSettingsFragment : BaseFragment<FragmentSettingsBinding, MainSettingsV
     override fun initViewFinal() {
 
         // 마이카페인 설정
-        getFragmentBinding().fragmentSettingsSetPersonalButton.setOnClickListener {
+        fragment_settings_set_personal_button.setOnClickListener {
             startActivity(Intent(activity?.applicationContext, MainPersonalSettingActivity::class.java))
         }
 
         // 공지사항
-        getFragmentBinding().fragmentSettingsNoticeButton.setOnClickListener {
+        fragment_settings_notice_button.setOnClickListener {
             startActivity(Intent(activity?.applicationContext, MainSettingsNoticeActivity::class.java))
         }
 
         // 이용약관
-        getFragmentBinding().fragmentSettingsTermsButton.setOnClickListener {
+        fragment_settings_terms_button.setOnClickListener {
             startActivity(Intent(activity?.applicationContext, MainSettingsTermsActivity::class.java))
         }
    }

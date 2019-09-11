@@ -9,6 +9,7 @@ import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentNoticeDetailBinding
 import com.dnd.killcaffeine.model.data.response.Notice
 import com.orhanobut.logger.Logger
+import kotlinx.android.synthetic.main.fragment_notice_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NoticeDetailFragment(private val notice: Notice) : BaseFragment<FragmentNoticeDetailBinding, NoticeDetailViewModel>() {
@@ -38,10 +39,8 @@ class NoticeDetailFragment(private val notice: Notice) : BaseFragment<FragmentNo
     }
 
     override fun initViewFinal() {
-        getFragmentBinding().run {
-            fragmentNoticeDetailWriteTimeTextView.text = notice.writeTime
-            fragmentNoticeDetailTitleTextView.text = notice.title
-        }
+        fragment_notice_detail_write_time_text_view.text = notice.writeTime
+        fragment_notice_detail_title_text_view.text = notice.title
 
         mViewModel.getNoticeDetail(notice.noticeId)
     }

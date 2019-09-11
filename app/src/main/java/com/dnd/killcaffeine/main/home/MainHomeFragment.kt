@@ -5,6 +5,7 @@ package com.dnd.killcaffeine.main.home
 
 import android.app.Activity.RESULT_OK
 import android.content.*
+import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,7 @@ import com.dnd.killcaffeine.main.home.show_more.TodayRecommendDrinkActivity
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.service.CommentService
 import com.orhanobut.logger.Logger
+import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -63,34 +65,33 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             })
         }
 
-        getFragmentBinding().run {
-            fragmentHomeTodayDecaffeineRecyclerView.apply {
-                layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.HORIZONTAL, false)
-                adapter = mDecaffeineRecyclerViewAdapter
-            }
-
-            fragmentHomeCoffeeRecentRecyclerView.apply {
-                layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.HORIZONTAL, false)
-                adapter = mRecentRecyclerViewAdapter
-            }
-
-            fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, mViewModel.getTotalCaffeineIntake().toString())
+        fragment_home_today_decaffeine_recycler_view.run {
+            layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.HORIZONTAL, false)
+            adapter = mDecaffeineRecyclerViewAdapter
         }
+
+        fragment_home_coffee_recent_recycler_view.run {
+            layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.HORIZONTAL, false)
+            adapter = mRecentRecyclerViewAdapter
+        }
+
+        fragment_home_daily_caffeine_intake_value.text = resources.getString(R.string.main_home_fragment_total_intake, mViewModel.getTotalCaffeineIntake().toString())
     }
 
     override fun initDataBinding() {
         mViewModel.decaffeineMenuLiveData.observe(this, Observer { result ->
             result?.let {
 
-                with(it.list){
+                with(it.list) {
                     // 오늘의 대체 음료 추천
                     mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(this)
                     mDecaffeineArrayList.addAll(this)
+                }
 
-                    // 최근에 마신 음료
-                    mViewModel.getSavedMenuList()?.let { menuList ->
-                        mRecentRecyclerViewAdapter.setRecentDrinkArrayList(menuList)
-                    }
+                // 최근에 마신 음료
+                // TODO 이부분이 문제가 되는듯..
+                mViewModel.getSavedMenuList()?.let { menuList ->
+                    mRecentRecyclerViewAdapter.setRecentDrinkArrayList(menuList)
                 }
             }
         })
@@ -98,7 +99,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         mViewModel.refreshedHistoryLiveData.observe(this, Observer { list ->
             list?.let {
 
-               // 히스토리 내역이 변경되었다면, 리스트 갱신
+                // 히스토리 내역이 변경되었다면, 리스트 갱신
                 mViewModel.setSavedMenuList(it)
                 mRecentRecyclerViewAdapter.setRecentDrinkArrayList(it)
             }
@@ -109,17 +110,21 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     override fun initViewFinal() {
         mViewModel.getDecaffeineMenuList()
 
-        getFragmentBinding().fragmentHomeFrameLayout.setOnClickListener {
-            startActivityForResult(Intent(activity?.applicationContext, HistoryTodayActivity::class.java).apply {
+        fragment_home_frame_layout.setOnClickListener {
+            val intent: Intent = Intent(activity?.applicationContext, HistoryTodayActivity::class.java).apply {
                 putExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER, mViewModel.getTotalCaffeineIntake())
-            }, RequestCode.HISTORY_TODAY_REQUEST_CODE)
+            }
+
+            startActivityForResult(intent, RequestCode.HISTORY_TODAY_REQUEST_CODE)
         }
 
-        getFragmentBinding().fragmentHomeTodayDecaffeineShowMoreButton.setOnClickListener {
-
-            startActivity(Intent(activity?.applicationContext, TodayRecommendDrinkActivity::class.java).apply {
+        fragment_home_today_decaffeine_show_more_button.setOnClickListener {
+            val intent: Intent = Intent(activity?.applicationContext, TodayRecommendDrinkActivity::class.java).apply {
                 putExtra(RequestCode.DECAFFEINE_TODAY_RECOMMEND_SHOW_MORE, mDecaffeineArrayList)
-            })
+            }
+
+            startActivity(intent)
+
         }
     }
 

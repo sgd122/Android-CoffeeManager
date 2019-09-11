@@ -12,6 +12,7 @@ import com.dnd.killcaffeine.databinding.FragmentNoticeListBinding
 import com.dnd.killcaffeine.main.settings.notice.MainSettingsNoticeActivity
 import com.dnd.killcaffeine.model.data.response.Notice
 import com.dnd.killcaffeine.recyclerview.NoticeAdapter
+import kotlinx.android.synthetic.main.fragment_notice_list.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,7 +32,7 @@ class NoticeListFragment : BaseFragment<FragmentNoticeListBinding, NoticeListVie
             }
         })
 
-        getFragmentBinding().fragmentNoticeListRecyclerView.apply {
+        fragment_notice_list_recycler_view.run {
             layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.VERTICAL, false)
             adapter = mNoticeAdapter
         }

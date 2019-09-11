@@ -7,6 +7,7 @@ import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHistoryRegisterChoiceTypeBinding
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterActivity
+import kotlinx.android.synthetic.main.fragment_history_register_choice_type.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryRegisterChoiceTypeFragment : BaseFragment<FragmentHistoryRegisterChoiceTypeBinding, HistoryRegisterChoiceTypeViewModel>() {
@@ -29,12 +30,12 @@ class HistoryRegisterChoiceTypeFragment : BaseFragment<FragmentHistoryRegisterCh
     }
 
     override fun initViewFinal() {
-        getFragmentBinding().fragmentHistoryChoiceTypeCoffee.setOnClickListener {
+        fragment_history_choice_type_coffee.setOnClickListener {
 
             (activity as? HistoryTodayRegisterActivity)?.replaceFranchiseFragment()
         }
 
-        getFragmentBinding().fragmentHistoryChoiceTypeDrink.setOnClickListener {
+        fragment_history_choice_type_drink.setOnClickListener {
             showSnackbar("일반음료 선택")
         }
 

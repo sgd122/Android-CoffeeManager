@@ -41,11 +41,16 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
         mBinding.lifecycleOwner = this
 
         snackbarObserving()
+
+        return mBinding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
         initViewStart()
         initDataBinding()
         initViewFinal()
-
-        return mBinding.root
     }
 
     fun getFragmentBinding() = mBinding

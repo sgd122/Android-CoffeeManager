@@ -15,6 +15,7 @@ import com.dnd.killcaffeine.dialog.HistoryRegisterWarningDialog
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.recyclerview.FranchiseMenuAdapter
 import com.dnd.killcaffeine.recyclerview.decoration.SpacesItemDecoration
+import kotlinx.android.synthetic.main.fragment_history_register_choice_menu.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,7 +34,7 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
 
     override fun initViewStart() {
 
-        getFragmentBinding().fragmentHistoryRegisterChoiceMenuRecyclerView.apply {
+        fragment_history_register_choice_menu_recycler_view.apply {
             layoutManager = GridLayoutManager(activity?.applicationContext, RECYCLER_VIEW_SPAN_COUNT)
             adapter = mFranchiseMenuAdapter
             addItemDecoration(SpacesItemDecoration(32))

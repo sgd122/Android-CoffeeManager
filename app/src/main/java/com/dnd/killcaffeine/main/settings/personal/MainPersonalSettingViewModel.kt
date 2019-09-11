@@ -20,6 +20,13 @@ import io.reactivex.schedulers.Schedulers
 
 class MainPersonalSettingViewModel(private val mSharedPref: SharedPreferences) : BaseViewModel() {
 
+    companion object {
+
+        private fun ADULT_RECOMMEND(weight: Int): Int = weight * 6
+        private const val PREGNANT_RECOMMEND: Int = 200
+        private const val TEEN_AND_OLD_RECOMMEND: Int = 100
+    }
+
     private val _insertPersonalLiveData = SingleLiveEvent<Any>()
     val insertPersonalLiveData: LiveData<Any> get() = _insertPersonalLiveData
 
@@ -83,10 +90,10 @@ class MainPersonalSettingViewModel(private val mSharedPref: SharedPreferences) :
 
     fun recommendIntakeCalculation(radioButtonId: Int, weight: Int): Int{
         return when(radioButtonId){
-            radioButtonIdList[0] -> 400
-            radioButtonIdList[1] -> 300
-            radioButtonIdList[2] -> (weight * 2)
-            else -> 400
+            radioButtonIdList[0] -> ADULT_RECOMMEND(weight = weight)
+            radioButtonIdList[1] -> PREGNANT_RECOMMEND
+            radioButtonIdList[2] -> TEEN_AND_OLD_RECOMMEND
+            else -> ADULT_RECOMMEND(weight = weight)
         }
     }
 

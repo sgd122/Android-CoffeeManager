@@ -47,7 +47,7 @@ val viewModelModule = module {
         MainViewModel()
     }
     viewModel {
-        MainHomeViewModel(get())
+        MainHomeViewModel(get(), get())
     }
     viewModel {
         MainStatisticsViewModel()

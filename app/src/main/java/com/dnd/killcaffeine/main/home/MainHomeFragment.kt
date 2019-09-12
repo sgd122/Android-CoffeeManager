@@ -6,6 +6,9 @@ package com.dnd.killcaffeine.main.home
 import android.app.Activity.RESULT_OK
 import android.content.*
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +17,7 @@ import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHomeBinding
+import com.dnd.killcaffeine.dialog.ExceedRecommendWarningDialog
 import com.dnd.killcaffeine.dialog.RecentDrinkDetailDialog
 import com.dnd.killcaffeine.history.HistoryTodayActivity
 import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
@@ -103,8 +107,14 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
                 mViewModel.setSavedMenuList(it)
                 mRecentRecyclerViewAdapter.setRecentDrinkArrayList(it)
             }
-
         })
+
+        mViewModel.exceededIntakeLiveData.observe(this, Observer {
+            Logger.d("경고 다이얼로그 띄우기")
+            // 권장섭취량 초과 했을때 경고 다이얼로그 띄움
+            showExceedWarningDialog()
+        })
+
     }
 
     override fun initViewFinal() {
@@ -139,6 +149,9 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
                     mViewModel.refreshHistoryFromRoomDatabase()
                     getFragmentBinding().fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, refreshedValue.toString())
+
+                    // 권장 섭취량 초과했는지 판별
+                    mViewModel.checkExceedRecommendedQuantity(intake = refreshedValue)
                 }
             }
         }
@@ -161,6 +174,13 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     private fun showRecentDrinkDetailDialog(menu: Menu){
         activity?.let {
             RecentDrinkDetailDialog(it, menu).show()
+        }
+    }
+
+    private fun showExceedWarningDialog(){
+        activity?.let {
+            Logger.d("showExceedWarningDialog")
+            ExceedRecommendWarningDialog(it).show()
         }
     }
 

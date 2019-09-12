@@ -40,6 +40,7 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
         mBinding = DataBindingUtil.inflate(inflater, resourceId, container, false)
         mBinding.lifecycleOwner = this
 
+        initDataBinding()
         snackbarObserving()
 
         return mBinding.root
@@ -49,7 +50,6 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
         super.onActivityCreated(savedInstanceState)
 
         initViewStart()
-        initDataBinding()
         initViewFinal()
     }
 

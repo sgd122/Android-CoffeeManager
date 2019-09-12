@@ -49,6 +49,7 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
                     PersonalBodyType.TEEN_OLD -> activity_settings_personal_radio_group.check(mViewModel.radioButtonIdList[2])
                 }
 
+                mViewModel.setPersonalWeight(weight = personal.weight)
                 setupSavedPersonal(activity_settings_personal_weight_edit_text, personal.weight)
                 setupRecommendEditText(personal.weight)
             }
@@ -57,6 +58,7 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
 
     override fun initViewFinal() {
 
+        // 저장되어 있는 정보 가져오기
         mViewModel.getPersonalInfo()
 
         // 라디오 그룹 체크리스너
@@ -125,10 +127,12 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
                     editText.filters= arrayOf(InputFilter.LengthFilter(WEIGHT_INPUT_LENGTH))
                 }
                 false -> {
-                    mViewModel.setPersonalWeight(when(editText.text.toString() == ""){
+                    val weight: Int = when(editText.text.toString() == ""){
                         true -> 0
                         false -> editText.text.toString().toInt()
-                    })
+                    }
+
+                    mViewModel.setPersonalWeight(weight = weight)
                     editText.filters = arrayOf(InputFilter.LengthFilter(WEIGHT_OUTPUT_LENGTH))
                     editText.setText(getString(R.string.main_settings_personal_weight_form, mViewModel.getPersonalWeight().toString()))
                     setupRecommendEditText(mViewModel.getPersonalWeight())

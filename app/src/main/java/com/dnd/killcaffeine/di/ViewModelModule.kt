@@ -3,8 +3,6 @@
  */
 package com.dnd.killcaffeine.di
 
-import androidx.preference.PreferenceManager
-import androidx.room.Room
 import com.dnd.killcaffeine.history.HistoryTodayViewModel
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterViewModel
 import com.dnd.killcaffeine.history.today.register.HistoryRegisterChoiceFranchiseViewModel
@@ -20,24 +18,9 @@ import com.dnd.killcaffeine.main.settings.notice.fragment.NoticeListViewModel
 import com.dnd.killcaffeine.main.settings.personal.MainPersonalSettingViewModel
 import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel
-import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
-import com.dnd.killcaffeine.recyclerview.*
 import com.dnd.killcaffeine.splash.SplashViewModel
-import org.koin.android.ext.koin.androidApplication
-import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-
-val databaseModule = module {
-    single{
-        Room.databaseBuilder(androidApplication(), MenuDatabase::class.java, "Menu-db")
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-    single {
-        PreferenceManager.getDefaultSharedPreferences(androidContext())
-    }
-}
 
 val viewModelModule = module {
     viewModel {
@@ -47,7 +30,7 @@ val viewModelModule = module {
         MainViewModel()
     }
     viewModel {
-        MainHomeViewModel(get(), get())
+        MainHomeViewModel(get(), get(), get())
     }
     viewModel {
         MainStatisticsViewModel()
@@ -80,32 +63,12 @@ val viewModelModule = module {
         MainSettingsNoticeViewModel()
     }
     viewModel {
-        NoticeListViewModel()
+        NoticeListViewModel(get())
     }
     viewModel {
-        NoticeDetailViewModel()
+        NoticeDetailViewModel(get())
     }
     viewModel {
         MainPersonalSettingViewModel(get())
     }
 }
-
-val adapterModule = module {
-    factory {
-        DecaffeineAdpater()
-    }
-    factory {
-        RecentDrinkAdapter()
-    }
-    factory {
-        HistoryTodayAdapter()
-    }
-    factory {
-        FranchiseMenuAdapter()
-    }
-    factory {
-        NoticeAdapter()
-    }
-}
-
-val appModule =  listOf(databaseModule, viewModelModule, adapterModule)

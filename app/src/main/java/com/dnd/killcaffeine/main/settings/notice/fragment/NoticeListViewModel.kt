@@ -6,18 +6,19 @@ package com.dnd.killcaffeine.main.settings.notice.fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
+import com.dnd.killcaffeine.model.CoffeeRepository
 import com.dnd.killcaffeine.model.data.response.Notice
-import com.dnd.killcaffeine.model.remote.CoffeeManagerService
+import com.dnd.killcaffeine.model.remote.service.CoffeeManagerService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class NoticeListViewModel : BaseViewModel(){
+class NoticeListViewModel(private val mCoffeeRepository: CoffeeRepository) : BaseViewModel(){
 
     private val _noticeListLiveData = MutableLiveData<ArrayList<Notice>>()
     val noticeListLiveData: LiveData<ArrayList<Notice>> get() = _noticeListLiveData
 
     fun getNoticeList(){
-        addDisposable(CoffeeManagerService.getNoticeList()
+        addDisposable(mCoffeeRepository.getNoticeList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->

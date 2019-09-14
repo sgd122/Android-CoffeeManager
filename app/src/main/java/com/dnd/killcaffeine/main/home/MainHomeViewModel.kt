@@ -8,11 +8,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.SharedPreferenceKey
 import com.dnd.killcaffeine.base.BaseViewModel
+import com.dnd.killcaffeine.model.CoffeeRepository
 import com.dnd.killcaffeine.model.data.Personal
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
 import com.dnd.killcaffeine.model.data.result.DecaffeineResult
-import com.dnd.killcaffeine.model.remote.CoffeeManagerService
+import com.dnd.killcaffeine.model.remote.service.CoffeeManagerService
 import com.dnd.killcaffeine.utils.SingleLiveEvent
 import com.google.gson.Gson
 import com.orhanobut.logger.Logger
@@ -21,7 +22,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
-                        private val mSharedPref: SharedPreferences) : BaseViewModel() {
+                        private val mSharedPref: SharedPreferences,
+                        private val mCoffeeRepository: CoffeeRepository) : BaseViewModel() {
 
     private val _decaffeineMenuLiveData = MutableLiveData<DecaffeineResult>()
     val decaffeineMenuLiveData: LiveData<DecaffeineResult> get() = _decaffeineMenuLiveData
@@ -36,7 +38,7 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
     private var savedMenuList: ArrayList<Menu>? = null
 
     fun getDecaffeineMenuList(){
-        addDisposable(CoffeeManagerService.getDecaffineMenuList()
+        addDisposable(mCoffeeRepository.getDecaffeineMenuList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->

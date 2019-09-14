@@ -1,9 +1,8 @@
 /*
  * Created by iohyeong on 2019-08-10..
  */
-package com.dnd.killcaffeine.model.remote
+package com.dnd.killcaffeine.model.remote.service
 
-import com.dnd.killcaffeine.model.BaseRetrofit
 import com.dnd.killcaffeine.model.data.response.NoticeDetail
 import com.dnd.killcaffeine.model.data.result.DecaffeineResult
 import com.dnd.killcaffeine.model.data.result.FranchiseResult
@@ -25,14 +24,4 @@ interface CoffeeManagerService {
 
     @GET("/api/notice/{noticeId}")
     fun getNoticeDetail(@Path("noticeId") noticeId: Int): Single<NoticeDetail>
-
-    companion object {
-        fun getDecaffineMenuList() : Single<DecaffeineResult> = BaseRetrofit.create(CoffeeManagerService::class.java).getDecaffeineMenuList()
-
-        fun getFranchiseMenuList() : Single<FranchiseResult> = BaseRetrofit.create(CoffeeManagerService::class.java).getFranchiseMenuList()
-
-        fun getNoticeList() : Single<NoticeResult> = BaseRetrofit.create(CoffeeManagerService::class.java).getNoticeList()
-
-        fun getNoticeDetail(noticeId: Int): Single<NoticeDetail> = BaseRetrofit.create(CoffeeManagerService::class.java).getNoticeDetail(noticeId)
-    }
 }

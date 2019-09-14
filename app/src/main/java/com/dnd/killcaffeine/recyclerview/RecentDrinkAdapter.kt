@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.dnd.killcaffeine.R
-import com.dnd.killcaffeine.model.BaseRetrofit
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 
 /*
@@ -17,7 +16,6 @@ import com.dnd.killcaffeine.model.data.room.menu.Menu
 class RecentDrinkAdapter : RecyclerView.Adapter<RecentDrinkAdapter.RecentDrinkRecyclerViewHolder>() {
 
     private val mDRecentDrinkArrayList:ArrayList<Menu> = ArrayList()
-    private val baseUrl: String = BaseRetrofit.BASE_URL
 
     private var mOnItemClickListener: View.OnClickListener? = null
     private var mOnRecentDrinkItemClickListener: OnRecentDrinkItemClickListener? = null

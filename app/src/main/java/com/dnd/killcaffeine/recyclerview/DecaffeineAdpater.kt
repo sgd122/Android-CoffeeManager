@@ -11,13 +11,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.dnd.killcaffeine.R
-import com.dnd.killcaffeine.model.BaseRetrofit
+import com.dnd.killcaffeine.di.baseUrl
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 
 class DecaffeineAdpater : RecyclerView.Adapter<DecaffeineAdpater.DecaffeineRecyclerViewHolder>() {
 
     private val mDecaffeineArrayList:ArrayList<Menu> = ArrayList()
-    private val baseUrl: String = BaseRetrofit.BASE_URL
 
     private var mOnItemClickListener: View.OnClickListener? = null
 

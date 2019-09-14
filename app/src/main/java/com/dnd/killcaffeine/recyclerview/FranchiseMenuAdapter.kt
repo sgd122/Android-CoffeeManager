@@ -11,13 +11,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.dnd.killcaffeine.R
-import com.dnd.killcaffeine.model.BaseRetrofit
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 
 class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.FranchiseMenuViewHolder>() {
 
     private val mFranchiseMenuArrayList: ArrayList<Menu> = ArrayList()
-    private val baseUrl: String = BaseRetrofit.BASE_URL
 
     private var mOnFranchiseClickListener: OnFranchiseMenuClickListener? = null
 

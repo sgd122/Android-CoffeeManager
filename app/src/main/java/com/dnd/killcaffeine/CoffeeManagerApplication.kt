@@ -4,7 +4,8 @@
 package com.dnd.killcaffeine
 
 import android.app.Application
-import com.dnd.killcaffeine.di.appModule
+import com.dnd.killcaffeine.di.*
+import com.dnd.killcaffeine.model.remote.service.CoffeeManagerService
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
@@ -25,7 +26,7 @@ class CoffeeManagerApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@CoffeeManagerApplication)
-            modules(appModule)
+            modules(listOf(adapterModule, apiModule, databaseModule, repositoryModule, retrofitModule, viewModelModule))
         }
 
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()

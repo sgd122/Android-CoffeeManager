@@ -21,15 +21,18 @@ class NoticeDetailViewModel(private val mCoffeeRepository: CoffeeRepository) : B
     val exceptionNoticeLiveData: LiveData<Any> get() = _exceptionNoticeLiveData
 
     fun getNoticeDetail(noticeId: Int){
+        startLoadingIndicator()
         addDisposable(mCoffeeRepository.getNoticeDetail(noticeId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ detail ->
+                stopLoadingIndicator()
                 detail?.run {
                     _noticeDetailLiveData.postValue(data)
 
                 }
             }, {
+                stopLoadingIndicator()
                 showSnackbar("공지사항을 불러오는데 실패했습니다.")
                 _exceptionNoticeLiveData.call()
             }))

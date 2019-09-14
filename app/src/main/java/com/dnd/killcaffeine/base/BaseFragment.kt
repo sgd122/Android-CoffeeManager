@@ -20,7 +20,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.dnd.killcaffeine.R
+import com.dnd.killcaffeine.dialog.LoadingIndicator
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
 
 abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(), BaseView {
 
@@ -28,6 +30,8 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
 
     abstract val mViewModel: V
     private lateinit var mBinding: T
+
+    private var mLoadingIndicator: LoadingIndicator? = null
 
     abstract fun initViewStart()
 
@@ -42,8 +46,14 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
 
         initDataBinding()
         snackbarObserving()
+        loadingIndicatorObserving()
 
         return mBinding.root
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mLoadingIndicator?.cancel()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -83,6 +93,21 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
                 setupKeyboardHide(view.getChildAt(i), activity)
             }
         }
+    }
+
+    override fun loadingIndicatorObserving() {
+        mViewModel.loadingIndicatorLiveData.observe(this, Observer { control ->
+            when(control) {
+                true -> {
+                    activity?.run {
+                        if(isFinishing){
+                            mLoadingIndicator?.show()
+                        }
+                    }
+                }
+                false -> mLoadingIndicator?.cancel()
+            }
+        })
     }
 
     override fun startActivity(intent: Intent?) {

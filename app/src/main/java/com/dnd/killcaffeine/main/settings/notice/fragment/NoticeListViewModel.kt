@@ -18,14 +18,17 @@ class NoticeListViewModel(private val mCoffeeRepository: CoffeeRepository) : Bas
     val noticeListLiveData: LiveData<ArrayList<Notice>> get() = _noticeListLiveData
 
     fun getNoticeList(){
+        startLoadingIndicator()
         addDisposable(mCoffeeRepository.getNoticeList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
+                stopLoadingIndicator()
                 result?.run {
                     _noticeListLiveData.postValue(list)
                 }
             }, {
+                stopLoadingIndicator()
                 showSnackbar("공지사항을 불러오는데 실패했습니다.")
             }))
     }

@@ -13,4 +13,6 @@ interface BaseView {
     fun setToolbar(resourceId: Int?, title: String? = "커피 매니저")
 
     fun setupKeyboardHide(view: View, activity: Activity?)
+
+    fun loadingIndicatorObserving()
 }

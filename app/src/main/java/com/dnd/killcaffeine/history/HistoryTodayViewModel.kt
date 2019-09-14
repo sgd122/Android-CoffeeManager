@@ -35,13 +35,16 @@ class HistoryTodayViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewM
     }
 
     fun insertHistoryToRoomDatabase(menu: Menu){
+        startLoadingIndicator()
         addDisposable(mMenuDatabase.menuDao.insertMenu(menu)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                stopLoadingIndicator()
                 _insertHistoryLiveData.call()
 
             }, {
+                stopLoadingIndicator()
                 showSnackbar(it.message ?: "히스토리 등록에 실패하였습니다.")
             }))
     }

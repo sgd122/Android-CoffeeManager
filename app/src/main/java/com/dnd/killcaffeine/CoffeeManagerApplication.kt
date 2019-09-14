@@ -26,7 +26,8 @@ class CoffeeManagerApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@CoffeeManagerApplication)
-            modules(listOf(adapterModule, apiModule, databaseModule, repositoryModule, retrofitModule, viewModelModule))
+            modules(listOf(adapterModule, apiModule, databaseModule,
+                repositoryModule, retrofitModule, viewModelModule))
         }
 
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()

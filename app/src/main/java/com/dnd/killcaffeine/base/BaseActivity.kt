@@ -20,7 +20,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.dnd.killcaffeine.R
+import com.dnd.killcaffeine.dialog.LoadingIndicator
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
 
 abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatActivity(), BaseView {
 
@@ -28,6 +30,8 @@ abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatAc
 
     abstract val mViewModel: V
     private lateinit var mBinding: T
+
+    private var mLoadingIndicator: LoadingIndicator? = null
 
     abstract fun initViewStart()
 
@@ -41,10 +45,18 @@ abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatAc
         mBinding = DataBindingUtil.setContentView(this, resourceId)
         mBinding.lifecycleOwner = this
 
+        mLoadingIndicator = LoadingIndicator(this)
+
+        loadingIndicatorObserving()
         snackbarObserving()
         initViewStart()
         initDataBinding()
         initViewFinal()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mLoadingIndicator?.dismiss()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -60,7 +72,7 @@ abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatAc
 
     override fun setToolbar(resourceId: Int?, title: String?) {
         resourceId?.let {
-            setSupportActionBar(findViewById<Toolbar>(it))
+            setSupportActionBar(findViewById(it))
             supportActionBar?.run {
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowTitleEnabled(true)
@@ -87,9 +99,17 @@ abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatAc
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mViewModel
+    override fun loadingIndicatorObserving() {
+        mViewModel.loadingIndicatorLiveData.observe(this, Observer { control ->
+            when(control) {
+                true -> {
+                    if(!isFinishing) {
+                        mLoadingIndicator?.show()
+                    }
+                }
+                false -> mLoadingIndicator?.cancel()
+            }
+        })
     }
 
     override fun finish() {

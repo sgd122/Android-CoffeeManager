@@ -198,7 +198,7 @@
             android:id="@+id/activity_settings_personal_save_button"
             android:layout_width="112dp"
             android:layout_height="52dp"
-            android:background="@drawable/background_radis_10dp_personal_save_button"
+            android:background="@drawable/background_radius_10dp_personal_save_button"
             android:layout_gravity="center"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="36dp"

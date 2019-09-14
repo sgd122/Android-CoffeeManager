@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">커피매니저</string>
     <string name="app_version">0.0.1</string>
+
+    <string name="fragment_statistics_title">통계</string>
+    <string name="fragment_statistics_show_analysis_button_text">분석보기</string>
+    <string name="fragment_statistics_graph_sub_title_daily">일별 섭취량</string>
+    <string name="fragment_statistics_graph_sub_title_weekly">주별 섭취량</string>
+    <string name="fragment_statistics_graph_sub_title_monthly">월별 섭취량</string>
+    <string name="fragment_statistics_category_success">성공</string>
+    <string name="fragment_statistics_category_exceed">초과</string>
+    <string name="fragment_statistics_category_user_average">사용자평균</string>
+
     <string name="activity_history_today_register_toolbar_title">입력</string>
     <string name="dialog_history_register_warning_confirm">추가</string>
     <string name="dialog_history_register_warning_cancel">취소</string>

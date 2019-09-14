@@ -1,25 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewmodel"
             type="com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel" />
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:background="@color/background_main_white">
+        android:isScrollContainer="false">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PAGE 2"
-            android:textColor="@color/color_text_grayish_brown"
-            android:textSize="36sp"
-            android:textStyle="bold"/>
+            android:background="@color/background_main_white"
+            android:padding="16dp"
+            android:clipToPadding="false">
 
-    </LinearLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/fragment_statistics_title"
+                    android:textColor="@color/color_text_settings_green"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/scdream9_black"
+                    android:includeFontPadding="false"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/fragment_statistics_show_analysis_button_text"
+                    android:textColor="@color/color_text_white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/spoqa_han_sans_bold"
+                    android:includeFontPadding="false"
+                    android:background="@drawable/background_radius_8dp_show_analysis_button"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/fragment_statistics_graph_sub_title_daily"
+                    android:textColor="@color/color_text_grayish_brown"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/spoqa_han_sans_bold"
+                    android:includeFontPadding="false"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <LinearLayout
+                    android:id="@+id/fragment_statistics_category_success"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_statistics_category_exceed"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/icon_statistics_category_success"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="성공"
+                        android:textSize="12sp"
+                        android:textColor="@color/color_text_brownish_grey"
+                        android:fontFamily="@font/spoqa_han_sans_regular"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fragment_statistics_category_exceed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    app:layout_constraintRight_toLeftOf="@id/fragment_statistics_category_user_average"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/icon_statistics_category_exceed"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragment_statistics_category_exceed"
+                        android:textSize="12sp"
+                        android:textColor="@color/color_text_brownish_grey"
+                        android:fontFamily="@font/spoqa_han_sans_regular"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fragment_statistics_category_user_average"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/icon_statistics_category_user_avg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragment_statistics_category_user_average"
+                        android:textSize="12sp"
+                        android:textColor="@color/color_text_brownish_grey"
+                        android:fontFamily="@font/spoqa_han_sans_regular"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/fragment_statistics_graph_daily"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_radius_10dp_white_box"
+                android:text="@string/fragment_statistics_graph_sub_title_daily"
+                android:textSize="24sp"
+                android:textColor="@color/color_text_grayish_brown"
+                android:gravity="center"
+                android:fontFamily="@font/spoqa_han_sans_bold"
+                android:includeFontPadding="false"
+                android:elevation="6dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/fragment_statistics_graph_sub_title_weekly"
+                android:textColor="@color/color_text_grayish_brown"
+                android:textSize="18sp"
+                android:fontFamily="@font/spoqa_han_sans_bold"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:id="@+id/fragment_statistics_graph_weekly"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_radius_10dp_white_box"
+                android:text="@string/fragment_statistics_graph_sub_title_weekly"
+                android:textSize="24sp"
+                android:textColor="@color/color_text_grayish_brown"
+                android:gravity="center"
+                android:fontFamily="@font/spoqa_han_sans_bold"
+                android:includeFontPadding="false"
+                android:elevation="6dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/fragment_statistics_graph_sub_title_monthly"
+                android:textColor="@color/color_text_grayish_brown"
+                android:textSize="18sp"
+                android:fontFamily="@font/spoqa_han_sans_bold"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:id="@+id/fragment_statistics_graph_monthly"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_radius_10dp_white_box"
+                android:text="@string/fragment_statistics_graph_sub_title_monthly"
+                android:textSize="24sp"
+                android:textColor="@color/color_text_grayish_brown"
+                android:gravity="center"
+                android:fontFamily="@font/spoqa_han_sans_bold"
+                android:includeFontPadding="false"
+                android:elevation="6dp"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
 </layout>

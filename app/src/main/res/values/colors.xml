@@ -11,6 +11,14 @@
     <color name="colorGradientCenter">#2db16b</color>
     <color name="colorGradientEnd">#83d7aa</color>
 
+    <color name="colorCategoryExceedGradientStart">#f06676</color>
+    <color name="colorCategoryExceedGradientCenter">#f06676</color>
+    <color name="colorCategoryExceedGradientEnd">#ffafb9</color>
+
+    <color name="colorCategoryUserAvgGradientStart">#dfdfdf</color>
+    <color name="colorCategoryUserAvgGradientCenter">#dfdfdf</color>
+    <color name="colorCategoryUserAvgGradientEnd">#c2c2c2</color>
+
     <color name="color_text_white">#ffffff</color>
     <color name="color_text_jade_green">#2db16b</color>
     <color name="color_text_grayish_brown">#434343</color>
@@ -33,6 +41,7 @@
     <color name="background_color_personal_save_button">#FFA36D</color>
 
     <color name="background_color_show_more_button">#fba676</color>
+    <color name="background_color_show_analysis_button">#FFA36D</color>
     <color name="background_color_notification_switch_button_inside">#c8e6d6</color>
     <color name="background_color_notification_switch_button_outside">#4aad78</color>
     <color name="background_color_notification_switch_button_thumb">#4aad78</color>

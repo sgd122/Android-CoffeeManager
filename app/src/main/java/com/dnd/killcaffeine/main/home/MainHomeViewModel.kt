@@ -34,8 +34,8 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
     private val _exceededIntakeLiveData = SingleLiveEvent<Any?>()
     val exceededIntakeLiveData: LiveData<Any?> get() = _exceededIntakeLiveData
 
-    private var totalIntakeFromSplash: Int = 0 // Splash 에서 넘겨받은 일일카페인 섭취량
-    private var savedMenuList: ArrayList<Menu>? = null
+    private val _savedPersonalRecommend = MutableLiveData<Int>()
+    val savedPersonalRecommand: LiveData<Int> get() = _savedPersonalRecommend
 
     fun getDecaffeineMenuList(){
         startLoadingIndicator()
@@ -86,15 +86,18 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
         )
     }
 
-    fun setTotalCaffeineIntake(total : Int) {
-        totalIntakeFromSplash = total
+    fun getPersonalRecommendCaffeeine(){
+        addDisposable(Observable.just(mSharedPref.getString(SharedPreferenceKey.PUT_PERSONAL_INFO, ""))
+            .observeOn(Schedulers.io())
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribe({ personal ->
+                personal?.let {
+                    val savedPersonalInfo: Personal = Gson().fromJson(it, Personal::class.java)
+                    _savedPersonalRecommend.postValue(savedPersonalInfo.recommendIntake)
+
+                }
+            }, {
+            })
+        )
     }
-
-    fun setSavedMenuList(list: ArrayList<Menu>){
-        savedMenuList = list
-    }
-
-    fun getTotalCaffeineIntake(): Int = totalIntakeFromSplash
-
-    fun getSavedMenuList(): ArrayList<Menu>? = savedMenuList
 }

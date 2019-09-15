@@ -3,12 +3,10 @@
  */
 package com.dnd.killcaffeine.main.home
 
-import android.app.Activity.RESULT_OK
-import android.content.*
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,12 +18,11 @@ import com.dnd.killcaffeine.databinding.FragmentHomeBinding
 import com.dnd.killcaffeine.dialog.ExceedRecommendWarningDialog
 import com.dnd.killcaffeine.dialog.RecentDrinkDetailDialog
 import com.dnd.killcaffeine.history.HistoryTodayActivity
-import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
-import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
 import com.dnd.killcaffeine.main.home.show_more.TodayRecommendDrinkActivity
 import com.dnd.killcaffeine.model.data.room.menu.Menu
+import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
+import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
 import com.dnd.killcaffeine.service.CommentService
-import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -68,8 +65,6 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.HORIZONTAL, false)
             adapter = mRecentRecyclerViewAdapter
         }
-
-        fragment_home_daily_caffeine_intake_value.text = resources.getString(R.string.main_home_fragment_total_intake, mViewModel.getTotalCaffeineIntake().toString())
     }
 
     override fun initDataBinding() {
@@ -88,7 +83,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
                 mTotalCaffeineIntake = 0
                 it.forEach { menu -> mTotalCaffeineIntake += menu.caffeine }
-                getFragmentBinding().fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, mTotalCaffeineIntake.toString())
+                getFragmentBinding().fragmentHomeDailyCaffeineIntakeValue.text = mTotalCaffeineIntake.toString()
 
                 mViewModel.checkExceedRecommendedQuantity(intake = mTotalCaffeineIntake)
             }
@@ -99,17 +94,20 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             //showExceedWarningDialog()
         })
 
+        mViewModel.savedPersonalRecommand.observe(this, Observer { recommend ->
+            fragment_home_personal_recommend_caffeine.text = getString(R.string.main_home_fragment_personal_recommend_caffeine, recommend.toString())
+        })
+
     }
 
     override fun initViewFinal() {
         mViewModel.getDecaffeineMenuList()
 
-        fragment_home_frame_layout.setOnClickListener {
-            val intent: Intent = Intent(activity?.applicationContext, HistoryTodayActivity::class.java).apply {
-                putExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER, mViewModel.getTotalCaffeineIntake())
-            }
+        mViewModel.getPersonalRecommendCaffeeine()
 
-            startActivityForResult(intent, RequestCode.HISTORY_TODAY_REQUEST_CODE)
+        fragment_home_frame_layout.setOnClickListener {
+
+            startActivity(Intent(activity?.applicationContext, HistoryTodayActivity::class.java))
         }
 
         fragment_home_today_decaffeine_show_more_button.setOnClickListener {

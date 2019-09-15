@@ -15,7 +15,7 @@
     <string name="dialog_history_register_warning_confirm">입력하기</string>
     <string name="dialog_history_register_warning_cancel">돌아가기</string>
 
-    <string name="main_home_fragment_total_intake">%smg</string>
+    <string name="main_home_fragment_personal_recommend_caffeine">%smg</string>
     <string name="history_caffeine_intake">%smg</string>
     <string name="main_settings_personal_weight_form">%skg</string>
     <string name="main_settings_personal_recommend_form">%smg</string>

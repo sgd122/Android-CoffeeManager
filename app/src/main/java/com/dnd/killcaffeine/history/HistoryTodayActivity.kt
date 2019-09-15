@@ -24,16 +24,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTodayViewModel>() {
 
-    private val TAG = "HistoryTodayActivity"
-
     override val mViewModel: HistoryTodayViewModel by viewModel()
     override val resourceId: Int
         get() = R.layout.activity_history_today
 
     private val mHistoryTodayAdapter: HistoryTodayAdapter by inject()
-
-    private var mTodayCaffeineFromMainFragment: Int = 0
-    private var mTodayCaffeineIntakeCalculation: Int = 0
 
     override fun initViewStart() {
         mHistoryTodayAdapter.setOnHistoryClickListener(object: HistoryTodayAdapter.OnHistoryClickListener{
@@ -43,11 +38,6 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
                 showHistoryDeleteDialog(menu)
             }
         })
-
-        if(intent.hasExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER)){
-            mTodayCaffeineFromMainFragment = intent.getIntExtra(RequestCode.TODAY_CAFFEINE_INTAKE_MAIN_TO_HISTORY_REGISTER, 0)
-            Logger.d("홈프레그먼트에서 받아온 카페인 : $mTodayCaffeineFromMainFragment")
-        }
 
         activity_today_history_recycler_view.apply {
             layoutManager = LinearLayoutManager(this@HistoryTodayActivity, RecyclerView.VERTICAL, false)
@@ -59,11 +49,6 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
         mViewModel.historyListLiveData.observe(this, Observer { list ->
             list?.let {
                 mHistoryTodayAdapter.setHistoryList(it)
-                mTodayCaffeineIntakeCalculation = 0
-                list.forEach { menu ->
-                    mTodayCaffeineIntakeCalculation += menu.caffeine
-                }
-                Logger.d("새롭게 계산한 카페인 : $mTodayCaffeineIntakeCalculation")
             }
         })
 
@@ -73,8 +58,6 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
 
         mViewModel.deleteHistoryLiveData.observe(this, Observer { history ->
             mHistoryTodayAdapter.deleteHistory(history)
-            mTodayCaffeineIntakeCalculation -= history.caffeine
-
         })
     }
 

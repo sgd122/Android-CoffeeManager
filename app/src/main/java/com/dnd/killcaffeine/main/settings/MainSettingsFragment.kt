@@ -10,6 +10,7 @@ import com.dnd.killcaffeine.databinding.FragmentSettingsBinding
 import com.dnd.killcaffeine.main.settings.notice.MainSettingsNoticeActivity
 import com.dnd.killcaffeine.main.settings.personal.MainPersonalSettingActivity
 import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsActivity
+import com.dnd.killcaffeine.sign_in.SignInActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,6 +27,16 @@ class MainSettingsFragment : BaseFragment<FragmentSettingsBinding, MainSettingsV
     }
 
     override fun initViewFinal() {
+
+        // 로그인 버튼
+        fragment_settings_login_button.setOnClickListener {
+            startActivity(Intent(activity?.applicationContext, SignInActivity::class.java))
+        }
+
+        // 로그아웃 버튼
+        fragment_settings_logout_button.setOnClickListener {
+
+        }
 
         // 마이카페인 설정
         fragment_settings_set_personal_button.setOnClickListener {

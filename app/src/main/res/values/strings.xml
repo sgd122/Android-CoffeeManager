@@ -22,6 +22,12 @@
     <string name="main_settings_login_button_text">로그인</string>
     <string name="main_settings_logout_button_text">로그아웃</string>
 
+    <string name="activity_sign_in_title_email">이메일</string>
+    <string name="activity_sign_in_title_password">비밀번호</string>
+    <string name="activity_sign_in_find_password_description"><u>비밀번호를 잊으셨나요?</u></string>
+    <string name="activity_sign_in_not_yet_user_description">아직 회원이 아니신가요?</string>
+    <string name="activity_sign_in_sign_in_description">가입하기</string>
+
     <string name="dialog_history_register_warning_confirm">입력하기</string>
     <string name="dialog_history_register_warning_cancel">돌아가기</string>
     <string name="dialog_warning_title">카페인의 위험성</string>

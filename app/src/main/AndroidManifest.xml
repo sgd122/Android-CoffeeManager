@@ -55,6 +55,10 @@
             android:name=".main.settings.personal.MainPersonalSettingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".sign_in.SignInActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".service.CommentService" />
 

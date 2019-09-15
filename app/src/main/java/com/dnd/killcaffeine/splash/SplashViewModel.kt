@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
+import com.dnd.killcaffeine.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -16,38 +17,16 @@ class SplashViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewModel()
 
     companion object {
         private const val START_ACTIVITY_POST_DELAY: Long = 2000
-        private const val INVALID_INTAKE_RESULT: Int = -1
     }
 
-    private val _startActivityLiveData = MutableLiveData<Pair<Int, ArrayList<Menu>>>()
-    val startActivityLiveData: LiveData<Pair<Int, ArrayList<Menu>>> get() = _startActivityLiveData
+    private val _startActivityLiveData = SingleLiveEvent<Any>()
+    val startActivityLiveData: LiveData<Any> get() = _startActivityLiveData
 
-    private val _loadSavedHistoryLiveData = MutableLiveData<ArrayList<Menu>>()
-    val loadSavedHistoryLiveData: LiveData<ArrayList<Menu>> get() = _loadSavedHistoryLiveData
-
-    fun startMainActivityAfterPostDelay(menuList : ArrayList<Menu>){
+    fun startMainActivityAfterPostDelay(){
         Handler().postDelayed({
-            var totalCaffeine = 0
-            menuList.forEach {
-                totalCaffeine += it.caffeine
-            }
 
-            _startActivityLiveData.postValue(Pair(totalCaffeine, menuList))
+            _startActivityLiveData.call()
 
         }, START_ACTIVITY_POST_DELAY)
-    }
-
-    fun loadTotalTodayCaffeineIntake(){
-        addDisposable(mMenuDatabase.menuDao.getAllMenu()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ list ->
-                list?.let {
-                    _loadSavedHistoryLiveData.value = it as ArrayList
-
-                }
-            }, {
-                _loadSavedHistoryLiveData.value = ArrayList()
-            }))
     }
 }

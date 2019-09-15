@@ -82,18 +82,12 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
         mViewModel.loadHistoryListFromRoomDatabase()
 
         activity_today_history_back_button.setOnClickListener {
-            sendCaffeineToHome()
             finish()
         }
 
         activity_today_history_floating_action_button.setOnClickListener {
             startActivityForResult(Intent(applicationContext, HistoryTodayRegisterActivity::class.java), RequestCode.HISTORY_REGISTER_REQUEST_CODE)
         }
-    }
-
-    override fun finish() {
-        sendCaffeineToHome()
-        super.finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -113,43 +107,11 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
         }
     }
 
-    private fun sendCaffeineToHome(){
-        when(mTodayCaffeineFromMainFragment != mTodayCaffeineIntakeCalculation){
-            true -> {
-                setResult(Activity.RESULT_OK, Intent().apply {
-                    putExtra(RequestCode.TODAY_CAFFEINE_INTAKE_HISTORY_REGISTER_TO_MAIN, mTodayCaffeineIntakeCalculation)
-                })
-            }
-            false -> setResult(Activity.RESULT_OK)
-        }
-    }
-
     private fun showHistoryDeleteDialog(menu: Menu){
         HistoryDeleteWarningDialog(this, View.OnClickListener {
 
             mViewModel.deleteHistoryFromRoomDatabase(menu)
 
         }).show()
-    }
-
-    private fun insertMockHistory(): ArrayList<Menu> {
-        return arrayListOf(
-            Menu(0, "아이스 아메리카노", "R.drawable.app_icon", "스타벅스", 150, false),
-            Menu(0, "카페 라떼", "R.drawable.app_icon","이디야", 100, false),
-            Menu(0, "에스프레소", "R.drawable.app_icon","빽다방", 180, false),
-            Menu(0, "카푸치노", "R.drawable.app_icon","엔젤리너스", 120, false),
-            Menu(0, "자바칩 프라푸치노", "R.drawable.app_icon","스타벅스", 100, false),
-            Menu(0, "바닐라 라떼", "R.drawable.app_icon","더벤티", 120, false),
-            Menu(0, "디카페인 아메리카노", "R.drawable.app_icon","탐앤탐스", 30, false),
-            Menu(0, "얼그레이 버블티", "R.drawable.app_icon","공차", 50, false),
-            Menu(0, "아이스 아메리카노", "R.drawable.app_icon","스타벅스", 150, false),
-            Menu(0, "카페 라떼", "R.drawable.app_icon","이디야", 100, false),
-            Menu(0, "에스프레소", "R.drawable.app_icon","빽다방", 180, false),
-            Menu(0, "카푸치노", "R.drawable.app_icon","엔젤리너스", 120, false),
-            Menu(0, "자바칩 프라푸치노", "R.drawable.app_icon","스타벅스", 100, false),
-            Menu(0, "바닐라 라떼", "R.drawable.app_icon","더벤티", 120, false),
-            Menu(0, "디카페인 아메리카노", "R.drawable.app_icon","탐앤탐스", 30, false),
-            Menu(0, "얼그레이 버블티", "R.drawable.app_icon","공차", 50, false)
-        )
     }
 }

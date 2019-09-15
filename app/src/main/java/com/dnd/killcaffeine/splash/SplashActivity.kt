@@ -24,23 +24,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     override fun initDataBinding() {
 
-        mViewModel.loadSavedHistoryLiveData.observe(this, Observer { list ->
-
-            mViewModel.startMainActivityAfterPostDelay(list)
-        })
-
-        mViewModel.startActivityLiveData.observe(this, Observer { pair ->
-            pair?.let {
-                startActivity(Intent(this, MainActivity::class.java).apply {
-                    putExtra(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_SPLASH_TO_MAIN, pair.first)
-                    putExtra(RequestCode.TOTAL_TODAY_MENU_LIST_SPLASH_TO_MAIN, pair.second)
-                })
-                finish()
-            }
+        mViewModel.startActivityLiveData.observe(this, Observer {
+            startActivity(Intent(applicationContext, MainActivity::class.java))
+            finish()
         })
     }
 
     override fun initViewFinal() {
-        mViewModel.loadTotalTodayCaffeineIntake()
+        mViewModel.startMainActivityAfterPostDelay()
     }
 }

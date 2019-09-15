@@ -32,10 +32,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() {
 
-    companion object {
-        fun newInstance() = MainHomeFragment()
-    }
-
     override val mViewModel: MainHomeViewModel by viewModel()
     override val resourceId: Int
         get() = R.layout.fragment_home
@@ -46,15 +42,9 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     private val mDecaffeineArrayList: ArrayList<Menu> = ArrayList()
 
     private var mCommentReceiver: BroadcastReceiver? = null
+    private var mTotalCaffeineIntake: Int = 0
 
     override fun initViewStart() {
-        (arguments?.getInt(RequestCode.TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT, 0) ?: 0).run {
-            mViewModel.setTotalCaffeineIntake(this)
-        }
-        (arguments?.getSerializable(RequestCode.TOTAL_TODAY_MENU_LIST_MAIN_TO_FRAGMENT) as ArrayList<Menu>).run {
-            mViewModel.setSavedMenuList(this)
-        }
-
 
         mDecaffeineRecyclerViewAdapter.apply {
             setDecaffeineArrayList(insertMockData())
@@ -85,18 +75,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     override fun initDataBinding() {
         mViewModel.decaffeineMenuLiveData.observe(this, Observer { result ->
             result?.let {
-
-                with(it.list) {
-                    // 오늘의 대체 음료 추천
-                    mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(this)
-                    mDecaffeineArrayList.addAll(this)
-                }
-
-                // 최근에 마신 음료
-                // TODO 이부분이 문제가 되는듯..
-                mViewModel.getSavedMenuList()?.let { menuList ->
-                    mRecentRecyclerViewAdapter.setRecentDrinkArrayList(menuList)
-                }
+                mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(it.list)
+                mDecaffeineArrayList.addAll(it.list)
             }
         })
 
@@ -104,15 +84,19 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             list?.let {
 
                 // 히스토리 내역이 변경되었다면, 리스트 갱신
-                mViewModel.setSavedMenuList(it)
                 mRecentRecyclerViewAdapter.setRecentDrinkArrayList(it)
+
+                mTotalCaffeineIntake = 0
+                it.forEach { menu -> mTotalCaffeineIntake += menu.caffeine }
+                getFragmentBinding().fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, mTotalCaffeineIntake.toString())
+
+                mViewModel.checkExceedRecommendedQuantity(intake = mTotalCaffeineIntake)
             }
         })
 
         mViewModel.exceededIntakeLiveData.observe(this, Observer {
-            Logger.d("경고 다이얼로그 띄우기")
             // 권장섭취량 초과 했을때 경고 다이얼로그 띄움
-            showExceedWarningDialog()
+            //showExceedWarningDialog()
         })
 
     }
@@ -134,32 +118,13 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             }
 
             startActivity(intent)
-
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(resultCode == RESULT_OK){
-            when(requestCode){
-                RequestCode.HISTORY_TODAY_REQUEST_CODE -> {
-                    // TODO 히스토리 추가되어서 돌아오는 경우에 최근 마신음료 리스트, 일일 카페인 섭취량 갱신해야됨.
-                    val refreshedValue:Int = data?.getIntExtra(RequestCode.TODAY_CAFFEINE_INTAKE_HISTORY_REGISTER_TO_MAIN, mViewModel.getTotalCaffeineIntake()) ?: mViewModel.getTotalCaffeineIntake()
-
-                    mViewModel.refreshHistoryFromRoomDatabase()
-                    getFragmentBinding().fragmentHomeDailyCaffeineIntakeValue.text = resources.getString(R.string.main_home_fragment_total_intake, refreshedValue.toString())
-
-                    // 권장 섭취량 초과했는지 판별
-                    mViewModel.checkExceedRecommendedQuantity(intake = refreshedValue)
-                }
-            }
         }
     }
 
     override fun onStart() {
         super.onStart()
 
+        mViewModel.refreshHistoryFromRoomDatabase()
         registerCommentReceiver()
         startCommentService()
     }
@@ -179,7 +144,6 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     private fun showExceedWarningDialog(){
         activity?.let {
-            Logger.d("showExceedWarningDialog")
             ExceedRecommendWarningDialog(it).show()
         }
     }
@@ -200,8 +164,6 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         mCommentReceiver = object: BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 intent?.getStringExtra(BroadcastReceiverKey.COMMENT_SERVICE_RANDOM)?.let { comment ->
-                    Logger.d("HomeFragment 에서 받은 Comment : $comment")
-
                     getFragmentBinding().fragmentHomeTodayCommentTextView.text = comment
                 }
             }

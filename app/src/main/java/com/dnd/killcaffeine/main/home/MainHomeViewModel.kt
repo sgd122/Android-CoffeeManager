@@ -45,9 +45,6 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
             .subscribe({ result ->
                 stopLoadingIndicator()
                 _decaffeineMenuLiveData.postValue(result)
-                /*result.list.forEach {
-                    Logger.d(it.toString())
-                }*/
 
             }, {
                 stopLoadingIndicator()

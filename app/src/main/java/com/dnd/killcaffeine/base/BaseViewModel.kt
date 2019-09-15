@@ -26,7 +26,7 @@ abstract class BaseViewModel : ViewModel() {
     fun addDisposable(disposable: Disposable?) = disposable?.let { mCompositeDisposable.add(it) }
 
     override fun onCleared() {
-        mCompositeDisposable.dispose()
+        mCompositeDisposable.clear()
         super.onCleared()
     }
 

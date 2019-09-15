@@ -44,23 +44,22 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
         mBinding = DataBindingUtil.inflate(inflater, resourceId, container, false)
         mBinding.lifecycleOwner = this
 
-        initDataBinding()
-        snackbarObserving()
-        loadingIndicatorObserving()
-
         return mBinding.root
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mLoadingIndicator?.cancel()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         initViewStart()
+        initDataBinding()
         initViewFinal()
+        snackbarObserving()
+        loadingIndicatorObserving()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mLoadingIndicator?.cancel()
     }
 
     fun getFragmentBinding() = mBinding

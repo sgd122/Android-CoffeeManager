@@ -21,6 +21,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override val mViewModel: MainViewModel by viewModel()
 
+    enum class TabComponent {
+        HOME, STATISTICS, SETTINGS
+    }
+
+    private val fragmentList = listOf(
+        MainHomeFragment(),
+        MainStatisticsFragment(),
+        MainSettingsFragment()
+    )
+
+    private val tabIconList = listOf(
+        R.drawable.icon_tab_home_selector,
+        R.drawable.icon_tab_statistics_selector,
+        R.drawable.icon_tab_settings_selector
+    )
+
     override fun initViewStart() {
         supportFragmentManager.beginTransaction().add(R.id.activity_main_container, getFragment(0)).commitNow()
 
@@ -34,15 +50,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    with(R.id.activity_main_container){
-                        when(tab?.position){
-                            TabComponent.HOME.ordinal -> supportFragmentManager.beginTransaction().replace(this, getFragment(TabComponent.HOME.ordinal))
-                            TabComponent.STATISTICS.ordinal -> supportFragmentManager.beginTransaction().replace(this, getFragment(TabComponent.STATISTICS.ordinal))
-                            TabComponent.SETTINGS.ordinal -> supportFragmentManager.beginTransaction().replace(this, getFragment(TabComponent.SETTINGS.ordinal))
-                            else -> throw IllegalStateException("올바르지 않은 접근입니다")
-                        }.also {
-                            it.commit()
-                        }
+                    when(tab?.position){
+                        TabComponent.HOME.ordinal -> supportFragmentManager.beginTransaction().replace(R.id.activity_main_container, getFragment(TabComponent.HOME.ordinal)).commit()
+                        TabComponent.STATISTICS.ordinal -> supportFragmentManager.beginTransaction().replace(R.id.activity_main_container, getFragment(TabComponent.STATISTICS.ordinal)).commit()
+                        TabComponent.SETTINGS.ordinal -> supportFragmentManager.beginTransaction().replace(R.id.activity_main_container, getFragment(TabComponent.SETTINGS.ordinal)).commit()
+                        else -> throw IllegalStateException("올바르지 않은 접근입니다")
                     }
                 }
             })
@@ -70,24 +82,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
-    companion object {
-        enum class TabComponent {
-            HOME, STATISTICS, SETTINGS
-        }
-
-        private val fragmentList = listOf(
-            MainHomeFragment.newInstance(),
-            MainStatisticsFragment.newInstance(),
-            MainSettingsFragment.newInstance()
-        )
-
-        private val tabIconList = listOf(
-            R.drawable.icon_tab_home_selector,
-            R.drawable.icon_tab_statistics_selector,
-            R.drawable.icon_tab_settings_selector
-        )
-
-        fun getTabIcon(position: Int): Int = tabIconList[position]
-        fun getFragment(position: Int): Fragment = fragmentList[position]
-    }
+    private fun getTabIcon(position: Int): Int = tabIconList[position]
+    fun getFragment(position: Int): Fragment = fragmentList[position]
 }

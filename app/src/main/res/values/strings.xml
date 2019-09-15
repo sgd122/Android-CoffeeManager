@@ -12,8 +12,8 @@
     <string name="fragment_statistics_category_user_average">사용자평균</string>
 
     <string name="activity_history_today_register_toolbar_title">입력</string>
-    <string name="dialog_history_register_warning_confirm">추가</string>
-    <string name="dialog_history_register_warning_cancel">취소</string>
+    <string name="dialog_history_register_warning_confirm">입력하기</string>
+    <string name="dialog_history_register_warning_cancel">돌아가기</string>
 
     <string name="main_home_fragment_total_intake">%smg</string>
     <string name="history_caffeine_intake">%smg</string>

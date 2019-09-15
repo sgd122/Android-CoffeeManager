@@ -15,10 +15,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainSettingsFragment : BaseFragment<FragmentSettingsBinding, MainSettingsViewModel>() {
 
-    companion object {
-        fun newInstance() = MainSettingsFragment()
-    }
-
     override val mViewModel: MainSettingsViewModel by viewModel()
     override val resourceId: Int
         get() = R.layout.fragment_settings

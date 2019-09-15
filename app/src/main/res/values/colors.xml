@@ -45,6 +45,7 @@
 
     <color name="background_color_show_more_button">#fba676</color>
     <color name="background_color_show_analysis_button">#FFA36D</color>
+    <color name="background_color_settings_login_button">#FFA36D</color>
     <color name="background_color_notification_switch_button_inside">#c8e6d6</color>
     <color name="background_color_notification_switch_button_outside">#4aad78</color>
     <color name="background_color_notification_switch_button_thumb">#4aad78</color>

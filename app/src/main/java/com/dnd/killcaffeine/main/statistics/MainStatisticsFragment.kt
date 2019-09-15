@@ -10,10 +10,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainStatisticsFragment : BaseFragment<FragmentStatisticsBinding, MainStatisticsViewModel>() {
 
-    companion object {
-        fun newInstance() = MainStatisticsFragment()
-    }
-
     override val mViewModel: MainStatisticsViewModel by viewModel()
     override val resourceId: Int
         get() = R.layout.fragment_statistics

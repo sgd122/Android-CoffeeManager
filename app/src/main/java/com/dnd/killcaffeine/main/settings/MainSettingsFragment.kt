@@ -10,7 +10,7 @@ import com.dnd.killcaffeine.databinding.FragmentSettingsBinding
 import com.dnd.killcaffeine.main.settings.notice.MainSettingsNoticeActivity
 import com.dnd.killcaffeine.main.settings.personal.MainPersonalSettingActivity
 import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsActivity
-import com.dnd.killcaffeine.sign_in.SignInActivity
+import com.dnd.killcaffeine.membership.SignInActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

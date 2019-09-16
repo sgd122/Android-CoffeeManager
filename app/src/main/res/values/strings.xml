@@ -28,6 +28,15 @@
     <string name="activity_sign_in_not_yet_user_description">아직 회원이 아니신가요?</string>
     <string name="activity_sign_in_sign_in_description">가입하기</string>
 
+    <string name="activity_sign_up_title_toolbar">회원가입</string>
+    <string name="activity_sign_up_title_name">성함</string>
+    <string name="activity_sign_up_title_email">이메일</string>
+    <string name="activity_sign_up_title_password">비밀번호</string>
+    <string name="activity_sign_up_information_gathering_description"><u>정보수집에 동의하십니까? (필수)</u></string>
+    <string name="activity_sign_up_alarm_setting_description"><u>알람 설정에 동의하십니까? (선택)</u></string>
+    <string name="activity_sign_up_button_text">회원가입</string>
+
+
     <string name="dialog_history_register_warning_confirm">입력하기</string>
     <string name="dialog_history_register_warning_cancel">돌아가기</string>
     <string name="dialog_warning_title">카페인의 위험성</string>

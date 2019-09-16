@@ -56,7 +56,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".sign_in.SignInActivity"
+            android:name=".membership.SignInActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".membership.SignUpActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 

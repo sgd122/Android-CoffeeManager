@@ -43,3 +43,7 @@ Thumbs.db
 .idea/caches/
 .idea/gradle.xml
 .idea/modules.xml
+.idea/libraries/
+
+# app.iml
+app/app.iml

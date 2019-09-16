@@ -45,5 +45,6 @@ Thumbs.db
 .idea/modules.xml
 .idea/libraries/
 
-# app.iml
+# ignore *.iml
 app/app.iml
+*.iml

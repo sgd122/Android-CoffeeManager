@@ -208,9 +208,12 @@ class HistoryRegisterChoiceFranchiseFragment : BaseFragment<FragmentHistoryRegis
 
     private fun insertCustomMenu(): ArrayList<Menu> {
         return arrayListOf(
-            Menu(100, "샷 한번 커피", "R.drawable.coffee_sample", "카페", 90, true),
-            Menu(101, "샷 두번 커피", "R.drawable.coffee_sample", "카페", 180, true),
-            Menu(102, "디카페인 카피", "R.drawable.coffee_sample", "카페", 5, true)
+            Menu(100, "샷 한번 커피", "R.drawable.image_decaffeine", "카페", 90, true),
+            Menu(101, "샷 두번 커피", "R.drawable.image_decaffeine", "카페", 180, true),
+            Menu(102, "샷 두번 커피", "R.drawable.image_decaffeine", "카페", 180, true),
+            Menu(103, "디카페인 커피", "R.drawable.image_decaffeine", "카페", 5, true),
+            Menu(104, "따뜻한 차", "R.drawable.image_tea", "차", 0, true),
+            Menu(105, "차가운 차", "R.drawable.image_tea", "차", 0, true)
         )
     }
 

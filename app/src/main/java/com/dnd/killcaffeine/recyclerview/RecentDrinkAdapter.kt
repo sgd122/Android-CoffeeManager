@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.model.data.room.menu.Menu
+import com.orhanobut.logger.Logger
 
 /*
  * Created by iohyeong on 2019-08-11..
@@ -61,7 +62,8 @@ class RecentDrinkAdapter : RecyclerView.Adapter<RecentDrinkAdapter.RecentDrinkRe
         //"$baseUrl${menu.menuImgUrl}"
 
         fun bindTo(menu: Menu){
-            coffeeImageView.load(R.drawable.coffee_sample) {
+            Logger.d("menu.menuImgUrl : ${menu.menuImgUrl}")
+            coffeeImageView.load(menu.menuImgUrl) {
                 crossfade(true)
                 placeholder(R.drawable.background_radius_10dp_white_box)
                 error(R.drawable.background_radius_10dp_white_box)

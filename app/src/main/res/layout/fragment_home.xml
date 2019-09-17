@@ -37,6 +37,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         app:layout_constraintGuide_percent="0.62"/>
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/fragment_home_guide_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.75"/>
 
                     <TextView
                         android:id="@+id/fragment_home_title"
@@ -154,6 +160,16 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
+                    <ImageView
+                        android:id="@+id/fragment_home_coffee_intake_graphic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:alpha="0.8"
+                        app:srcCompat="@drawable/icon_caffeine_bad"
+                        app:layout_constraintBottom_toBottomOf="@id/fragment_home_coffee_bottle"
+                        app:layout_constraintLeft_toRightOf="@id/fragment_home_guide_2" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </FrameLayout>
@@ -198,17 +214,17 @@
                     android:id="@+id/fragment_home_today_decaffeine_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="12dp"
+                    android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
                     android:overScrollMode="never"
                     android:paddingStart="0dp"
                     android:paddingEnd="16dp"
-                    android:clipToPadding="false"
-                    tools:listitem="@layout/list_item_coffee"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fragment_home_today_decaffeine_title"
-                    app:layout_constraintLeft_toLeftOf="parent"/>
+                    tools:listitem="@layout/list_item_coffee" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -244,6 +260,7 @@
                     android:textSize="12sp"
                     android:fontFamily="@font/spoqa_han_sans_bold"
                     android:includeFontPadding="false"
+                    android:visibility="gone"
                     android:background="@drawable/background_radius_6dp_show_more_button"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintRight_toRightOf="parent"/>

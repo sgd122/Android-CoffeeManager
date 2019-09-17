@@ -2,6 +2,8 @@
     <string name="app_name">커피매니저</string>
     <string name="app_version">0.0.1</string>
 
+    <string name="fragment_history_today_register_search_text">검색</string>
+
     <string name="fragment_statistics_title">통계</string>
     <string name="fragment_statistics_show_analysis_button_text">분석보기</string>
     <string name="fragment_statistics_graph_sub_title_daily">일별 섭취량</string>
@@ -36,7 +38,8 @@
     <string name="activity_sign_up_alarm_setting_description"><u>알람 설정에 동의하십니까? (선택)</u></string>
     <string name="activity_sign_up_button_text">회원가입</string>
 
-
+    <string name="dialog_history_register_franchise_not_found">찾으시는 카페가 없으신가요?</string>
+    <string name="dialog_history_register_franchise_choice_custom_description">아래의 음료 중 선택하여 입력해주세요.</string>
     <string name="dialog_history_register_warning_confirm">입력하기</string>
     <string name="dialog_history_register_warning_cancel">돌아가기</string>
     <string name="dialog_warning_title">카페인의 위험성</string>
@@ -82,5 +85,26 @@
     <string name="home_fragment_today_warning_comment_4">충분한 수면은 카페인을 줄이는 데 도움이 돼요!4</string>
     <string name="home_fragment_today_warning_comment_5">충분한 수면은 카페인을 줄이는 데 도움이 돼요!5</string>
 
+    <!-- ImageView Description -->
+    <string name="image_view_description_choice_franchise_1">1번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_2">2번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_3">3번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_4">4번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_5">5번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_6">6번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_7">7번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_8">8번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_9">9번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_10">10번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_11">11번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_12">12번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_13">13번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_14">14번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_15">15번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_16">16번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_17">17번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_18">18번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_19">19번 프랜차이즈</string>
+    <string name="image_view_description_choice_franchise_20">20번 프랜차이즈</string>
 
 </resources>

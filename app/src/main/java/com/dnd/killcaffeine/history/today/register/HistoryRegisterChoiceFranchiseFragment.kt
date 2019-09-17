@@ -3,14 +3,24 @@
  */
 package com.dnd.killcaffeine.history.today.register
 
+import android.app.Activity
+import android.content.Intent
+import android.view.View
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import com.dnd.killcaffeine.R
+import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHistoryRegisterChoiceFranchiseBinding
+import com.dnd.killcaffeine.dialog.HistoryRegisterWarningDialog
 import com.dnd.killcaffeine.history.today.HistoryTodayRegisterActivity
+import com.dnd.killcaffeine.model.data.room.menu.Menu
+import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
 import kotlinx.android.synthetic.main.fragment_history_register_choice_franchise.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryRegisterChoiceFranchiseFragment : BaseFragment<FragmentHistoryRegisterChoiceFranchiseBinding, HistoryRegisterChoiceFranchiseViewModel>() {
@@ -23,7 +33,27 @@ class HistoryRegisterChoiceFranchiseFragment : BaseFragment<FragmentHistoryRegis
     override val resourceId: Int
         get() = R.layout.fragment_history_register_choice_franchise
 
+    private val mCustomCoffeeAdapter: RecentDrinkAdapter by inject()
+
     override fun initViewStart() {
+        setupKeyboardHide(
+            view = fragment_history_register_choice_franchise_parent_linear_layout,
+            activity = activity
+        )
+
+        mCustomCoffeeAdapter.apply {
+            setRecentDrinkArrayList(insertCustomMenu())
+            setOnRecentDrinkItemClickListener(object: RecentDrinkAdapter.OnRecentDrinkItemClickListener {
+                override fun onItemClick(menu: Menu) {
+                    showWarningDialog(menu)
+                }
+            })
+        }
+
+        fragment_history_register_franchise_not_found_recycler_view.run {
+            layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.HORIZONTAL, false)
+            adapter = mCustomCoffeeAdapter
+        }
 
     }
 
@@ -173,6 +203,25 @@ class HistoryRegisterChoiceFranchiseFragment : BaseFragment<FragmentHistoryRegis
             load(R.drawable.image_logo_baskin){
                 transformations(CircleCropTransformation())
             }
+        }
+    }
+
+    private fun insertCustomMenu(): ArrayList<Menu> {
+        return arrayListOf(
+            Menu(100, "샷 한번 커피", "R.drawable.coffee_sample", "카페", 90, true),
+            Menu(101, "샷 두번 커피", "R.drawable.coffee_sample", "카페", 180, true),
+            Menu(102, "디카페인 카피", "R.drawable.coffee_sample", "카페", 5, true)
+        )
+    }
+
+    private fun showWarningDialog(menu: Menu){
+        activity?.let { activity ->
+            HistoryRegisterWarningDialog(activity, View.OnClickListener {
+                activity.setResult(Activity.RESULT_OK, Intent().apply {
+                    putExtra(RequestCode.HISTORY_REGISTER_SUCCESS_MENU, menu)
+                })
+                activity.finish()
+            }).show()
         }
     }
 }

@@ -1,12 +1,15 @@
 package com.dnd.killcaffeine.recyclerview
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.bumptech.glide.Glide
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.orhanobut.logger.Logger
@@ -59,11 +62,26 @@ class RecentDrinkAdapter : RecyclerView.Adapter<RecentDrinkAdapter.RecentDrinkRe
         private val coffeeNameTextView: TextView = itemView.findViewById(R.id.list_item_coffee_name_text_view)
         private val caffeineIntake: TextView = itemView.findViewById(R.id.list_item_coffee_caffeine_content)
 
-        //"$baseUrl${menu.menuImgUrl}"
-
         fun bindTo(menu: Menu){
-            Logger.d("menu.menuImgUrl : ${menu.menuImgUrl}")
-            coffeeImageView.load(menu.menuImgUrl) {
+            /*when(menu.menuImgUrl.contains("R.drawable.")){
+                true -> {
+                    val drawableRes: Int = itemView.context.resources.getIdentifier(menu.menuImgUrl, "drawable", itemView.context.applicationContext.packageName)
+
+                    coffeeImageView.load(drawableRes) {
+                        crossfade(true)
+                        placeholder(R.drawable.background_radius_10dp_white_box)
+                        error(R.drawable.background_radius_10dp_white_box)
+                    }
+                }
+                else -> {
+                    coffeeImageView.load(menu.menuImgUrl) {
+                        crossfade(true)
+                        placeholder(R.drawable.background_radius_10dp_white_box)
+                        error(R.drawable.background_radius_10dp_white_box)
+                    }
+                }
+            }*/
+            coffeeImageView.load(R.drawable.image_decaffeine) {
                 crossfade(true)
                 placeholder(R.drawable.background_radius_10dp_white_box)
                 error(R.drawable.background_radius_10dp_white_box)

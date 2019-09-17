@@ -65,12 +65,10 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
     }
 
     fun checkExceedRecommendedQuantity(intake: Int){
-        startLoadingIndicator()
         addDisposable(Observable.just(mSharedPref.getString(SharedPreferenceKey.PUT_PERSONAL_INFO, ""))
             .observeOn(Schedulers.io())
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe({ personal ->
-                stopLoadingIndicator()
                 personal?.let {
                     val savedPersonalInfo: Personal = Gson().fromJson(it, Personal::class.java)
 
@@ -81,7 +79,7 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
                     }
                 }
             }, {
-                stopLoadingIndicator()
+
             })
         )
     }

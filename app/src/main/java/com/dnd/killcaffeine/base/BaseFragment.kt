@@ -22,6 +22,7 @@ import androidx.lifecycle.Observer
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.dialog.LoadingIndicator
 import com.google.android.material.snackbar.Snackbar
+import com.orhanobut.logger.Logger
 import org.koin.android.ext.android.inject
 
 abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(), BaseView {
@@ -43,6 +44,10 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
 
         mBinding = DataBindingUtil.inflate(inflater, resourceId, container, false)
         mBinding.lifecycleOwner = this
+
+        activity?.let { context ->
+            mLoadingIndicator = LoadingIndicator(context)
+        }
 
         return mBinding.root
     }
@@ -99,7 +104,7 @@ abstract class BaseFragment<T : ViewDataBinding, V: BaseViewModel> : Fragment(),
             when(control) {
                 true -> {
                     activity?.run {
-                        if(isFinishing){
+                        if(!isFinishing){
                             mLoadingIndicator?.show()
                         }
                     }

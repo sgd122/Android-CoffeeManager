@@ -38,6 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     )
 
     override fun initViewStart() {
+
         supportFragmentManager.beginTransaction().add(R.id.activity_main_container, getFragment(0)).commitNow()
 
         activity_main_tab_layout.apply {

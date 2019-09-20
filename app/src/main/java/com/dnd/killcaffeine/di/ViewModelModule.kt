@@ -20,6 +20,8 @@ import com.dnd.killcaffeine.main.settings.terms.MainSettingsTermsViewModel
 import com.dnd.killcaffeine.main.statistics.MainStatisticsViewModel
 import com.dnd.killcaffeine.membership.SignInViewModel
 import com.dnd.killcaffeine.membership.SignUpViewModel
+import com.dnd.killcaffeine.membership.sign_up.SignUpBasicViewModel
+import com.dnd.killcaffeine.membership.sign_up.SignUpHintViewModel
 import com.dnd.killcaffeine.splash.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -78,5 +80,11 @@ val viewModelModule = module {
     }
     viewModel {
         SignUpViewModel()
+    }
+    viewModel {
+        SignUpBasicViewModel()
+    }
+    viewModel {
+        SignUpHintViewModel()
     }
 }

@@ -150,7 +150,7 @@ abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatAc
         })
     }
 
-    private fun showSnackbar(message: String, duration: Int = Snackbar.LENGTH_SHORT){
+    internal fun showSnackbar(message: String, duration: Int = Snackbar.LENGTH_SHORT){
         findViewById<View>(android.R.id.content)?.let { view ->
 
             val snackbar: Snackbar = if(duration != Snackbar.LENGTH_SHORT || duration != Snackbar.LENGTH_LONG || duration != Snackbar.LENGTH_INDEFINITE){
@@ -164,7 +164,7 @@ abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatAc
         }
     }
 
-    private fun showSnackbar(stringRes: Int, duration: Int = Snackbar.LENGTH_SHORT){
+    internal fun showSnackbar(stringRes: Int, duration: Int = Snackbar.LENGTH_SHORT){
         findViewById<View>(android.R.id.content)?.let { view ->
 
             val snackbar: Snackbar = if(duration != Snackbar.LENGTH_SHORT || duration != Snackbar.LENGTH_LONG || duration != Snackbar.LENGTH_INDEFINITE){

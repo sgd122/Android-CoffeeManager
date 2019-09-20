@@ -25,18 +25,24 @@
     <string name="main_settings_logout_button_text">로그아웃</string>
 
     <string name="activity_sign_in_title_email">이메일</string>
+    <string name="activity_sign_in_title_id">아이디</string>
     <string name="activity_sign_in_title_password">비밀번호</string>
     <string name="activity_sign_in_find_password_description"><u>비밀번호를 잊으셨나요?</u></string>
     <string name="activity_sign_in_not_yet_user_description">아직 회원이 아니신가요?</string>
     <string name="activity_sign_in_sign_in_description">가입하기</string>
 
     <string name="activity_sign_up_title_toolbar">회원가입</string>
-    <string name="activity_sign_up_title_name">성함</string>
+    <string name="activity_sign_up_title_id">아이디 입력</string>
     <string name="activity_sign_up_title_email">이메일</string>
     <string name="activity_sign_up_title_password">비밀번호</string>
+    <string name="activity_sign_up_title_password_edit_text_hint">●●●●●●●●</string>
     <string name="activity_sign_up_information_gathering_description"><u>정보수집에 동의하십니까? (필수)</u></string>
     <string name="activity_sign_up_alarm_setting_description"><u>알람 설정에 동의하십니까? (선택)</u></string>
-    <string name="activity_sign_up_button_text">회원가입</string>
+    <string name="activity_sign_up_next_button_text">다음</string>
+    <string name="activity_sign_up_done_button_text">회원가입</string>
+    <string name="activity_sign_up_password_hint">비밀번호 힌트</string>
+    <string name="activity_sign_up_password_edit_text_hint">질문 선택</string>
+    <string name="activity_sign_up_password_edit_text_answer_hint">답</string>
 
     <string name="dialog_history_register_franchise_not_found">찾으시는 카페가 없으신가요?</string>
     <string name="dialog_history_register_franchise_choice_custom_description">아래의 음료 중 선택하여 입력해주세요.</string>

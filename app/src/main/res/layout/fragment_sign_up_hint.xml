@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_sign_up_hint_constraint_parent_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/fragment_sign_up_hint_title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/activity_sign_up_password_hint"
+            android:textColor="@color/color_text_grayish_brown"
+            android:textSize="18sp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!--
+        <EditText
+            android:id="@+id/fragment_sign_up_hint_choice_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/component_edit_text_height"
+            android:layout_margin="16dp"
+            android:hint="@string/activity_sign_up_password_edit_text_hint"
+            android:gravity="center"
+            android:textColor="@color/color_text_jade_green"
+            android:textSize="18sp"
+            android:textCursorDrawable="@drawable/edit_text_cursor_drawable"
+            android:maxLines="1"
+            android:maxLength="13"
+            android:singleLine="true"
+            android:inputType="textPersonName"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"
+            android:background="@drawable/background_radius_10dp_white_box"
+            android:elevation="6dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_hint_title_name"/> -->
+
+        <TextView
+            android:id="@+id/fragment_sign_up_hint_choice_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/component_edit_text_height"
+            android:layout_margin="16dp"
+            android:hint="@string/activity_sign_up_password_edit_text_hint"
+            android:gravity="center"
+            android:textColor="@color/color_text_jade_green"
+            android:textSize="18sp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"
+            android:background="@drawable/background_radius_10dp_white_box"
+            android:elevation="6dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_hint_title_name"/>
+
+        <EditText
+            android:id="@+id/fragment_sign_up_hin_answer_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/component_edit_text_height"
+            android:layout_margin="16dp"
+            android:hint="@string/activity_sign_up_password_edit_text_answer_hint"
+            android:gravity="center"
+            android:textColor="@color/color_text_jade_green"
+            android:textSize="18sp"
+            android:textCursorDrawable="@drawable/edit_text_cursor_drawable"
+            android:maxLines="1"
+            android:maxLength="26"
+            android:singleLine="true"
+            android:inputType="text"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"
+            android:background="@drawable/background_radius_10dp_white_box"
+            android:elevation="6dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_hint_choice_button"/>
+
+        <TextView
+            android:id="@+id/fragment_sign_up_hint_information_gathering_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/activity_sign_up_information_gathering_description"
+            android:textColor="@color/color_text_brownish_grey"
+            android:textSize="14sp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            android:includeFontPadding="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_hin_answer_edit_text" />
+
+        <CheckBox
+            android:id="@+id/fragment_sign_up_hint_information_gathering_check_box"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="26dp"
+            android:checked="false"
+            android:button="@android:color/transparent"
+            android:background="@drawable/background_checkbox_sign_up_agreement"
+            android:elevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_hin_answer_edit_text"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/fragment_sign_up_hint_alarm_setting_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/activity_sign_up_alarm_setting_description"
+            android:textColor="@color/color_text_brownish_grey"
+            android:textSize="14sp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            android:includeFontPadding="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_hint_information_gathering_text_view" />
+
+        <CheckBox
+            android:id="@+id/fragment_sign_up_hint_alarm_setting_check_box"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="26dp"
+            android:checked="false"
+            android:button="@android:color/transparent"
+            android:background="@drawable/background_checkbox_sign_up_agreement"
+            android:elevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_hint_information_gathering_check_box"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/fragment_sign_up_hint_done_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:minWidth="@dimen/component_login_button_width"
+            android:minHeight="@dimen/component_login_button_height"
+            android:gravity="center"
+            android:text="@string/activity_sign_up_done_button_text"
+            android:textSize="16sp"
+            android:textColor="@color/color_text_white"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"
+            android:background="@drawable/background_radius_10dp_activity_sign_inactive_button"
+            android:elevation="6dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_hint_alarm_setting_text_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.8"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

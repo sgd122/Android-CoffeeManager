@@ -19,4 +19,6 @@ object RequestCode {
 
     const val TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT = "total_today_caffeine_intake_to_fragment"
     const val TOTAL_TODAY_MENU_LIST_MAIN_TO_FRAGMENT = "total_today_menu_list_to_fragment"
+
+    const val SIGN_UP_REQ_CODE = 200
 }

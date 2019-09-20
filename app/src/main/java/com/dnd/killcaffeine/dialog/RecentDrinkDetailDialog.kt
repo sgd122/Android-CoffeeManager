@@ -8,12 +8,17 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.Window
+import android.widget.Button
 import android.widget.TextView
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import kotlin.system.exitProcess
 
-class RecentDrinkDetailDialog(context: Context, menu: Menu) : Dialog(context) {
+class RecentDrinkDetailDialog(context: Context, menu: Menu, onRegisterListener: OnRecentDrinkRegisterListener) : Dialog(context) {
+
+    interface OnRecentDrinkRegisterListener {
+        fun onRecentDrinkRegister(menu: Menu)
+    }
 
     init {
         setCancelable(true)
@@ -25,9 +30,15 @@ class RecentDrinkDetailDialog(context: Context, menu: Menu) : Dialog(context) {
 
         setContentView(R.layout.dialog_recent_drink_detail)
 
-        // 뷰를 누르면 다이얼로그 Cancel
-        findViewById<View>(R.id.dialog_recent_drink_detail_parent_layout).setOnClickListener {
+        // 돌아가기
+        findViewById<Button>(R.id.dialog_recent_drink_cancel_button).setOnClickListener {
             cancel()
+        }
+
+        // 추가하기
+        findViewById<Button>(R.id.dialog_recent_drink_confirm_button).setOnClickListener {
+            onRegisterListener.onRecentDrinkRegister(menu = menu)
+            dismiss()
         }
 
         findViewById<TextView>(R.id.dialog_recent_drink_detail_menu_name).text = menu.menuName

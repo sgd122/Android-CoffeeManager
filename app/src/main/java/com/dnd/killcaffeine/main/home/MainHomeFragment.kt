@@ -23,6 +23,7 @@ import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
 import com.dnd.killcaffeine.recyclerview.RecentDrinkAdapter
 import com.dnd.killcaffeine.service.CommentService
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -85,7 +86,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
                 it.forEach { menu -> mTotalCaffeineIntake += menu.caffeine }
                 getFragmentBinding().fragmentHomeDailyCaffeineIntakeValue.text = mTotalCaffeineIntake.toString()
 
-                mViewModel.checkExceedRecommendedQuantity(intake = mTotalCaffeineIntake)
+                //mViewModel.checkExceedRecommendedQuantity(intake = mTotalCaffeineIntake)
             }
         })
 
@@ -96,6 +97,10 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
         mViewModel.savedPersonalRecommand.observe(this, Observer { recommend ->
             fragment_home_personal_recommend_caffeine.text = getString(R.string.main_home_fragment_personal_recommend_caffeine, recommend.toString())
+        })
+
+        mViewModel.recentRegisterLiveData.observe(this, Observer {
+            mViewModel.refreshHistoryFromRoomDatabase()
         })
 
     }
@@ -136,7 +141,14 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     private fun showRecentDrinkDetailDialog(menu: Menu){
         activity?.let {
-            RecentDrinkDetailDialog(it, menu).show()
+            RecentDrinkDetailDialog(it, menu, object: RecentDrinkDetailDialog.OnRecentDrinkRegisterListener {
+                override fun onRecentDrinkRegister(menu: Menu) {
+                    menu.run {
+                        val newMenu = Menu(0, menuName, menuImgUrl, franchiseName, caffeine, personalShop)
+                        mViewModel.insertHistoryToRoomDatabase(menu = newMenu)
+                    }
+                }
+            }).show()
         }
     }
 

@@ -10,10 +10,9 @@ import com.dnd.killcaffeine.SharedPreferenceKey
 import com.dnd.killcaffeine.base.BaseViewModel
 import com.dnd.killcaffeine.model.CoffeeRepository
 import com.dnd.killcaffeine.model.data.Personal
+import com.dnd.killcaffeine.model.data.result.DecaffeineResult
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
-import com.dnd.killcaffeine.model.data.result.DecaffeineResult
-import com.dnd.killcaffeine.model.remote.service.CoffeeManagerService
 import com.dnd.killcaffeine.utils.SingleLiveEvent
 import com.google.gson.Gson
 import com.orhanobut.logger.Logger
@@ -36,6 +35,9 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
 
     private val _savedPersonalRecommend = MutableLiveData<Int>()
     val savedPersonalRecommand: LiveData<Int> get() = _savedPersonalRecommend
+
+    private val _recentRegisterLiveData = MutableLiveData<Boolean>()
+    val recentRegisterLiveData: LiveData<Boolean> get() = _recentRegisterLiveData
 
     fun getDecaffeineMenuList(){
         startLoadingIndicator()
@@ -97,5 +99,20 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
             }, {
             })
         )
+    }
+
+    fun insertHistoryToRoomDatabase(menu: Menu){
+        addDisposable(mMenuDatabase.menuDao.insertMenu(menu)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Logger.d("히스토리 등록에 성공했습니다.")
+                _recentRegisterLiveData.postValue(true)
+
+            }, {
+                stopLoadingIndicator()
+                Logger.d(it.message)
+                showSnackbar(it.message ?: "히스토리 등록에 실패하였습니다.")
+            }))
     }
 }

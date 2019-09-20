@@ -55,6 +55,8 @@
     <string name="dialog_recent_drink_franchise_name">프랜차이즈 :</string>
     <string name="dialog_recent_drink_caffeine">카페인 :</string>
     <string name="dialog_recent_drink_caffeine_form">%smg</string>
+    <string name="dialog_recent_drink_cancel_button">돌아가기</string>
+    <string name="dialog_recent_drink_confirm_button">추가하기</string>
 
     <!-- 권장 섭취량 초과했을때 경고 다이얼로그 메세지 -->
     <string name="dialog_exceed_recommend_warning_title">권장 섭취량 초과</string>

@@ -110,4 +110,38 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="21dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_recent_drink_cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/background_radius_10dp_dialog_warning_cancel_button"
+            android:text="@string/dialog_recent_drink_cancel_button"
+            android:textSize="16sp"
+            android:textColor="@color/color_text_dialog_warning_cancel_button"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"
+            android:stateListAnimator="@null"/>
+
+        <Button
+            android:id="@+id/dialog_recent_drink_confirm_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/background_radius_10dp_personal_save_button"
+            android:text="@string/dialog_recent_drink_confirm_button"
+            android:textSize="16sp"
+            android:textColor="@color/color_text_white"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"
+            android:stateListAnimator="@null"/>
+    </LinearLayout>
+
 </LinearLayout>

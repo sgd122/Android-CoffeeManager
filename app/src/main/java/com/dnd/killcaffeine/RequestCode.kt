@@ -17,6 +17,11 @@ object RequestCode {
     const val TOTAL_TODAY_CAFFEINE_INTAKE_SPLASH_TO_MAIN = "total_today_caffeine_intake"
     const val TOTAL_TODAY_MENU_LIST_SPLASH_TO_MAIN = "total_today_menu_list"
 
+    const val SAVED_TOTAL_CAFFIEINE_INTAKE = "saved_total_caffeine_intake"
+    const val SAVED_PERSONAL_RECOMMEND = "saved_personal_recommend"
+    const val BUNDLE_TOTAL_CAFFEINE_INTAKE = "bundle_total_caffeine_intake"
+    const val BUNDLE_PERSONAL_RECOMMEND = "bundle_personal_recommend"
+
     const val TOTAL_TODAY_CAFFEINE_INTAKE_MAIN_TO_FRAGMENT = "total_today_caffeine_intake_to_fragment"
     const val TOTAL_TODAY_MENU_LIST_MAIN_TO_FRAGMENT = "total_today_menu_list_to_fragment"
 

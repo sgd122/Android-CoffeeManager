@@ -8,16 +8,16 @@ import com.dnd.killcaffeine.utils.RegexUtil
 
 class SignInViewModel : BaseViewModel() {
 
-    fun checkLoginForm(email: String?, password: String?): Boolean {
+    fun checkLoginForm(id: String?, password: String?): Boolean {
 
         when {
-            email.isNullOrEmpty() -> {
-                showSnackbar("이메일을 입력해주세요.")
+            id.isNullOrEmpty() -> {
+                showSnackbar("아이디를 입력해주세요.")
                 return false
 
             }
-            !email.matches(RegexUtil.EMAIL) -> {
-                showSnackbar("이메일 형식이 올바르지 않습니다.")
+            !id.matches(RegexUtil.EMAIL) -> {
+                showSnackbar("아이디 형식이 올바르지 않습니다.")
                 return false
 
             }

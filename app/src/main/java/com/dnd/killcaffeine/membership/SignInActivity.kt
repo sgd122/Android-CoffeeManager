@@ -57,7 +57,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>() {
         activity_sign_in_login_button.setOnClickListener {
             if(mLoginButtonActivated) {
                 mViewModel.checkLoginForm(
-                    email = activity_sign_in_id_edit_text.text.toString(),
+                    id = activity_sign_in_id_edit_text.text.toString(),
                     password = activity_sign_in_password_edit_text.text.toString()
                 )
             }

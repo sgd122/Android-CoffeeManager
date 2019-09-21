@@ -3,6 +3,7 @@
  */
 package com.dnd.killcaffeine.main.home
 
+import android.app.Activity.RESULT_OK
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -18,6 +19,7 @@ import com.dnd.killcaffeine.databinding.FragmentHomeBinding
 import com.dnd.killcaffeine.dialog.ExceedRecommendWarningDialog
 import com.dnd.killcaffeine.dialog.RecentDrinkDetailDialog
 import com.dnd.killcaffeine.history.HistoryTodayActivity
+import com.dnd.killcaffeine.main.MainActivity
 import com.dnd.killcaffeine.main.home.show_more.TodayRecommendDrinkActivity
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.recyclerview.DecaffeineAdpater
@@ -40,10 +42,15 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     private val mDecaffeineArrayList: ArrayList<Menu> = ArrayList()
 
     private var mCommentReceiver: BroadcastReceiver? = null
+
     private var mTotalCaffeineIntake: Int = 0
     private var mPersonalRecommendCaffeine = 0
 
     override fun initViewStart() {
+
+        Logger.d("퍼센트, savedCaffeineIntake : ${MainActivity.savedCaffeineIntake}\nsavedPersonalRecommend: ${MainActivity.savedPersonalRecommend}")
+
+        //getSavedInfo()
 
         mDecaffeineRecyclerViewAdapter.apply {
             setDecaffeineArrayList(insertMockData())
@@ -85,6 +92,10 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
                 mTotalCaffeineIntake = 0
                 it.forEach { menu -> mTotalCaffeineIntake += menu.caffeine }
+
+                MainActivity.savedCaffeineIntake = mTotalCaffeineIntake
+                setupBottleContent(MainActivity.savedCaffeineIntake, MainActivity.savedPersonalRecommend)
+
                 getFragmentBinding().fragmentHomeDailyCaffeineIntakeValue.text = mTotalCaffeineIntake.toString()
 
                 //mViewModel.checkExceedRecommendedQuantity(intake = mTotalCaffeineIntake)
@@ -97,8 +108,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         })
 
         mViewModel.savedPersonalRecommand.observe(this, Observer { recommend ->
-            Logger.d("recommend: $recommend")
-            mPersonalRecommendCaffeine = recommend
+            MainActivity.savedPersonalRecommend = recommend
             fragment_home_personal_recommend_caffeine.text = getString(R.string.main_home_fragment_personal_recommend_caffeine, recommend.toString())
         })
 
@@ -131,7 +141,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         super.onStart()
 
         mViewModel.refreshHistoryFromRoomDatabase()
-        setupBottleContent()
+        setupBottleContent(MainActivity.savedCaffeineIntake, MainActivity.savedPersonalRecommend)
         registerCommentReceiver()
         startCommentService()
     }
@@ -192,17 +202,31 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         }
     }
 
-    private fun setupBottleContent(){
+    private fun setupBottleContent(intake: Int = 0, recommend: Int = 0){
         val percentage: Double = mViewModel.calCaffeinePercentage(
-            intake = mTotalCaffeineIntake,
-            recommend = mPersonalRecommendCaffeine
+            intake = intake,
+            recommend = recommend
         )
+        Logger.d("퍼센트 : $percentage")
         when {
             percentage <= 30.0 -> fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_normal))
             percentage <= 80.0 -> fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_middle))
             else -> fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_exceed))
         }
     }
+
+    /*private fun getSavedInfo(){
+        // MainActivity 에서 Bundle 넘겨받음
+        (arguments?.getInt(RequestCode.BUNDLE_TOTAL_CAFFEINE_INTAKE, 0) ?: 0).run {
+            mTotalCaffeineIntake = this
+        }
+        (arguments?.getInt(RequestCode.BUNDLE_PERSONAL_RECOMMEND, 0) ?: 0).run {
+            mPersonalRecommendCaffeine = this
+        }
+
+        Logger.d("퍼센트, 저장되어 있던 것들 : $mTotalCaffeineIntake, $mPersonalRecommendCaffeine")
+        setupBottleContent(mTotalCaffeineIntake, mPersonalRecommendCaffeine)
+    }*/
 
     private fun insertMockData(): ArrayList<Menu> {
         return arrayListOf(

@@ -66,6 +66,21 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
             }))
     }
 
+    fun getPersonalRecommendCaffeeine(){
+        addDisposable(Observable.just(mSharedPref.getString(SharedPreferenceKey.PUT_PERSONAL_INFO, ""))
+            .observeOn(Schedulers.io())
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribe({ personal ->
+                personal?.let {
+                    val savedPersonalInfo: Personal = Gson().fromJson(it, Personal::class.java)
+                    _savedPersonalRecommend.postValue(savedPersonalInfo.recommendIntake)
+
+                }
+            }, {
+            })
+        )
+    }
+
     fun checkExceedRecommendedQuantity(intake: Int){
         addDisposable(Observable.just(mSharedPref.getString(SharedPreferenceKey.PUT_PERSONAL_INFO, ""))
             .observeOn(Schedulers.io())
@@ -82,21 +97,6 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
                 }
             }, {
 
-            })
-        )
-    }
-
-    fun getPersonalRecommendCaffeeine(){
-        addDisposable(Observable.just(mSharedPref.getString(SharedPreferenceKey.PUT_PERSONAL_INFO, ""))
-            .observeOn(Schedulers.io())
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .subscribe({ personal ->
-                personal?.let {
-                    val savedPersonalInfo: Personal = Gson().fromJson(it, Personal::class.java)
-                    _savedPersonalRecommend.postValue(savedPersonalInfo.recommendIntake)
-
-                }
-            }, {
             })
         )
     }

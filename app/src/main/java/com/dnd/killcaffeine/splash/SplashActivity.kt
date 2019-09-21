@@ -19,18 +19,37 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     override val mViewModel: SplashViewModel by viewModel()
 
+    private var mTotalIntake = 0
+    private var mPersonalRecommend = 0
+
     override fun initViewStart() {
     }
 
     override fun initDataBinding() {
 
         mViewModel.startActivityLiveData.observe(this, Observer {
-            startActivity(Intent(applicationContext, MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java).apply {
+                putExtra(RequestCode.SAVED_TOTAL_CAFFIEINE_INTAKE, mTotalIntake)
+                putExtra(RequestCode.SAVED_PERSONAL_RECOMMEND, mPersonalRecommend)
+            })
             finish()
+        })
+
+        mViewModel.savedTotalIntakeLiveData.observe(this, Observer { intake ->
+            mTotalIntake = intake
+            mViewModel.getPersonalRecommendCaffeeine()
+        })
+
+        mViewModel.savedPersonalRecommend.observe(this, Observer { recommend ->
+            mPersonalRecommend = recommend
+
+            mViewModel.startMainActivityAfterPostDelay()
         })
     }
 
     override fun initViewFinal() {
-        mViewModel.startMainActivityAfterPostDelay()
+
+        mViewModel.loadSavedTotalIntake()
+
     }
 }

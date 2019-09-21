@@ -115,4 +115,14 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
                 showSnackbar(it.message ?: "히스토리 등록에 실패하였습니다.")
             }))
     }
+
+    fun calCaffeinePercentage(intake: Int, recommend: Int): Double{
+        Logger.d("퍼센트, intake: $intake , recommend: $recommend")
+        return if(intake == 0 || recommend == 0) {
+            1.0
+
+        } else {
+            (intake.toDouble() / recommend.toDouble()) * 100.0
+        }
+    }
 }

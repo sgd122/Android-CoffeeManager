@@ -42,7 +42,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.75"/>
+                        app:layout_constraintGuide_percent="0.732"/>
 
                     <TextView
                         android:id="@+id/fragment_home_title"
@@ -161,12 +161,11 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
                     <ImageView
-                        android:id="@+id/fragment_home_coffee_intake_graphic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:alpha="0.8"
-                        app:srcCompat="@drawable/icon_caffeine_bad"
+                        android:id="@+id/fragment_home_coffee_bottle_content"
+                        android:layout_width="124dp"
+                        android:layout_height="204dp"
+                        android:alpha="0.5"
+                        android:layout_marginBottom="4dp"
                         app:layout_constraintBottom_toBottomOf="@id/fragment_home_coffee_bottle"
                         app:layout_constraintLeft_toRightOf="@id/fragment_home_guide_2" />
 

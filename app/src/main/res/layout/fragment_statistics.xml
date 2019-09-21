@@ -145,19 +145,22 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/fragment_statistics_graph_daily"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fragment_statistics_graph_daily_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/background_radius_10dp_white_box"
-                android:text="@string/fragment_statistics_graph_sub_title_daily"
-                android:textSize="24sp"
-                android:textColor="@color/color_text_grayish_brown"
-                android:gravity="center"
-                android:fontFamily="@font/spoqa_han_sans_bold"
-                android:includeFontPadding="false"
-                android:elevation="6dp"/>
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp">
+
+                <ImageView
+                    android:id="@+id/fragment_statistics_graph_daily"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/image_statistic_graph_daily"
+                    android:scaleType="fitXY"/>
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -170,19 +173,22 @@
                 android:fontFamily="@font/spoqa_han_sans_bold"
                 android:includeFontPadding="false"/>
 
-            <TextView
-                android:id="@+id/fragment_statistics_graph_weekly"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fragment_statistics_graph_weekly_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/background_radius_10dp_white_box"
-                android:text="@string/fragment_statistics_graph_sub_title_weekly"
-                android:textSize="24sp"
-                android:textColor="@color/color_text_grayish_brown"
-                android:gravity="center"
-                android:fontFamily="@font/spoqa_han_sans_bold"
-                android:includeFontPadding="false"
-                android:elevation="6dp"/>
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp">
+
+                <ImageView
+                    android:id="@+id/fragment_statistics_graph_weekly"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/image_statistic_graph_weekly"
+                    android:scaleType="fitXY"/>
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -195,20 +201,22 @@
                 android:fontFamily="@font/spoqa_han_sans_bold"
                 android:includeFontPadding="false"/>
 
-            <TextView
-                android:id="@+id/fragment_statistics_graph_monthly"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fragment_statistics_graph_monthly_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/background_radius_10dp_white_box"
-                android:text="@string/fragment_statistics_graph_sub_title_monthly"
-                android:textSize="24sp"
-                android:textColor="@color/color_text_grayish_brown"
-                android:gravity="center"
-                android:fontFamily="@font/spoqa_han_sans_bold"
-                android:includeFontPadding="false"
-                android:elevation="6dp"/>
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp">
+
+                <ImageView
+                    android:id="@+id/fragment_statistics_graph_monthly"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/image_statistic_graph_monthly"
+                    android:scaleType="fitXY"/>
+
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

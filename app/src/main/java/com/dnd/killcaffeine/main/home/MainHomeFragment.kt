@@ -41,6 +41,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     private var mCommentReceiver: BroadcastReceiver? = null
     private var mTotalCaffeineIntake: Int = 0
+    private var mPersonalRecommendCaffeine = 0
 
     override fun initViewStart() {
 
@@ -96,6 +97,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         })
 
         mViewModel.savedPersonalRecommand.observe(this, Observer { recommend ->
+            Logger.d("recommend: $recommend")
+            mPersonalRecommendCaffeine = recommend
             fragment_home_personal_recommend_caffeine.text = getString(R.string.main_home_fragment_personal_recommend_caffeine, recommend.toString())
         })
 
@@ -128,6 +131,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         super.onStart()
 
         mViewModel.refreshHistoryFromRoomDatabase()
+        setupBottleContent()
         registerCommentReceiver()
         startCommentService()
     }
@@ -185,6 +189,18 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     private fun unregisterCommentReceiver(){
         mCommentReceiver?.let { receiver ->
             activity?.unregisterReceiver(receiver)
+        }
+    }
+
+    private fun setupBottleContent(){
+        val percentage: Double = mViewModel.calCaffeinePercentage(
+            intake = mTotalCaffeineIntake,
+            recommend = mPersonalRecommendCaffeine
+        )
+        when {
+            percentage <= 30.0 -> fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_normal))
+            percentage <= 80.0 -> fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_middle))
+            else -> fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_exceed))
         }
     }
 

@@ -13,7 +13,7 @@ import retrofit2.http.Path
 
 interface CoffeeManagerService {
 
-    @GET("/api/menu/deffeine")
+    @GET("/api/menu/decaffeine")
     fun getDecaffeineMenuList() : Single<DecaffeineResult>
 
     @GET("/api/franchise")

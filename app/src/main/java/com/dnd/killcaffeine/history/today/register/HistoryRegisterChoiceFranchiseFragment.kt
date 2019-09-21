@@ -73,135 +73,153 @@ class HistoryRegisterChoiceFranchiseFragment : BaseFragment<FragmentHistoryRegis
 
         // 이디야
         fragment_history_choice_franchise_2.run{
-            load(R.drawable.image_logo_ediya){
-                scaleType = ImageView.ScaleType.CENTER_CROP
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_ediya){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 투썸
         fragment_history_choice_franchise_3.run{
-            load(R.drawable.image_logo_twosome){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_twosome){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 파스쿠치
         fragment_history_choice_franchise_4.run{
-            load(R.drawable.image_logo_pascucci){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_pascucci){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 할리스
         fragment_history_choice_franchise_5.run{
-            load(R.drawable.image_logo_hollys){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_hollys){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 달콤
         fragment_history_choice_franchise_6.run{
-            load(R.drawable.image_logo_dalkomm){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_dalkomm){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 커피스미스
         fragment_history_choice_franchise_7.run{
-            load(R.drawable.image_logo_smith){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_smith){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 엔젤리너스
         fragment_history_choice_franchise_8.run{
-            load(R.drawable.image_logo_angel){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_angel){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 탐앤탐스
         fragment_history_choice_franchise_9.run{
-            load(R.drawable.image_logo_tomntoms){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_tomntoms){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 폴바셋
         fragment_history_choice_franchise_10.run{
-            load(R.drawable.image_logo_paulbassett){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_paulbassett){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 커피빈
         fragment_history_choice_franchise_11.run{
-            load(R.drawable.image_logo_coffeebean){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_coffeebean){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 요거프레소
         fragment_history_choice_franchise_12.run{
-            load(R.drawable.image_logo_yogerpresso){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_yogerpresso){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 빽다방
         fragment_history_choice_franchise_13.run{
-            load(R.drawable.image_logo_bback){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_bback){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 드롭탑
         fragment_history_choice_franchise_14.run{
-            load(R.drawable.image_logo_droptop){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_droptop){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 아티제
         fragment_history_choice_franchise_15.run{
-            load(R.drawable.image_logo_artisee){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_artisee){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 셀렉토커피
         fragment_history_choice_franchise_16.run{
-            load(R.drawable.image_logo_selecto){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_selecto){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 메머드커피(Mmth)
         fragment_history_choice_franchise_17.run{
-            load(R.drawable.image_logo_mmth){
-                transformations(CircleCropTransformation())
-            }
+            load(R.drawable.image_logo_mmth){ transformations(CircleCropTransformation()) }
+                setOnClickListener {
+                    (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
+                }
         }
 
         // 공차
         fragment_history_choice_franchise_18.run{
-            load(R.drawable.image_logo_gongcha){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_gongcha){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 오설록
         fragment_history_choice_franchise_19.run{
-            load(R.drawable.image_logo_osulloc){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_osulloc){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
 
         // 배스킨라빈스
         fragment_history_choice_franchise_20.run{
-            load(R.drawable.image_logo_baskin){
-                transformations(CircleCropTransformation())
+            load(R.drawable.image_logo_baskin){ transformations(CircleCropTransformation()) }
+            setOnClickListener {
+                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
             }
         }
     }

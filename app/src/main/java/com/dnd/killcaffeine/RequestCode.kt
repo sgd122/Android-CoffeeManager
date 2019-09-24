@@ -26,4 +26,11 @@ object RequestCode {
     const val TOTAL_TODAY_MENU_LIST_MAIN_TO_FRAGMENT = "total_today_menu_list_to_fragment"
 
     const val SIGN_UP_REQ_CODE = 200
+
+    const val FIREBASE_CHANNEL_ID: String = "firebase_channel_id"
+    const val FIREBASE_CHANNEL_NAME: String = "coffeeManager_channel"
+    const val FIREBASE_CHANNEL_DESCRIPTION: String = "This is CoffeeManager Channel"
+    const val FIREBASE_NOTIFICATION_ACTION: String = "카페매니저 열기"
+    const val FIREBASE_PEDING_INTENT_REQ_CODE: Int = 300
+    const val FIREBASE_NOTIFICATION_ID: Int = 301
 }

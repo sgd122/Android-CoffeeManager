@@ -119,7 +119,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     }
 
     override fun initViewFinal() {
-        mViewModel.getDecaffeineMenuList()
+        //mViewModel.getDecaffeineMenuList()
 
         mViewModel.getPersonalRecommendCaffeeine()
 

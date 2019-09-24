@@ -115,4 +115,7 @@
     <string name="image_view_description_choice_franchise_19">19번 프랜차이즈</string>
     <string name="image_view_description_choice_franchise_20">20번 프랜차이즈</string>
 
+    <string name="firebase_message_not_received">파이어베이스 메세지를 수신하지 못했습니다.</string>
+    <string name="firebase_default_notification_channel_id">firebase_channel_id</string>
+
 </resources>

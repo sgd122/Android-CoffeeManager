@@ -8,7 +8,10 @@ import com.dnd.killcaffeine.databinding.ActivityMainBinding
 import com.dnd.killcaffeine.main.home.MainHomeFragment
 import com.dnd.killcaffeine.main.settings.MainSettingsFragment
 import com.dnd.killcaffeine.main.statistics.MainStatisticsFragment
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.iid.FirebaseInstanceId
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -88,4 +91,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private fun getTabIcon(position: Int): Int = tabIconList[position]
     fun getFragment(position: Int): Fragment = fragmentList[position]
+
+
+    // 파이어 베이스 토큰을 생성하는 함수
+    private fun getFirebaseTokenInstance(){
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener { task ->
+                if(!task.isSuccessful) {
+                    Logger.w("파이어베이스 getInstance is failed ${task.exception}")
+                }
+
+                val token = task.result?.token
+                Logger.d("Token : $token")
+            }
+    }
 }

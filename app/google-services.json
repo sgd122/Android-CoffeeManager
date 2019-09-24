@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "667560678323",
+    "firebase_url": "https://coffeemanager-6173c.firebaseio.com",
+    "project_id": "coffeemanager-6173c",
+    "storage_bucket": "coffeemanager-6173c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667560678323:android:f7279e8f5351765c2db1c6",
+        "android_client_info": {
+          "package_name": "com.dnd.killcaffeine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667560678323-p9eq7upg1p20ab08ve0kefehgaf371s7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dnd.killcaffeine",
+            "certificate_hash": "847126840602ec143413a7e080e423eca1d4feb0"
+          }
+        },
+        {
+          "client_id": "667560678323-l8ic2t30spbip21iidgtaeg45im2if40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlnVfFk0F43mxYJPMW3QfvLC2W0YocFGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667560678323-l8ic2t30spbip21iidgtaeg45im2if40.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

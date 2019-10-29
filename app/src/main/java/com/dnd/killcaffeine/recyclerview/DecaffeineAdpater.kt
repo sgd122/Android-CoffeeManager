@@ -8,13 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.di.baseUrl
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 
-class DecaffeineAdpater : RecyclerView.Adapter<DecaffeineAdpater.DecaffeineRecyclerViewHolder>() {
+class DecaffeineAdpater : ListAdapter<Menu, DecaffeineAdpater.DecaffeineRecyclerViewHolder>(Menu.DIFF_CALLBACK) {
 
     private val mDecaffeineArrayList:ArrayList<Menu> = ArrayList()
 
@@ -28,15 +30,21 @@ class DecaffeineAdpater : RecyclerView.Adapter<DecaffeineAdpater.DecaffeineRecyc
         holder.bindTo(mDecaffeineArrayList[position])
     }
 
-    fun setDecaffeineArrayList(list : ArrayList<Menu>){
-        mDecaffeineArrayList.clear()
+    fun setDecaffeineArrayList(list : List<Menu>){
+        /*mDecaffeineArrayList.clear()
         mDecaffeineArrayList.addAll(list)
-        notifyDataSetChanged()
+        notifyDataSetChanged()*/
+
+        submitList(list)
     }
 
     fun addDecaffeineArrayList(menu : Menu){
-        mDecaffeineArrayList.add(menu)
-        notifyDataSetChanged()
+        /*mDecaffeineArrayList.add(menu)
+        notifyDataSetChanged()*/
+
+        submitList(currentList.apply {
+            add(menu)
+        })
     }
 
     fun setItemOnClickListener(itemOnClickListener: View.OnClickListener){

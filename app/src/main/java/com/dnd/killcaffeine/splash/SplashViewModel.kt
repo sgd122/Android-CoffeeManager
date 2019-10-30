@@ -73,6 +73,7 @@ class SplashViewModel(private val mMenuDatabase: MenuDatabase,
 
                     }
                 }, {
+                    _savedPersonalRecommendLiveData.postValue(0)
                 })
         )
     }

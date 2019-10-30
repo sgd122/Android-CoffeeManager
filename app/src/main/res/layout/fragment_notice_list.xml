@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewmodel"
+            type="com.dnd.killcaffeine.main.settings.notice.fragment.NoticeListViewModel" />
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_main_white">
+
+        <TextView
+            android:id="@+id/fragment_notice_list_text_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/list_item_notice_fetch_list_error"
+            android:textColor="@color/color_text_grayish_brown"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"
+            android:visibility="@{viewmodel.noticeErrorLiveData ? View.VISIBLE : View.GONE, default = gone}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_notice_list_recycler_view"
@@ -18,8 +42,10 @@
             android:layout_height="match_parent"
             android:overScrollMode="never"
             android:scrollbars="none"
-            tools:listitem="@layout/list_item_notice"/>
+            android:visibility="@{viewmodel.noticeErrorLiveData ? View.GONE : View.VISIBLE, default = visible}"
+            tools:listitem="@layout/list_item_notice"
+            tools:itemCount="5"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

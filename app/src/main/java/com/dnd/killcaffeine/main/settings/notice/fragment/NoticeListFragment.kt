@@ -12,6 +12,7 @@ import com.dnd.killcaffeine.databinding.FragmentNoticeListBinding
 import com.dnd.killcaffeine.main.settings.notice.MainSettingsNoticeActivity
 import com.dnd.killcaffeine.model.data.response.Notice
 import com.dnd.killcaffeine.recyclerview.NoticeAdapter
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.fragment_notice_list.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,6 +26,9 @@ class NoticeListFragment : BaseFragment<FragmentNoticeListBinding, NoticeListVie
     private val mNoticeAdapter: NoticeAdapter by inject()
 
     override fun initViewStart() {
+
+        bindViewModel()
+
         mNoticeAdapter.setOnNoticeClickListener(object: NoticeAdapter.OnNoticeClickListener {
             override fun onClick(notice: Notice) {
                 val parentActivity = activity as? MainSettingsNoticeActivity
@@ -49,5 +53,9 @@ class NoticeListFragment : BaseFragment<FragmentNoticeListBinding, NoticeListVie
 
     override fun initViewFinal() {
         mViewModel.getNoticeList()
+    }
+
+    private fun bindViewModel(){
+        getFragmentBinding().viewmodel = mViewModel
     }
 }

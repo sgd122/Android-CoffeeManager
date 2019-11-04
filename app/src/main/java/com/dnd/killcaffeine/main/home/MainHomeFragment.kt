@@ -137,8 +137,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
 
         mViewModel.refreshHistoryFromRoomDatabase()
         setupBottleContent(MainActivity.savedCaffeineIntake, MainActivity.savedPersonalRecommend)
@@ -146,8 +146,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         startCommentService()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
 
         unregisterCommentReceiver()
         stopCommentService()

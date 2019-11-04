@@ -25,13 +25,5 @@ class MainStatisticsFragment : BaseFragment<FragmentStatisticsBinding, MainStati
 
     override fun initViewFinal() {
 
-        /*activity?.run {
-            fragment_statistics_graph_daily.run {
-                elevation = 6.0f
-                load(R.drawable.image_statistic_graph_daily) {
-                    transformations(RoundedCornersTransformation(10f))
-                }
-            }
-        }*/
     }
 }

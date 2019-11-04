@@ -1,6 +1,7 @@
 package com.dnd.killcaffeine.main
 
 import androidx.fragment.app.Fragment
+import com.dnd.killcaffeine.CoffeeManagerApplication
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity

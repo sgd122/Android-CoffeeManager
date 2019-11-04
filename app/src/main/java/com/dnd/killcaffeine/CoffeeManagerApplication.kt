@@ -40,6 +40,6 @@ class CoffeeManagerApplication : Application() {
                 return BuildConfig.DEBUG
             }
         })
-
     }
+
 }

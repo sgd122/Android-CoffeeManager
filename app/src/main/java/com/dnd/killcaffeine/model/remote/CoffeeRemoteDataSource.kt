@@ -10,6 +10,7 @@ import com.dnd.killcaffeine.model.data.result.NoticeResult
 import com.dnd.killcaffeine.model.remote.service.CoffeeManagerService
 import io.reactivex.Single
 
+@Deprecated("Not use this project. Look at CoffeeRepository")
 class CoffeeRemoteDataSource(private val mCoffeeService: CoffeeManagerService) : CoffeeManagerService {
 
     override fun getDecaffeineMenuList(): Single<DecaffeineResult> {

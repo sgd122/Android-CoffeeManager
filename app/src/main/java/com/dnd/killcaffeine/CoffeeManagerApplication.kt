@@ -14,7 +14,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
-class CoffeeManagerApplication : Application() {
+class  CoffeeManagerApplication : Application() {
 
     companion object {
         private const val PRINT_STACK_COUNT: Int = 5

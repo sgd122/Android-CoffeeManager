@@ -7,6 +7,7 @@ import com.dnd.killcaffeine.model.data.GithubRepo
 import com.dnd.killcaffeine.model.remote.service.GithubService
 import io.reactivex.Single
 
+@Deprecated("Not use this project. Look at GithubRepository")
 class GithubRemoteDataSource(private val mGithubService: GithubService) : GithubService {
 
     override fun getUserRepositoryList(id: String): Single<ArrayList<GithubRepo>> {

@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.SharedPreferenceKey
 import com.dnd.killcaffeine.base.BaseViewModel
+import com.dnd.killcaffeine.model.CoffeeRepository
 import com.dnd.killcaffeine.model.data.Personal
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
@@ -18,7 +19,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class SplashViewModel(private val mMenuDatabase: MenuDatabase,
+class SplashViewModel(private val mRepository: CoffeeRepository,
                       private val mSharedPref: SharedPreferences) : BaseViewModel() {
 
     companion object {
@@ -43,7 +44,7 @@ class SplashViewModel(private val mMenuDatabase: MenuDatabase,
     }
 
     fun loadSavedTotalIntake(){
-        addDisposable(mMenuDatabase.menuDao.getAllMenu()
+        addDisposable(mRepository.getAllMenu()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->

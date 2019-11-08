@@ -20,8 +20,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
-                        private val mSharedPref: SharedPreferences,
+class MainHomeViewModel(private val mSharedPref: SharedPreferences,
                         private val mCoffeeRepository: CoffeeRepository) : BaseViewModel() {
 
     private val _decaffeineMenuLiveData = MutableLiveData<DecaffeineResult>()
@@ -55,7 +54,7 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
     }
 
     fun refreshHistoryFromRoomDatabase(){
-        addDisposable(mMenuDatabase.menuDao.getAllMenu()
+        addDisposable(mCoffeeRepository.getAllMenu()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -102,7 +101,7 @@ class MainHomeViewModel(private val mMenuDatabase: MenuDatabase,
     }
 
     fun insertHistoryToRoomDatabase(menu: Menu){
-        addDisposable(mMenuDatabase.menuDao.insertMenu(menu)
+        addDisposable(mCoffeeRepository.insertMenu(menu)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

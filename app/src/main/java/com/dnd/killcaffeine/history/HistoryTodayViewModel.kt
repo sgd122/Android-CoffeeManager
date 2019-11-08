@@ -6,13 +6,14 @@ package com.dnd.killcaffeine.history
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
+import com.dnd.killcaffeine.model.CoffeeRepository
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
 import com.dnd.killcaffeine.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class HistoryTodayViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewModel() {
+class HistoryTodayViewModel(private val mRepository: CoffeeRepository) : BaseViewModel() {
 
     private val _historyListLiveData = MutableLiveData<ArrayList<Menu>>()
     val historyListLiveData: LiveData<ArrayList<Menu>> get() = _historyListLiveData
@@ -24,7 +25,7 @@ class HistoryTodayViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewM
     val deleteHistoryLiveData: LiveData<Menu> get() = _deleteHistoryLiveData
 
     fun loadHistoryListFromRoomDatabase(){
-        addDisposable(mMenuDatabase.menuDao.getAllMenu()
+        addDisposable(mRepository.getAllMenu()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->
@@ -36,7 +37,7 @@ class HistoryTodayViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewM
 
     fun insertHistoryToRoomDatabase(menu: Menu){
         startLoadingIndicator()
-        addDisposable(mMenuDatabase.menuDao.insertMenu(menu)
+        addDisposable(mRepository.insertMenu(menu)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -50,7 +51,7 @@ class HistoryTodayViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewM
     }
 
     fun insertHistoryListToRoomDatabase(menuList: List<Menu>){
-        addDisposable(mMenuDatabase.menuDao.insertMenuList(menuList)
+        addDisposable(mRepository.insertMenuList(menuList)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -63,7 +64,7 @@ class HistoryTodayViewModel(private val mMenuDatabase: MenuDatabase) : BaseViewM
     }
 
     fun deleteHistoryFromRoomDatabase(menu: Menu){
-        addDisposable(mMenuDatabase.menuDao.deleteMenu(menu)
+        addDisposable(mRepository.deleteMenu(menu)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

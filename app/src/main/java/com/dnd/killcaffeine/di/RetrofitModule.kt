@@ -16,9 +16,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 const val baseUrl = "http://52.78.118.71:8080"
-private const val CONNECT_TIMEOUT = 15L
-private const val WRITE_TIMEOUT = 15L
-private const val READ_TIMEOUT = 15L
+private const val CONNECT_TIMEOUT = 10L
+private const val WRITE_TIMEOUT = 10L
+private const val READ_TIMEOUT = 10L
 private const val CACHE_SIZE = 10L * 1024 * 1024
 
 val retrofitModule = module {

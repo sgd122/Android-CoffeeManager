@@ -6,13 +6,13 @@ package com.dnd.killcaffeine.main.home
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dnd.killcaffeine.Constants
 import com.dnd.killcaffeine.SharedPreferenceKey
 import com.dnd.killcaffeine.base.BaseViewModel
 import com.dnd.killcaffeine.model.CoffeeRepository
 import com.dnd.killcaffeine.model.data.Personal
 import com.dnd.killcaffeine.model.data.result.DecaffeineResult
 import com.dnd.killcaffeine.model.data.room.menu.Menu
-import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
 import com.dnd.killcaffeine.utils.SingleLiveEvent
 import com.google.gson.Gson
 import com.orhanobut.logger.Logger
@@ -58,14 +58,17 @@ class MainHomeViewModel(private val mSharedPref: SharedPreferences,
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                _refreshedHistoryLiveData.postValue(it as ArrayList<Menu>)
+                when(it.isEmpty()) {
+                    true -> _refreshedHistoryLiveData.postValue(arrayListOf(mockRecentDrinkNotFound()))
+                    false -> _refreshedHistoryLiveData.postValue(it as ArrayList<Menu>)
+                }
 
             }, {
                 _refreshedHistoryLiveData.postValue(ArrayList())
             }))
     }
 
-    fun getPersonalRecommendCaffeeine(){
+    fun getPersonalRecommendCaffeine(){
         addDisposable(Observable.just(mSharedPref.getString(SharedPreferenceKey.PUT_PERSONAL_INFO, ""))
             .observeOn(Schedulers.io())
             .subscribeOn(AndroidSchedulers.mainThread())
@@ -123,5 +126,9 @@ class MainHomeViewModel(private val mSharedPref: SharedPreferences,
         } else {
             (intake.toDouble() / recommend.toDouble()) * 100.0
         }
+    }
+
+    private fun mockRecentDrinkNotFound(): Menu {
+        return Menu(Constants.COFFEE_NOT_FOUND, "커피 그림을 눌러보세요", "R.drawable.coffee_sample", "커피가 텅텅", 0, false)
     }
 }

@@ -17,7 +17,7 @@ import kotlin.random.Random
 class CommentService : Service() {
 
     companion object {
-        private const val COMMENT_CYCLE: Long = 30000 // 10초
+        private const val COMMENT_CYCLE: Long = 3000 // 10초
     }
 
     private var mRandom: Int = 0

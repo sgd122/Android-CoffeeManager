@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">커피매니저</string>
-    <string name="app_version">0.0.1</string>
+    <string name="app_version">1.0.0</string>
 
     <string name="fragment_history_today_register_search_text">검색</string>
 
@@ -88,11 +88,11 @@
         감사합니다!
     </string>
 
-    <string name="home_fragment_today_warning_comment_1">충분한 수면은 카페인을 줄이는 데 도움이 돼요!1</string>
-    <string name="home_fragment_today_warning_comment_2">충분한 수면은 카페인을 줄이는 데 도움이 돼요!2</string>
-    <string name="home_fragment_today_warning_comment_3">충분한 수면은 카페인을 줄이는 데 도움이 돼요!3</string>
-    <string name="home_fragment_today_warning_comment_4">충분한 수면은 카페인을 줄이는 데 도움이 돼요!4</string>
-    <string name="home_fragment_today_warning_comment_5">충분한 수면은 카페인을 줄이는 데 도움이 돼요!5</string>
+    <string name="home_fragment_today_warning_comment_1">과도한 카페인 섭취는 건강에 좋지 않아요</string>
+    <string name="home_fragment_today_warning_comment_2">충분한 수면은 카페인을 줄이는 데 도움이 돼요!</string>
+    <string name="home_fragment_today_warning_comment_3">커피 한잔 만들어 주는 사람을 좋아하라</string>
+    <string name="home_fragment_today_warning_comment_4">커피 보다는 물을 자주 마시는게 좋아요</string>
+    <string name="home_fragment_today_warning_comment_5">커피 한 잔의 여유~ 너무 심하지 않게~</string>
 
     <!-- ImageView Description -->
     <string name="image_view_description_choice_franchise_1">1번 프랜차이즈</string>

@@ -5,6 +5,7 @@ package com.dnd.killcaffeine.main.settings
 
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import com.dnd.killcaffeine.BR
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.base.BaseFragment
@@ -20,6 +21,8 @@ class MainSettingsFragment : BaseFragment<FragmentSettingsBinding, MainSettingsV
     override val mViewModel: MainSettingsViewModel by viewModel()
     override val resourceId: Int
         get() = R.layout.fragment_settings
+
+    private var mAppVersionClickCount = 0
 
     override fun initViewStart() {
 
@@ -45,6 +48,15 @@ class MainSettingsFragment : BaseFragment<FragmentSettingsBinding, MainSettingsV
                 R.id.fragment_settings_notice_button -> startActivity(Intent(activity?.applicationContext, MainSettingsNoticeActivity::class.java))
 
                 R.id.fragment_settings_terms_button -> startActivity(Intent(activity?.applicationContext, MainSettingsTermsActivity::class.java))
+
+                R.id.fragment_settings_version_button -> {
+                    mAppVersionClickCount++
+                    if(mAppVersionClickCount % 3 == 0) {
+                        Toast.makeText(activity?.applicationContext, "클릭", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                else -> {}
             }
         }
     }

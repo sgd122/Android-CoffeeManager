@@ -3,15 +3,16 @@
  */
 package com.dnd.killcaffeine.main.home
 
-import android.app.Activity.RESULT_OK
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dnd.killcaffeine.BroadcastReceiverKey
+import com.dnd.killcaffeine.Constants
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
@@ -70,6 +71,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             adapter = mDecaffeineRecyclerViewAdapter
         }
 
+        // 최근 마신 음
         fragment_home_coffee_recent_recycler_view.run {
             layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.HORIZONTAL, false)
             adapter = mRecentRecyclerViewAdapter
@@ -84,8 +86,10 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             }
         })
 
+        // 최근 마신 음료 Observe
         mViewModel.refreshedHistoryLiveData.observe(this, Observer { list ->
             list?.let {
+
 
                 // 히스토리 내역이 변경되었다면, 리스트 갱신
                 mRecentRecyclerViewAdapter.setRecentDrinkArrayList(it)
@@ -121,7 +125,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     override fun initViewFinal() {
         //mViewModel.getDecaffeineMenuList()
 
-        mViewModel.getPersonalRecommendCaffeeine()
+        mViewModel.getPersonalRecommendCaffeine()
 
         fragment_home_frame_layout.setOnClickListener {
 
@@ -155,14 +159,17 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     private fun showRecentDrinkDetailDialog(menu: Menu){
         activity?.let {
-            RecentDrinkDetailDialog(it, menu, object: RecentDrinkDetailDialog.OnRecentDrinkRegisterListener {
-                override fun onRecentDrinkRegister(menu: Menu) {
-                    menu.run {
-                        val newMenu = Menu(0, menuName, menuImgUrl, franchiseName, caffeine, personalShop)
-                        mViewModel.insertHistoryToRoomDatabase(menu = newMenu)
+            Log.d("최근마신음료", menu.toString())
+            if(menu.menuId != Constants.COFFEE_NOT_FOUND) {
+                RecentDrinkDetailDialog(it, menu, object: RecentDrinkDetailDialog.OnRecentDrinkRegisterListener {
+                    override fun onRecentDrinkRegister(menu: Menu) {
+                        menu.run {
+                            val newMenu = Menu(0, menuName, menuImgUrl, franchiseName, caffeine, personalShop)
+                            mViewModel.insertHistoryToRoomDatabase(menu = newMenu)
+                        }
                     }
-                }
-            }).show()
+                }).show()
+            }
         }
     }
 

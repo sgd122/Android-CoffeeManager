@@ -38,6 +38,12 @@ class MainHomeViewModel(private val mSharedPref: SharedPreferences,
     private val _recentRegisterLiveData = MutableLiveData<Boolean>()
     val recentRegisterLiveData: LiveData<Boolean> get() = _recentRegisterLiveData
 
+    private val _savedPersonalLiveData = MutableLiveData<Personal?>()
+    val savedPersonalLiveData: LiveData<Personal?> get() = _savedPersonalLiveData
+
+    private val _personalLiveDataValid = MutableLiveData<Boolean>()
+    val personalLiveDataValid: LiveData<Boolean> get() = _personalLiveDataValid
+
     fun getDecaffeineMenuList(){
         startLoadingIndicator()
         addDisposable(mCoffeeRepository.getDecaffeineMenuList()
@@ -126,6 +132,30 @@ class MainHomeViewModel(private val mSharedPref: SharedPreferences,
         } else {
             (intake.toDouble() / recommend.toDouble()) * 100.0
         }
+    }
+
+    fun getPersonalInfo() {
+        addDisposable(Observable.just(mSharedPref.getString(SharedPreferenceKey.PUT_PERSONAL_INFO, ""))
+            .observeOn(Schedulers.io())
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribe({ personal ->
+                when(!personal.isNullOrEmpty()){
+                    true -> {
+                        val savedPersonalInfo = Gson().fromJson(personal, Personal::class.java)
+                        Logger.d("홈화면이 불러질때 저장된 마이카페인 : $savedPersonalInfo")
+
+                        //_savedPersonalLiveData.postValue(savedPersonalInfo)
+                        _personalLiveDataValid.postValue(true)
+                    }
+                    false -> {
+                        _personalLiveDataValid.postValue(false)
+                    }
+                }
+
+            }, {
+                //_savedPersonalLiveData.postValue(null)
+                _personalLiveDataValid.postValue(false)
+            }))
     }
 
     private fun mockRecentDrinkNotFound(): Menu {

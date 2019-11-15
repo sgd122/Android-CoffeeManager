@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -120,6 +121,13 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             mViewModel.refreshHistoryFromRoomDatabase()
         })
 
+        mViewModel.personalLiveDataValid.observe(this, Observer { isValid ->
+            fragment_home_personal_not_set.visibility = when(isValid) {
+                true -> View.GONE // 저장되어 있다면, 안보임
+                false -> View.VISIBLE
+            }
+        })
+
     }
 
     override fun initViewFinal() {
@@ -143,6 +151,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     override fun onResume() {
         super.onResume()
+
+        mViewModel.getPersonalInfo() // 홈 화면 되돌아올 때 마다 마이카페인이 저장되어 있는 지 확인
 
         mViewModel.refreshHistoryFromRoomDatabase()
         setupBottleContent(MainActivity.savedCaffeineIntake, MainActivity.savedPersonalRecommend)

@@ -134,7 +134,7 @@ class MainHomeViewModel(private val mSharedPref: SharedPreferences,
         }
     }
 
-    fun getPersonalInfo() {
+    fun checkPersonalCaffeineSaved() {
         addDisposable(Observable.just(mSharedPref.getString(SharedPreferenceKey.PUT_PERSONAL_INFO, ""))
             .observeOn(Schedulers.io())
             .subscribeOn(AndroidSchedulers.mainThread())
@@ -144,16 +144,13 @@ class MainHomeViewModel(private val mSharedPref: SharedPreferences,
                         val savedPersonalInfo = Gson().fromJson(personal, Personal::class.java)
                         Logger.d("홈화면이 불러질때 저장된 마이카페인 : $savedPersonalInfo")
 
-                        //_savedPersonalLiveData.postValue(savedPersonalInfo)
                         _personalLiveDataValid.postValue(true)
                     }
                     false -> {
                         _personalLiveDataValid.postValue(false)
                     }
                 }
-
             }, {
-                //_savedPersonalLiveData.postValue(null)
                 _personalLiveDataValid.postValue(false)
             }))
     }

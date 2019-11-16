@@ -74,7 +74,7 @@
                         android:background="@drawable/background_radius_10dp_white_box"
                         android:text="충분한 수면은 카페인을 줄이는 데 도움이 돼요!"
                         android:textColor="@color/color_text_grayish_brown"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:autoSizeTextType="uniform"
                         android:gravity="center|start"
                         android:fontFamily="@font/spoqa_han_sans_bold"
@@ -182,10 +182,11 @@
                         android:id="@+id/fragment_home_coffee_bottle_content"
                         android:layout_width="124dp"
                         android:layout_height="204dp"
+                        android:layout_marginStart="46dp"
                         android:alpha="0.5"
                         android:layout_marginBottom="4dp"
                         app:layout_constraintBottom_toBottomOf="@id/fragment_home_coffee_bottle"
-                        app:layout_constraintLeft_toRightOf="@id/fragment_home_guide_2" />
+                        app:layout_constraintLeft_toRightOf="@id/fragment_home_guide_1" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -292,6 +293,7 @@
                     android:paddingStart="0dp"
                     android:paddingEnd="16dp"
                     android:clipToPadding="false"
+                    android:clipChildren="false"
                     tools:listitem="@layout/list_item_coffee"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/fragment_home_coffee_recent_title"

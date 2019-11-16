@@ -1,10 +1,17 @@
 package com.dnd.killcaffeine.main
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import androidx.fragment.app.Fragment
+import com.dnd.killcaffeine.BroadcastReceiverKey
 import com.dnd.killcaffeine.CoffeeManagerApplication
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
+import com.dnd.killcaffeine.broadcast.ActionDateChangedReceiver
 import com.dnd.killcaffeine.databinding.ActivityMainBinding
 import com.dnd.killcaffeine.main.home.MainHomeFragment
 import com.dnd.killcaffeine.main.settings.MainSettingsFragment
@@ -15,6 +22,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
@@ -59,9 +67,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when(tab?.position){
-                        TabComponent.HOME.ordinal -> supportFragmentManager.beginTransaction().replace(R.id.activity_main_container, getFragment(TabComponent.HOME.ordinal)).commit()
-                        TabComponent.STATISTICS.ordinal -> supportFragmentManager.beginTransaction().replace(R.id.activity_main_container, getFragment(TabComponent.STATISTICS.ordinal)).commit()
-                        TabComponent.SETTINGS.ordinal -> supportFragmentManager.beginTransaction().replace(R.id.activity_main_container, getFragment(TabComponent.SETTINGS.ordinal)).commit()
+                        TabComponent.HOME.ordinal -> supportFragmentManager.beginTransaction().replace(R.id.activity_main_container, getFragment(TabComponent.HOME.ordinal)).commitAllowingStateLoss()
+                        TabComponent.STATISTICS.ordinal -> supportFragmentManager.beginTransaction().replace(R.id.activity_main_container, getFragment(TabComponent.STATISTICS.ordinal)).commitAllowingStateLoss()
+                        TabComponent.SETTINGS.ordinal -> supportFragmentManager.beginTransaction().replace(R.id.activity_main_container, getFragment(TabComponent.SETTINGS.ordinal)).commitAllowingStateLoss()
                         else -> throw IllegalStateException("올바르지 않은 접근입니다")
                     }
                 }
@@ -70,9 +78,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun initDataBinding() {
+
+        mViewModel.midNightAlarmLiveData.observe(this, androidx.lifecycle.Observer {
+            deleteRoomDateChanged()
+            mViewModel.saveMidNightAlarmPreference()
+        })
     }
 
     override fun initViewFinal() {
+
+        mViewModel.checkSavedMidNightAlarm()
+
         if(intent.hasExtra(RequestCode.SAVED_TOTAL_CAFFIEINE_INTAKE) && intent.hasExtra(RequestCode.SAVED_PERSONAL_RECOMMEND)){
             savedCaffeineIntake = intent.getIntExtra(RequestCode.SAVED_TOTAL_CAFFIEINE_INTAKE, 0)
             savedPersonalRecommend = intent.getIntExtra(RequestCode.SAVED_PERSONAL_RECOMMEND, 0)
@@ -90,12 +106,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        Log.d("알람", "MainActivity On New Intent")
+
+    }
+
     private fun getTabIcon(position: Int): Int = tabIconList[position]
     fun getFragment(position: Int): Fragment = fragmentList[position]
 
 
-    // 파이어 베이스 토큰을 생성하는 함수
     private fun getFirebaseTokenInstance(){
+        // 파이어 베이스 토큰을 생성하는 함수
+        
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener { task ->
                 if(!task.isSuccessful) {
@@ -105,5 +128,31 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 val token = task.result?.token
                 Logger.d("Token : $token")
             }
+    }
+
+    private fun deleteRoomDateChanged() {
+        // 자정이 되면 호출될 알람매니저
+
+        val alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val calendar: Calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 21)
+            set(Calendar.MINUTE, 12)
+            set(Calendar.SECOND, 0)
+        }
+
+        val pendingIntent: PendingIntent? = PendingIntent.getBroadcast(applicationContext,
+            BroadcastReceiverKey.ACTION_DATE_CHANGE_REQ_CODE,
+            Intent(this, ActionDateChangedReceiver::class.java),
+            PendingIntent.FLAG_NO_CREATE
+        )
+
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP, // Sleep 상태에서도 동작 가능
+            calendar.timeInMillis, // Trigger Time, 과거로 설정되어 있다면, 즉시 동작
+            AlarmManager.INTERVAL_DAY, // 하루마다 반
+            pendingIntent
+        )
     }
 }

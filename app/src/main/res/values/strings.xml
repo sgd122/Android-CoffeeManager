@@ -5,6 +5,7 @@
     <string name="fragment_history_today_register_search_text">검색</string>
 
     <string name="fragment_statistics_title">통계</string>
+    <string name="fragment_statistics_not_implemented">준비 중인 기능입니다</string>
     <string name="fragment_statistics_show_analysis_button_text">분석보기</string>
     <string name="fragment_statistics_graph_sub_title_daily">일별 섭취량</string>
     <string name="fragment_statistics_graph_sub_title_weekly">주별 섭취량</string>
@@ -92,7 +93,11 @@
     <string name="home_fragment_today_warning_comment_2">충분한 수면은 카페인을 줄이는 데 도움이 돼요!</string>
     <string name="home_fragment_today_warning_comment_3">커피 한잔 만들어 주는 사람을 좋아하라</string>
     <string name="home_fragment_today_warning_comment_4">커피 보다는 물을 자주 마시는게 좋아요</string>
-    <string name="home_fragment_today_warning_comment_5">커피 한 잔의 여유~ 너무 심하지 않게~</string>
+    <string name="home_fragment_today_warning_comment_5">이 많은 별빛이 내린 언덕 위에</string>
+    <string name="home_fragment_today_warning_comment_6">그대만큼 사랑스러운 사람을 본 일이 없다</string>
+    <string name="home_fragment_today_warning_comment_7">너무 맑고 초롱한 그 중 하나 별이여</string>
+    <string name="home_fragment_today_warning_comment_8">하늘을 우러러 한 점 부끄럼 없기를</string>
+    <string name="home_fragment_today_warning_comment_9">밤에 잠 못잔다면서 또 커피 마시나요?</string>
 
     <!-- ImageView Description -->
     <string name="image_view_description_choice_franchise_1">1번 프랜차이즈</string>

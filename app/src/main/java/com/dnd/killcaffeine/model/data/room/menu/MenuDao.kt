@@ -24,4 +24,7 @@ interface MenuDao {
 
     @Delete
     fun deleteAllMenu(menuList: List<Menu>) : Completable
+
+    @Query("DELETE FROM menu")
+    fun deleteAllMenu() : Completable
 }

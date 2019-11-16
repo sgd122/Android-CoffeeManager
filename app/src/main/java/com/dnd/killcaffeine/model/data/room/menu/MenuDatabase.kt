@@ -6,7 +6,7 @@ package com.dnd.killcaffeine.model.data.room.menu
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
-@Database(entities = [(Menu::class)], version = 1, exportSchema = false)
+@Database(entities = [(Menu::class)], version = 2, exportSchema = false)
 abstract class MenuDatabase : RoomDatabase() {
 
     abstract val menuDao: MenuDao

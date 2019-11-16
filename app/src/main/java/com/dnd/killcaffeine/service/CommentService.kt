@@ -78,7 +78,11 @@ class CommentService : Service() {
             getString(R.string.home_fragment_today_warning_comment_2),
             getString(R.string.home_fragment_today_warning_comment_3),
             getString(R.string.home_fragment_today_warning_comment_4),
-            getString(R.string.home_fragment_today_warning_comment_5)
+            getString(R.string.home_fragment_today_warning_comment_5),
+            getString(R.string.home_fragment_today_warning_comment_6),
+            getString(R.string.home_fragment_today_warning_comment_7),
+            getString(R.string.home_fragment_today_warning_comment_8),
+            getString(R.string.home_fragment_today_warning_comment_9)
         )
     }
 }

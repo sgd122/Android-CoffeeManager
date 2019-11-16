@@ -36,6 +36,10 @@ class CoffeeRepository(private val mCoffeeService: CoffeeManagerService,
         return mMenuDao.deleteAllMenu(menuList)
     }
 
+    override fun deleteAllMenu(): Completable {
+        return mMenuDao.deleteAllMenu()
+    }
+
     override fun getDecaffeineMenuList(): Single<DecaffeineResult> {
         return mCoffeeService.getDecaffeineMenuList()
     }

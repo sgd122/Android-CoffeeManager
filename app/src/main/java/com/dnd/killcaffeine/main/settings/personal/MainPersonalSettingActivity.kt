@@ -4,11 +4,15 @@
 package com.dnd.killcaffeine.main.settings.personal
 
 import android.content.Context
+import android.text.Editable
 import android.text.InputFilter
+import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.core.view.forEach
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.base.BaseActivity
@@ -120,14 +124,16 @@ class MainPersonalSettingActivity : BaseActivity<ActivitySettingsPersonalBinding
 
     private fun setupEditTextTemplate(editText: EditText){
         editText.setOnFocusChangeListener { _, focused ->
+            Log.d("FOCUS", "focus : $focused")
+
             when(focused) {
                 true -> {
                     editText.setText("")
                     clearRecommendEditText()
-                    editText.filters= arrayOf(InputFilter.LengthFilter(WEIGHT_INPUT_LENGTH))
+                    editText.filters = arrayOf(InputFilter.LengthFilter(WEIGHT_INPUT_LENGTH))
                 }
                 false -> {
-                    val weight: Int = when(editText.text.toString() == ""){
+                    val weight: Int = when(editText.text.toString().isEmpty()){
                         true -> 0
                         false -> editText.text.toString().toInt()
                     }

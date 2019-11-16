@@ -15,7 +15,8 @@ data class Menu(@PrimaryKey(autoGenerate = true) val menuId: Int,
                 val menuImgUrl: String,
                 val franchiseName: String,
                 val caffeine: Int,
-                val personalShop: Boolean) : Serializable {
+                val personalShop: Boolean,
+                val createAt: Long = System.currentTimeMillis()) : Serializable {
 
     companion object {
         val DIFF_CALLBACK = object: DiffUtil.ItemCallback<Menu>() {

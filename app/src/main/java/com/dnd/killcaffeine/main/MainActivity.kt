@@ -118,7 +118,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private fun getFirebaseTokenInstance(){
         // 파이어 베이스 토큰을 생성하는 함수
-        
+
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener { task ->
                 if(!task.isSuccessful) {
@@ -137,8 +137,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         val calendar: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, 21)
-            set(Calendar.MINUTE, 12)
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)
         }
 

@@ -145,7 +145,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val pendingIntent: PendingIntent? = PendingIntent.getBroadcast(applicationContext,
             BroadcastReceiverKey.ACTION_DATE_CHANGE_REQ_CODE,
             Intent(this, ActionDateChangedReceiver::class.java),
-            PendingIntent.FLAG_NO_CREATE
+            0
         )
 
         alarmManager.setInexactRepeating(

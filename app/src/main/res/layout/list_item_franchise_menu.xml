@@ -5,15 +5,16 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
-    android:background="@color/background_main_white">
+    android:background="@color/background_main_white"
+    android:clipToPadding="false">
 
     <androidx.cardview.widget.CardView
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_margin="2dp"
+        android:layout_margin="6dp"
         app:cardBackgroundColor="@color/background_white_2"
         app:cardCornerRadius="10dp"
-        app:cardElevation="1dp">
+        app:cardElevation="4dp">
 
         <ImageView
             android:id="@+id/list_item_franchise_menu_image_view"
@@ -53,8 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="Iced 토피넛라떼"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textColor="@color/color_text_grayish_brown"
+        android:autoSizeTextType="uniform"
         android:fontFamily="@font/spoqa_han_sans_bold"
         android:includeFontPadding="false"/>
 

@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="@color/background_color_tab_layout"
+            app:tabBackground="@android:color/transparent"
             app:tabIndicatorColor="@color/background_color_tab_selected"
             app:tabIndicatorHeight="4dp"
             app:layout_constraintLeft_toLeftOf="parent"

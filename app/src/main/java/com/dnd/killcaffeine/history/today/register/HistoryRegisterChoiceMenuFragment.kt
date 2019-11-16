@@ -37,7 +37,7 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
         fragment_history_register_choice_menu_recycler_view.apply {
             layoutManager = GridLayoutManager(activity?.applicationContext, RECYCLER_VIEW_SPAN_COUNT)
             adapter = mFranchiseMenuAdapter
-            addItemDecoration(SpacesItemDecoration(32))
+            //addItemDecoration(SpacesItemDecoration(16))
         }
 
         // TODO 테스트 용도이므로 나중에 지워야함

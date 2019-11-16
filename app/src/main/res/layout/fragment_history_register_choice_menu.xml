@@ -11,13 +11,15 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_main_white">
+        android:background="@color/background_main_white"
+        android:clipToPadding="false"
+        android:clipChildren="false">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_history_register_choice_menu_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:paddingStart="@dimen/activity_today_recommend_column_spacing"
             android:paddingEnd="@dimen/activity_today_recommend_column_spacing"
             android:paddingTop="@dimen/activity_today_recommend_column_spacing_half"

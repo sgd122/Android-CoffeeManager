@@ -269,7 +269,20 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/fragment_settings_designer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="end"
+                android:text="@string/designer_name"
+                android:textColor="@color/color_text_brownish_grey"
+                android:textSize="16sp"
+                android:fontFamily="@font/spoqa_han_sans_bold"
+                android:includeFontPadding="false"/>
 
         </LinearLayout>
     </ScrollView>

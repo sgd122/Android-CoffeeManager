@@ -3,6 +3,7 @@ package com.dnd.killcaffeine.model.data.room.menu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.dnd.killcaffeine.R
 import java.io.Serializable
 
 /*
@@ -10,13 +11,13 @@ import java.io.Serializable
  */
 
 @Entity(tableName = "menu")
-data class Menu(@PrimaryKey(autoGenerate = true) val menuId: Int = 0,
-                val menuName: String,
+data class Menu(val menuName: String,
                 val franchiseName: String,
                 val caffeine: Int = 0,
-                val menuImgUrl: String = "R.id.${franchiseName}_${menuName}",
+                val menuImgUrl: Int = R.drawable.coffee_sample,
                 val personalShop: Boolean = false,
-                val createAt: Long = System.currentTimeMillis()) : Serializable {
+                val createAt: Long = System.currentTimeMillis(),
+                @PrimaryKey(autoGenerate = true) val menuId: Int = 0) : Serializable {
 
     companion object {
         val DIFF_CALLBACK = object: DiffUtil.ItemCallback<Menu>() {

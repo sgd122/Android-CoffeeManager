@@ -59,9 +59,7 @@ class FranchiseMenuAdapter : RecyclerView.Adapter<FranchiseMenuAdapter.Franchise
         private val caffeineIntake: TextView = itemView.findViewById(R.id.list_item_franchise_menu_caffeine_content)
 
         fun bindTo(menu: Menu){
-            //Logger.d("$baseUrl${menu.menuImgUrl}")
-
-            coffeeImageView.load(R.drawable.coffee_sample) {
+            coffeeImageView.load(menu.menuImgUrl) {
                 crossfade(true)
                 placeholder(R.drawable.background_radius_10dp_white_box)
                 error(R.drawable.background_radius_10dp_white_box)

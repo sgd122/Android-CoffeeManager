@@ -10,6 +10,7 @@ import com.dnd.killcaffeine.databinding.ActivityHistoryTodayRegisterBinding
 import com.dnd.killcaffeine.history.today.register.HistoryRegisterChoiceFranchiseFragment
 import com.dnd.killcaffeine.history.today.register.HistoryRegisterChoiceMenuFragment
 import com.dnd.killcaffeine.history.today.register.HistoryRegisterChoiceTypeFragment
+import com.dnd.killcaffeine.model.data.room.menu.Menu
 import kotlinx.android.synthetic.main.activity_history_today_register.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -55,6 +56,8 @@ class HistoryTodayRegisterActivity : BaseActivity<ActivityHistoryTodayRegisterBi
     }
 
     companion object {
+        var chosenFranchiseMenu: ArrayList<Menu> = ArrayList()
+
         enum class RegisterComponent {
             Type, Franchise, Menu
         }

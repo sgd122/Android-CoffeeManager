@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.Constants
+import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.SharedPreferenceKey
 import com.dnd.killcaffeine.base.BaseViewModel
 import com.dnd.killcaffeine.model.CoffeeRepository
@@ -157,11 +158,11 @@ class MainHomeViewModel(private val mSharedPref: SharedPreferences,
 
     private fun mockRecentDrinkNotFound(): Menu {
         return Menu(
-            Constants.COFFEE_NOT_FOUND,
             "커피가 텅텅",
             "커피 그림을 눌러보세요",
             0,
-            "R.drawable.coffee_sample"
+            menuImgUrl = R.drawable.image_decaffeine,
+            menuId = Constants.COFFEE_NOT_FOUND
         )
     }
 }

@@ -9,7 +9,9 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import coil.api.load
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import kotlin.system.exitProcess
@@ -30,6 +32,13 @@ class RecentDrinkDetailDialog(context: Context, menu: Menu, onRegisterListener: 
 
         setContentView(R.layout.dialog_recent_drink_detail)
 
+        // 음료 사진
+        findViewById<ImageView>(R.id.dialog_recent_drink_detail_image_view).load(menu.menuImgUrl) {
+            crossfade(true)
+            placeholder(R.drawable.background_radius_10dp_white_box)
+            error(R.drawable.background_radius_10dp_white_box)
+        }
+
         // 돌아가기
         findViewById<Button>(R.id.dialog_recent_drink_cancel_button).setOnClickListener {
             cancel()
@@ -43,6 +52,10 @@ class RecentDrinkDetailDialog(context: Context, menu: Menu, onRegisterListener: 
 
         findViewById<TextView>(R.id.dialog_recent_drink_detail_menu_name).text = menu.menuName
         findViewById<TextView>(R.id.dialog_recent_drink_detail_franchise_name).text = menu.franchiseName
-        findViewById<TextView>(R.id.dialog_recent_drink_detail_caffeine).text = context.getString(R.string.dialog_recent_drink_caffeine_form, menu.caffeine.toString())
+
+        with(context.getString(R.string.dialog_recent_drink_caffeine_form, menu.caffeine.toString())) {
+            findViewById<TextView>(R.id.dialog_recent_drink_detail_caffeine).text = this
+            findViewById<TextView>(R.id.dialog_recent_drink_detail_caffeine_indicator).text = this
+        }
     }
 }

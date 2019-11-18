@@ -9,6 +9,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dnd.killcaffeine.Constants.DELETE_BUTTON_VISIBLE_LIMIT
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseActivity
@@ -48,6 +49,7 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
     override fun initDataBinding() {
         mViewModel.historyListLiveData.observe(this, Observer { list ->
             list?.let {
+                setVisibleDeleteButton(it.size)
                 mHistoryTodayAdapter.setHistoryList(it)
             }
         })
@@ -62,6 +64,7 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
 
         // 비우기 성공했을 때
         mViewModel.deleteAllHistoryLiveData.observe(this, Observer {
+            setVisibleDeleteButton(0)
             mHistoryTodayAdapter.setHistoryList(arrayListOf())
         })
     }
@@ -106,5 +109,12 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
             mViewModel.deleteHistoryFromRoomDatabase(menu)
 
         }).show()
+    }
+
+    private fun setVisibleDeleteButton(size: Int){
+        activity_history_today_delete_all_button.visibility = when(size >= DELETE_BUTTON_VISIBLE_LIMIT) {
+            true -> View.VISIBLE
+            false -> View.GONE
+        }
     }
 }

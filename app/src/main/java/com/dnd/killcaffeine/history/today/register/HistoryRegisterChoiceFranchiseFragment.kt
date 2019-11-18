@@ -6,7 +6,6 @@ package com.dnd.killcaffeine.history.today.register
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
@@ -67,7 +66,10 @@ class HistoryRegisterChoiceFranchiseFragment : BaseFragment<FragmentHistoryRegis
         fragment_history_choice_franchise_1.run {
             load(R.drawable.image_logo_starbucks){ transformations(CircleCropTransformation()) }
             setOnClickListener {
-                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
+                (activity as? HistoryTodayRegisterActivity)?.run {
+                    HistoryTodayRegisterActivity.chosenFranchiseMenu = MenuCollection.starBucks()
+                    replaceMenuFragment()
+                }
             }
         }
 
@@ -75,7 +77,10 @@ class HistoryRegisterChoiceFranchiseFragment : BaseFragment<FragmentHistoryRegis
         fragment_history_choice_franchise_2.run{
             load(R.drawable.image_logo_ediya){ transformations(CircleCropTransformation()) }
             setOnClickListener {
-                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
+                (activity as? HistoryTodayRegisterActivity)?.run{
+                    HistoryTodayRegisterActivity.chosenFranchiseMenu = MenuCollection.ediya()
+                    replaceMenuFragment()
+                }
             }
         }
 
@@ -83,7 +88,10 @@ class HistoryRegisterChoiceFranchiseFragment : BaseFragment<FragmentHistoryRegis
         fragment_history_choice_franchise_3.run{
             load(R.drawable.image_logo_hollys){ transformations(CircleCropTransformation()) }
             setOnClickListener {
-                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
+                (activity as? HistoryTodayRegisterActivity)?.run{
+                    HistoryTodayRegisterActivity.chosenFranchiseMenu = MenuCollection.hollys()
+                    replaceMenuFragment()
+                }
             }
         }
 
@@ -91,7 +99,10 @@ class HistoryRegisterChoiceFranchiseFragment : BaseFragment<FragmentHistoryRegis
         fragment_history_choice_franchise_4.run{
             load(R.drawable.image_logo_angel){ transformations(CircleCropTransformation()) }
             setOnClickListener {
-                (activity as? HistoryTodayRegisterActivity)?.replaceMenuFragment()
+                (activity as? HistoryTodayRegisterActivity)?.run{
+                    HistoryTodayRegisterActivity.chosenFranchiseMenu = MenuCollection.angelinus()
+                    replaceMenuFragment()
+                }
             }
         }
 
@@ -259,12 +270,12 @@ class HistoryRegisterChoiceFranchiseFragment : BaseFragment<FragmentHistoryRegis
 
     private fun insertCustomMenu(): ArrayList<Menu> {
         return arrayListOf(
-            Menu(100, "샷 한번 커피", "카페", 90, "R.drawable.image_decaffeine", true),
-            Menu(101, "샷 두번 커피", "카페", 180,"R.drawable.image_decaffeine", true),
-            Menu(102, "샷 세번 커피", "카페", 270,"R.drawable.image_decaffeine",true),
-            Menu(103, "디카페인 커피", "카페", 5,  "R.drawable.image_decaffeine",true),
-            Menu(104, "따뜻한 차", "차", 0,"R.drawable.image_tea", true),
-            Menu(105, "차가운 차", "차", 0, "R.drawable.image_tea",true)
+            Menu( "샷 한번 커피", "카페", 90, R.drawable.image_decaffeine, true),
+            Menu( "샷 두번 커피", "카페", 180,R.drawable.image_decaffeine, true),
+            Menu( "샷 세번 커피", "카페", 270,R.drawable.image_decaffeine,true),
+            Menu( "디카페인 커피", "카페", 5,  R.drawable.image_decaffeine,true),
+            Menu( "따뜻한 차", "차", 0,R.drawable.image_tea, true),
+            Menu( "차가운 차", "차", 0, R.drawable.image_tea,true)
         )
     }
 

@@ -52,12 +52,6 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
         Logger.d("퍼센트, savedCaffeineIntake : ${MainActivity.savedCaffeineIntake}\nsavedPersonalRecommend: ${MainActivity.savedPersonalRecommend}")
 
-        //getSavedInfo()
-
-        mDecaffeineRecyclerViewAdapter.apply {
-            setDecaffeineArrayList(insertMockData())
-        }
-
         mRecentRecyclerViewAdapter.apply {
             setRecentDrinkArrayList(insertMockData())
             setOnRecentDrinkItemClickListener(object: RecentDrinkAdapter.OnRecentDrinkItemClickListener {
@@ -69,7 +63,9 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
         fragment_home_today_decaffeine_recycler_view.run {
             layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.HORIZONTAL, false)
-            adapter = mDecaffeineRecyclerViewAdapter
+            adapter = mDecaffeineRecyclerViewAdapter.apply {
+                setDecaffeineArrayList(insertMockData())
+            }
         }
 
         // 최근 마신 음
@@ -240,14 +236,14 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     private fun insertMockData(): ArrayList<Menu> {
         return arrayListOf(
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample")
+            Menu( "아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu( "아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu( "아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu( "아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu( "아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu( "아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu( "아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu( "아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample)
         )
     }
 }

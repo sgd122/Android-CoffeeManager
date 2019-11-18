@@ -63,25 +63,7 @@ class RecentDrinkAdapter : RecyclerView.Adapter<RecentDrinkAdapter.RecentDrinkRe
         private val caffeineIntake: TextView = itemView.findViewById(R.id.list_item_coffee_caffeine_content)
 
         fun bindTo(menu: Menu){
-            /*when(menu.menuImgUrl.contains("R.drawable.")){
-                true -> {
-                    val drawableRes: Int = itemView.context.resources.getIdentifier(menu.menuImgUrl, "drawable", itemView.context.applicationContext.packageName)
-
-                    coffeeImageView.load(drawableRes) {
-                        crossfade(true)
-                        placeholder(R.drawable.background_radius_10dp_white_box)
-                        error(R.drawable.background_radius_10dp_white_box)
-                    }
-                }
-                else -> {
-                    coffeeImageView.load(menu.menuImgUrl) {
-                        crossfade(true)
-                        placeholder(R.drawable.background_radius_10dp_white_box)
-                        error(R.drawable.background_radius_10dp_white_box)
-                    }
-                }
-            }*/
-            coffeeImageView.load(R.drawable.image_decaffeine) {
+            coffeeImageView.load(menu.menuImgUrl) {
                 crossfade(true)
                 placeholder(R.drawable.background_radius_10dp_white_box)
                 error(R.drawable.background_radius_10dp_white_box)

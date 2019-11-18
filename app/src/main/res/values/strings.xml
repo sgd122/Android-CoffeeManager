@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">커피매니저</string>
     <string name="app_version">1.0.0</string>
-    <string name="designer_name">Designed By Gong.SoHyunn</string>
+    <string name="designer_name">Designer : Gong.SoHyunn</string>
+    <string name="developer1_name">Developer : Lee Oh Hyoung</string>
+    <string name="developer2_name">Developer : Won Jong Woon</string>
 
     <string name="fragment_history_today_register_search_text">검색</string>
 

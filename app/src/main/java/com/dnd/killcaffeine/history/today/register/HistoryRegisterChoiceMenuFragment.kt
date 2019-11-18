@@ -12,6 +12,7 @@ import com.dnd.killcaffeine.RequestCode
 import com.dnd.killcaffeine.base.BaseFragment
 import com.dnd.killcaffeine.databinding.FragmentHistoryRegisterChoiceMenuBinding
 import com.dnd.killcaffeine.dialog.HistoryRegisterWarningDialog
+import com.dnd.killcaffeine.history.today.HistoryTodayRegisterActivity
 import com.dnd.killcaffeine.model.data.room.menu.Menu
 import com.dnd.killcaffeine.recyclerview.FranchiseMenuAdapter
 import com.dnd.killcaffeine.recyclerview.decoration.SpacesItemDecoration
@@ -36,17 +37,15 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
 
         fragment_history_register_choice_menu_recycler_view.apply {
             layoutManager = GridLayoutManager(activity?.applicationContext, RECYCLER_VIEW_SPAN_COUNT)
-            adapter = mFranchiseMenuAdapter
-        }
-
-        // TODO 테스트 용도이므로 나중에 지워야함
-        mFranchiseMenuAdapter.setFranchiseMenuArrayList(insertMockData())
-
-        mFranchiseMenuAdapter.setItemOnClickListener(object: FranchiseMenuAdapter.OnFranchiseMenuClickListener {
-            override fun onclick(menu: Menu) {
-                showWarningDialog(menu)
+            adapter = mFranchiseMenuAdapter.apply {
+                setFranchiseMenuArrayList(HistoryTodayRegisterActivity.chosenFranchiseMenu)
+                setItemOnClickListener(object: FranchiseMenuAdapter.OnFranchiseMenuClickListener {
+                    override fun onclick(menu: Menu) {
+                        showWarningDialog(menu)
+                    }
+                })
             }
-        })
+        }
     }
 
     override fun initDataBinding() {
@@ -71,14 +70,16 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
     // TODO 테스트 용도이므로 나중에 지워야함
     private fun insertMockData(): ArrayList<Menu> {
         return arrayListOf(
-            Menu(0,"아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
-            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample")
+            Menu("아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu("아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu("아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu("아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu("아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu("아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu("아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu("아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu("아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample),
+            Menu("아이스 아메리카노","스타벅스", 100, R.drawable.coffee_sample)
         )
 
     }

@@ -36,7 +36,9 @@ class HistoryRegisterChoiceTypeFragment : BaseFragment<FragmentHistoryRegisterCh
         }
 
         fragment_history_choice_type_drink.setOnClickListener {
-            showSnackbar("일반음료 선택")
+            context?.applicationContext?.let { ctx ->
+                showNotImplementToast(ctx)
+            }
         }
 
     }

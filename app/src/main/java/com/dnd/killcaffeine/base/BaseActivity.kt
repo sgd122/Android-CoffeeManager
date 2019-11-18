@@ -7,6 +7,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +15,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.dialog.LoadingIndicator
 import com.google.android.material.snackbar.Snackbar
-import org.koin.android.ext.android.inject
 
 abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatActivity(), BaseView {
 
@@ -132,6 +132,21 @@ abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatAc
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 
+    override fun showNotImplementToast(applicationContext: Context) { // should be application context
+        val layout: View = layoutInflater.inflate(
+            R.layout.toast_not_implement,
+            findViewById(R.id.dialog_not_implement_parent_linear_layout)
+        )
+
+        val toast = Toast(applicationContext).apply {
+            setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 32)
+            duration = Toast.LENGTH_SHORT
+            view = layout
+        }
+
+        toast.show()
+    }
+
     private fun snackbarObserving(){
         mViewModel.snackbarLiveData.observe(this, Observer { string ->
             findViewById<View>(android.R.id.content)?.let { view ->
@@ -177,4 +192,5 @@ abstract class BaseActivity<T : ViewDataBinding, V: BaseViewModel> : AppCompatAc
             snackbar.show()
         }
     }
+
 }

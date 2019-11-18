@@ -1,6 +1,7 @@
 package com.dnd.killcaffeine.base
 
 import android.app.Activity
+import android.content.Context
 import android.view.View
 import com.dnd.killcaffeine.R
 import kotlinx.android.synthetic.main.toolbar.view.*
@@ -15,4 +16,6 @@ interface BaseView {
     fun setupKeyboardHide(view: View, activity: Activity?)
 
     fun loadingIndicatorObserving()
+
+    fun showNotImplementToast(applicationContext: Context)
 }

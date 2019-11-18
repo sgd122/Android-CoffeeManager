@@ -51,15 +51,15 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:inputType="text"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:textColor="@color/color_text_jade_green"
+                        android:textColorHint="@color/color_text_edit_text_hint"
                         android:textCursorDrawable="@drawable/edit_text_cursor_drawable"
                         android:hint="@string/fragment_history_today_register_search_text"
-                        android:textColorHint="@color/color_text_edit_text_hint"
-                        android:maxLength="50"
+                        android:maxLength="18"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:fontFamily="@font/spoqa_han_sans_regular"
+                        android:fontFamily="@font/spoqa_han_sans_bold"
                         android:includeFontPadding="false"/>
                 </LinearLayout>
 
@@ -119,10 +119,22 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/background_radius_10dp_white_box"
+                    android:padding="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="6dp">
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="52dp"
-                        android:layout_marginTop="24dp"
                         android:orientation="horizontal">
 
                         <ImageView

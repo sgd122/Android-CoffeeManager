@@ -16,6 +16,7 @@
     <string name="fragment_statistics_category_user_average">사용자평균</string>
 
     <string name="activity_history_today_register_toolbar_title">입력</string>
+    <string name="activity_history_today_register_delete_all">비우기</string>
 
     <string name="main_home_fragment_personal_recommend_caffeine">%smg</string>
     <string name="history_caffeine_intake">%smg</string>
@@ -65,7 +66,7 @@
     <string name="dialog_exceed_recommend_warning_description">권장 섭취량을 초과 했습니다.\n카페인 과잉 섭취시\n혈압상승을 일으키며\n지속적일 경우\n동맥경화를 유발합니다!</string>
 
     <!-- 아직 준비중인 기능입니다 -->
-    <string name="dialog_not_implement_text">준비중</string>
+    <string name="dialog_not_implement_text">    준비중    </string>
 
     <string name="activity_settings_terms_description">
         커피매니저 이용약관\n\n본 약관은 2018년 8월 10일부터 적용됩니다.\n\n\n제 1조 목적\n

@@ -6,8 +6,6 @@
     android:orientation="vertical"
     android:layout_width="320dp"
     android:layout_height="wrap_content"
-    
-
     android:background="@drawable/background_radius_10dp_white_box"
     android:elevation="6dp"
     android:clipToPadding="false">
@@ -19,7 +17,7 @@
         android:layout_margin="12dp"
         android:fontFamily="@font/spoqa_han_sans_bold"
         android:includeFontPadding="false"
-        android:text="@string/dialog_not_implement_text"
+        android:text="      준비중      "
         android:textColor="@color/color_text_grayish_brown"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

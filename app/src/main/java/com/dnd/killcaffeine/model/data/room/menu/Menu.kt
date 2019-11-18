@@ -10,12 +10,12 @@ import java.io.Serializable
  */
 
 @Entity(tableName = "menu")
-data class Menu(@PrimaryKey(autoGenerate = true) val menuId: Int,
+data class Menu(@PrimaryKey(autoGenerate = true) val menuId: Int = 0,
                 val menuName: String,
-                val menuImgUrl: String,
                 val franchiseName: String,
-                val caffeine: Int,
-                val personalShop: Boolean,
+                val caffeine: Int = 0,
+                val menuImgUrl: String = "R.id.${franchiseName}_${menuName}",
+                val personalShop: Boolean = false,
                 val createAt: Long = System.currentTimeMillis()) : Serializable {
 
     companion object {

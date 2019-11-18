@@ -46,6 +46,8 @@ class MainViewModel(private val mSharedPref: SharedPreferences) : BaseViewModel(
                 value?.let {
                     if(it == "") { // 저장된 알람이 없다면, LiveData call
                         _midNightAlarmLiveData.call()
+                    } else {
+                        Log.d("알람", "저장된 알람이 있음. : $value")
                     }
                 }
 

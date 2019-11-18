@@ -1,14 +1,15 @@
+/*
+ * Created by Lee Oh Hyoung on 2019-08-25..
+ */
 package com.dnd.killcaffeine.broadcast
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
 import androidx.room.Room
 import com.dnd.killcaffeine.main.MainActivity
 import com.dnd.killcaffeine.model.data.room.menu.MenuDatabase
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

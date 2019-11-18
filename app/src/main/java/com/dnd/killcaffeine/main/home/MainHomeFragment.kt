@@ -131,7 +131,6 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     }
 
     override fun initViewFinal() {
-        //mViewModel.getDecaffeineMenuList()
 
         mViewModel.getPersonalRecommendCaffeine()
 
@@ -174,7 +173,14 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
                 RecentDrinkDetailDialog(it, menu, object: RecentDrinkDetailDialog.OnRecentDrinkRegisterListener {
                     override fun onRecentDrinkRegister(menu: Menu) {
                         menu.run {
-                            val newMenu = Menu(0, menuName, menuImgUrl, franchiseName, caffeine, personalShop)
+                            val newMenu = Menu(
+                                menuName = menuName,
+                                menuImgUrl = menuImgUrl,
+                                caffeine = caffeine,
+                                franchiseName = franchiseName,
+                                personalShop = personalShop
+                            )
+
                             mViewModel.insertHistoryToRoomDatabase(menu = newMenu)
                         }
                     }
@@ -232,31 +238,16 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         }
     }
 
-    /*private fun getSavedInfo(){
-        // MainActivity 에서 Bundle 넘겨받음
-        (arguments?.getInt(RequestCode.BUNDLE_TOTAL_CAFFEINE_INTAKE, 0) ?: 0).run {
-            mTotalCaffeineIntake = this
-        }
-        (arguments?.getInt(RequestCode.BUNDLE_PERSONAL_RECOMMEND, 0) ?: 0).run {
-            mPersonalRecommendCaffeine = this
-        }
-
-        Logger.d("퍼센트, 저장되어 있던 것들 : $mTotalCaffeineIntake, $mPersonalRecommendCaffeine")
-        setupBottleContent(mTotalCaffeineIntake, mPersonalRecommendCaffeine)
-    }*/
-
     private fun insertMockData(): ArrayList<Menu> {
         return arrayListOf(
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(1, "아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false)
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample")
         )
     }
 }

@@ -37,7 +37,6 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
         fragment_history_register_choice_menu_recycler_view.apply {
             layoutManager = GridLayoutManager(activity?.applicationContext, RECYCLER_VIEW_SPAN_COUNT)
             adapter = mFranchiseMenuAdapter
-            //addItemDecoration(SpacesItemDecoration(16))
         }
 
         // TODO 테스트 용도이므로 나중에 지워야함
@@ -72,16 +71,15 @@ class HistoryRegisterChoiceMenuFragment : BaseFragment<FragmentHistoryRegisterCh
     // TODO 테스트 용도이므로 나중에 지워야함
     private fun insertMockData(): ArrayList<Menu> {
         return arrayListOf(
-            Menu(0, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(0, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(0, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(0, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(0, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(0, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(0, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(0, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(0, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false),
-            Menu(0, "아이스 아메리카노", "R.drawable.coffee_sample", "스타벅스", 100, false)
+            Menu(0,"아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample"),
+            Menu(0, "아이스 아메리카노","스타벅스", 100, "R.drawable.coffee_sample")
         )
+
     }
 }

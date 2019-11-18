@@ -156,6 +156,12 @@ class MainHomeViewModel(private val mSharedPref: SharedPreferences,
     }
 
     private fun mockRecentDrinkNotFound(): Menu {
-        return Menu(Constants.COFFEE_NOT_FOUND, "커피 그림을 눌러보세요", "R.drawable.coffee_sample", "커피가 텅텅", 0, false)
+        return Menu(
+            Constants.COFFEE_NOT_FOUND,
+            "커피가 텅텅",
+            "커피 그림을 눌러보세요",
+            0,
+            "R.drawable.coffee_sample"
+        )
     }
 }

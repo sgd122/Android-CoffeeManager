@@ -3,6 +3,7 @@
  */
 package com.dnd.killcaffeine.history
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.base.BaseViewModel
@@ -24,13 +25,19 @@ class HistoryTodayViewModel(private val mRepository: CoffeeRepository) : BaseVie
     private val _deleteHistoryLiveData = MutableLiveData<Menu>()
     val deleteHistoryLiveData: LiveData<Menu> get() = _deleteHistoryLiveData
 
+    private val _deleteAllHistoryLiveData = SingleLiveEvent<Any>()
+    val deleteAllHistoryLiveData: LiveData<Any> get() = _deleteAllHistoryLiveData
+
     fun loadHistoryListFromRoomDatabase(){
+        startLoadingIndicator()
         addDisposable(mRepository.getAllMenu()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->
+                stopLoadingIndicator()
                 _historyListLiveData.postValue(list as ArrayList<Menu>)
             }, {
+                stopLoadingIndicator()
                 _historyListLiveData.postValue(ArrayList())
             }))
     }
@@ -74,5 +81,20 @@ class HistoryTodayViewModel(private val mRepository: CoffeeRepository) : BaseVie
             }, {
                 showSnackbar(it.message ?: "히스토리 삭제에 실패하였습니다.")
             }))
+    }
+
+    fun deleteAllHistory() {
+        startLoadingIndicator()
+        addDisposable(mRepository.deleteAllMenu()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                stopLoadingIndicator()
+                _deleteAllHistoryLiveData.call()
+            }, {
+                stopLoadingIndicator()
+                showSnackbar("히스토리 비우기 실패 했습니다")
+            })
+        )
     }
 }

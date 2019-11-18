@@ -59,6 +59,11 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
         mViewModel.deleteHistoryLiveData.observe(this, Observer { history ->
             mHistoryTodayAdapter.deleteHistory(history)
         })
+
+        // 비우기 성공했을 때
+        mViewModel.deleteAllHistoryLiveData.observe(this, Observer {
+            mHistoryTodayAdapter.setHistoryList(arrayListOf())
+        })
     }
 
     override fun initViewFinal() {
@@ -70,6 +75,11 @@ class HistoryTodayActivity : BaseActivity<ActivityHistoryTodayBinding, HistoryTo
 
         activity_today_history_floating_action_button.setOnClickListener {
             startActivityForResult(Intent(applicationContext, HistoryTodayRegisterActivity::class.java), RequestCode.HISTORY_REGISTER_REQUEST_CODE)
+        }
+
+        // 비우기
+        activity_history_today_delete_all_button.setOnClickListener {
+            mViewModel.deleteAllHistory()
         }
     }
 

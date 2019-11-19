@@ -151,7 +151,24 @@ object MenuCollection {
     )
 
     fun hollys(): ArrayList<Menu> = arrayListOf(
-        Menu("할리스", HOLLYS, 245, R.drawable.starbucks_nitro_chocolat)
+        Menu("에스프레소", HOLLYS, 76, R.drawable.hollys_espresso),
+        Menu("에스프레소 마끼야또", HOLLYS, 76, R.drawable.hollys_espresso_macchiato),
+        Menu("에스프레소 콘 파나", HOLLYS, 76, R.drawable.hollys_espresso_con_panna),
+        Menu("아메리카노", HOLLYS, 152, R.drawable.hollys_americano),
+        Menu("카페 라떼", HOLLYS, 152, R.drawable.hollys_caffe_latte),
+        Menu("카푸치노", HOLLYS, 152, R.drawable.hollys_cappuccino),
+        Menu("카페 모카", HOLLYS, 160, R.drawable.hollys_caffe_mocha),
+        Menu("카라멜 마끼야또", HOLLYS, 152, R.drawable.hollys_caramel_macchiato),
+        Menu("바닐라 딜라이트", HOLLYS, 93, R.drawable.hollys_vanilla_delight),
+        Menu("리얼 벨지안 카페모", HOLLYS, 193, R.drawable.hollys_real_belgian_mocha),
+        Menu("아포가토", HOLLYS, 129, R.drawable.hollys_affogato),
+        Menu("콜드 브루", HOLLYS, 148, R.drawable.hollys_cold_brew),
+        Menu("콜드 브루 라떼", HOLLYS, 148, R.drawable.hollys_cold_brew_latte),
+
+        // 여기서부터
+        Menu("리얼 벨지안 카페모", HOLLYS, 193, R.drawable.hollys_real_belgian_mocha),
+        Menu("아포가토", HOLLYS, 129, R.drawable.hollys_affogato)
+
     )
 
     fun angelinus(): ArrayList<Menu> = arrayListOf(

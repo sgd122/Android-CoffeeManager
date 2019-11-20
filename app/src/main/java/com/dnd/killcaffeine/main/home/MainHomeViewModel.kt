@@ -4,12 +4,14 @@
 package com.dnd.killcaffeine.main.home
 
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dnd.killcaffeine.Constants
 import com.dnd.killcaffeine.R
 import com.dnd.killcaffeine.SharedPreferenceKey
 import com.dnd.killcaffeine.base.BaseViewModel
+import com.dnd.killcaffeine.history.today.register.MenuCollection
 import com.dnd.killcaffeine.model.CoffeeRepository
 import com.dnd.killcaffeine.model.data.Personal
 import com.dnd.killcaffeine.model.data.result.DecaffeineResult
@@ -24,8 +26,8 @@ import io.reactivex.schedulers.Schedulers
 class MainHomeViewModel(private val mSharedPref: SharedPreferences,
                         private val mCoffeeRepository: CoffeeRepository) : BaseViewModel() {
 
-    private val _decaffeineMenuLiveData = MutableLiveData<DecaffeineResult>()
-    val decaffeineMenuLiveData: LiveData<DecaffeineResult> get() = _decaffeineMenuLiveData
+    private val _decaffeineLiveData = MutableLiveData<List<Menu>?>()
+    val decaffeineLiveData: LiveData<List<Menu>?> get() = _decaffeineLiveData
 
     private val _refreshedHistoryLiveData = MutableLiveData<ArrayList<Menu>>()
     val refreshedHistoryLiveData: LiveData<ArrayList<Menu>> get() = _refreshedHistoryLiveData
@@ -39,25 +41,28 @@ class MainHomeViewModel(private val mSharedPref: SharedPreferences,
     private val _recentRegisterLiveData = MutableLiveData<Boolean>()
     val recentRegisterLiveData: LiveData<Boolean> get() = _recentRegisterLiveData
 
-    private val _savedPersonalLiveData = MutableLiveData<Personal?>()
-    val savedPersonalLiveData: LiveData<Personal?> get() = _savedPersonalLiveData
-
     private val _personalLiveDataValid = MutableLiveData<Boolean>()
     val personalLiveDataValid: LiveData<Boolean> get() = _personalLiveDataValid
 
-    fun getDecaffeineMenuList(){
+
+    fun recommendDecaffeineMenus(){
         startLoadingIndicator()
-        addDisposable(mCoffeeRepository.getDecaffeineMenuList()
+        addDisposable(Observable.just((MenuCollection.starBucks() + MenuCollection.hollys() + MenuCollection.angelinus() + MenuCollection.ediya())
+            .shuffled().filter { it.caffeine <= 10 }.take(30))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
+            .subscribe({ list ->
                 stopLoadingIndicator()
-                _decaffeineMenuLiveData.postValue(result)
+                _decaffeineLiveData.postValue(list)
+
+                Log.d("디카페인", list.toString())
 
             }, {
                 stopLoadingIndicator()
-                showSnackbar("디카페인 정보를 불러오는데 실패했습니다.")
-            }))
+                _decaffeineLiveData.postValue(null)
+                Log.d("MainHomeViewModel", it.message ?: "")
+            })
+        )
     }
 
     fun refreshHistoryFromRoomDatabase(){

@@ -49,7 +49,6 @@ class TodayRecommendDrinkActivity : BaseActivity<ActivityTodayRecommendDrinkBind
         activity_today_recommend_drink_recycler_view.apply {
             layoutManager = GridLayoutManager(this@TodayRecommendDrinkActivity, RECYCLER_VIEW_SPAN_COUNT)
             adapter = mDecaffeineRecyclerViewAdapter
-            addItemDecoration(SpacesItemDecoration(32))
         }
     }
 

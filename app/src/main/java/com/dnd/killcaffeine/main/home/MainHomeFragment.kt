@@ -63,9 +63,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
         fragment_home_today_decaffeine_recycler_view.run {
             layoutManager = LinearLayoutManager(activity?.applicationContext, RecyclerView.HORIZONTAL, false)
-            adapter = mDecaffeineRecyclerViewAdapter.apply {
-                setDecaffeineArrayList(insertMockData())
-            }
+            adapter = mDecaffeineRecyclerViewAdapter
         }
 
         // 최근 마신 음
@@ -76,10 +74,14 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     }
 
     override fun initDataBinding() {
-        mViewModel.decaffeineMenuLiveData.observe(this, Observer { result ->
-            result?.let {
-                mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(it.list)
-                mDecaffeineArrayList.addAll(it.list)
+        mViewModel.decaffeineLiveData.observe(this, Observer { list ->
+            list?.let {
+                mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(it.shuffled().take(10)) // 홈화면에서는 10개만.. 더보기에서는 30개 전부
+                mDecaffeineArrayList.addAll(it)
+
+            } ?: insertMockData().let {
+                mDecaffeineRecyclerViewAdapter.setDecaffeineArrayList(it)
+                mDecaffeineArrayList.addAll(it)
             }
         })
 
@@ -132,6 +134,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
     override fun initViewFinal() {
 
         mViewModel.getPersonalRecommendCaffeine()
+        mViewModel.recommendDecaffeineMenus()
 
         fragment_home_frame_layout.setOnClickListener {
 

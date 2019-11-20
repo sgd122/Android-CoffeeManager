@@ -31,16 +31,16 @@ class DecaffeineAdpater : ListAdapter<Menu, DecaffeineAdpater.DecaffeineRecycler
     }
 
     fun setDecaffeineArrayList(list : List<Menu>){
-        /*mDecaffeineArrayList.clear()
+        mDecaffeineArrayList.clear()
         mDecaffeineArrayList.addAll(list)
-        notifyDataSetChanged()*/
+        notifyDataSetChanged()
 
         submitList(list)
     }
 
     fun addDecaffeineArrayList(menu : Menu){
-        /*mDecaffeineArrayList.add(menu)
-        notifyDataSetChanged()*/
+        mDecaffeineArrayList.add(menu)
+        notifyDataSetChanged()
 
         submitList(currentList.apply {
             add(menu)
@@ -58,7 +58,7 @@ class DecaffeineAdpater : ListAdapter<Menu, DecaffeineAdpater.DecaffeineRecycler
         private val caffeineIntake: TextView = itemView.findViewById(R.id.list_item_coffee_caffeine_content)
 
         fun bindTo(menu: Menu){
-            coffeeImageView.load("$baseUrl${menu.menuImgUrl}") {
+            coffeeImageView.load(menu.menuImgUrl) {
                 crossfade(true)
                 placeholder(R.drawable.background_radius_10dp_white_box)
                 error(R.drawable.background_radius_10dp_white_box)

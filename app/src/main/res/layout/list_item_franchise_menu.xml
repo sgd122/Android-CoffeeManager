@@ -9,8 +9,8 @@
     android:clipToPadding="false">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_margin="6dp"
         app:cardBackgroundColor="@color/background_white_2"
         app:cardCornerRadius="10dp"
@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/list_item_franchise_menu_image_view"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/coffee_sample"/>
 

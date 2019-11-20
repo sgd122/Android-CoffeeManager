@@ -119,7 +119,10 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
         mViewModel.personalLiveDataValid.observe(this, Observer { isValid ->
             fragment_home_personal_not_set.visibility = when(isValid) {
-                true -> View.GONE // 저장되어 있다면, 안보임
+                true -> {
+                    setupBottleContent(MainActivity.savedCaffeineIntake, MainActivity.savedPersonalRecommend)
+                    View.GONE
+                } // 저장되어 있다면, 안보임
                 false -> View.VISIBLE
             }
         })
@@ -150,7 +153,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         mViewModel.checkPersonalCaffeineSaved() // 홈 화면 되돌아올 때 마다 마이카페인이 저장되어 있는 지 확인
 
         mViewModel.refreshHistoryFromRoomDatabase()
-        setupBottleContent(MainActivity.savedCaffeineIntake, MainActivity.savedPersonalRecommend)
+        //setupBottleContent(MainActivity.savedCaffeineIntake, MainActivity.savedPersonalRecommend)
         registerCommentReceiver()
         startCommentService()
     }

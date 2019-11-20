@@ -54,6 +54,7 @@
                     app:layout_constraintLeft_toRightOf="@id/fragment_statistics_title_text_view"/>
 
                 <Button
+                    android:id="@+id/fragment_statistics_show_analysis"
                     android:layout_width="80dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="16dp"
@@ -202,7 +203,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/image_statistic_graph_weekly"
-                    android:scaleType="fitCenter"/>
+                    android:scaleType="fitXY"/>
 
             </androidx.cardview.widget.CardView>
 

@@ -25,5 +25,12 @@ class MainStatisticsFragment : BaseFragment<FragmentStatisticsBinding, MainStati
 
     override fun initViewFinal() {
 
+        // 분석 보기
+        fragment_statistics_show_analysis.setOnClickListener {
+            activity?.applicationContext?.let {ctx ->
+                showNotImplementToast(ctx)
+            }
+        }
+
     }
 }

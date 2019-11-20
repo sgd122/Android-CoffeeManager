@@ -56,7 +56,6 @@
         android:text="Iced 토피넛라떼"
         android:textSize="14sp"
         android:textColor="@color/color_text_grayish_brown"
-        android:autoSizeTextType="uniform"
         android:fontFamily="@font/spoqa_han_sans_bold"
         android:includeFontPadding="false"/>
 

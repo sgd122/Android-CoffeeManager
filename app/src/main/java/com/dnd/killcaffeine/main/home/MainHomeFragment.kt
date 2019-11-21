@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,6 +48,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
 
     private var mTotalCaffeineIntake: Int = 0
     private var mPersonalRecommendCaffeine = 0
+
+    private var mMyCaffeineFlag: Boolean = false
 
     override fun initViewStart() {
 
@@ -123,6 +126,7 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
             fragment_home_personal_not_set.visibility = when(isValid) {
                 true -> {
                     setupBottleContent(MainActivity.savedCaffeineIntake, MainActivity.savedPersonalRecommend)
+                    mMyCaffeineFlag = true
                     View.GONE
                 } // 저장되어 있다면, 안보임
                 false -> View.VISIBLE
@@ -234,9 +238,22 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         )
         Logger.d("퍼센트 : $percentage")
         when {
-            percentage <= 30.0 -> fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_normal))
-            percentage <= 80.0 -> fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_middle))
-            else -> fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_exceed))
+            (!mMyCaffeineFlag) -> {
+                fragment_home_coffee_introduce.text = resources.getString(R.string.fragment_home_content_none)
+                fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_normal))
+            }
+            (mMyCaffeineFlag && percentage <= 30.0) -> {
+                fragment_home_coffee_introduce.text = resources.getString(R.string.fragment_home_content_low)
+                fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_normal))
+            }
+            (mMyCaffeineFlag && percentage <= 80.0) -> {
+                fragment_home_coffee_introduce.text = resources.getString(R.string.fragment_home_content_middle)
+                fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_middle))
+            }
+            else -> {
+                fragment_home_coffee_introduce.text = resources.getString(R.string.fragment_home_content_high)
+                fragment_home_coffee_bottle_content.setImageDrawable(activity?.getDrawable(R.drawable.background_bottle_content_exceed))
+            }
         }
     }
 

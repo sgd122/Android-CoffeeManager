@@ -22,8 +22,6 @@ class MainSettingsFragment : BaseFragment<FragmentSettingsBinding, MainSettingsV
     override val resourceId: Int
         get() = R.layout.fragment_settings
 
-    private var mAppVersionClickCount = 0
-
     override fun initViewStart() {
 
         getFragmentBinding().setVariable(BR.fragment, this)
@@ -49,12 +47,7 @@ class MainSettingsFragment : BaseFragment<FragmentSettingsBinding, MainSettingsV
 
                 R.id.fragment_settings_terms_button -> startActivity(Intent(activity?.applicationContext, MainSettingsTermsActivity::class.java))
 
-                R.id.fragment_settings_version_button -> {
-                    mAppVersionClickCount++
-                    if(mAppVersionClickCount % 3 == 0) {
-                        Toast.makeText(activity?.applicationContext, "클릭", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                R.id.fragment_settings_version_button -> {}
 
                 else -> {}
             }

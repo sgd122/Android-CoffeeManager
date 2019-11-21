@@ -7,6 +7,12 @@
 
     <string name="fragment_history_today_register_search_text">검색</string>
 
+    <!-- 음료량에 따라서 출력 되는 메세지 -->
+    <string name="fragment_home_content_none">오늘 마신 음료를\n기록하면 카페인 양을\n확인할 수 있어요!</string>
+    <string name="fragment_home_content_low">잘 하고 있어요!\n카페인 중독에서 벗어나\n건강을 되찾으세요</string>
+    <string name="fragment_home_content_middle">이정도가 적당해요!\n오늘은 여기까지 마시고\n건강을 지키세요</string>
+    <string name="fragment_home_content_high">더 이상은 위험해요!\n카페인 부작용이 건강을\n위협하고 있어요</string>
+
     <string name="fragment_statistics_title">통계</string>
     <string name="fragment_statistics_not_implemented">준비 중인 기능입니다</string>
     <string name="fragment_statistics_show_analysis_button_text">분석보기</string>

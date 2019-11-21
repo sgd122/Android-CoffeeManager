@@ -159,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginStart="26dp"
-                        android:text="오늘 마신 음료를\n기록하면 카페인 양을\n확인할 수 있어요! "
+                        android:text="오늘 마신 음료를\n기록하면 카페인 양을\n확인할 수 있어요!"
                         android:textSize="20sp"
                         android:textColor="@color/color_text_white"
                         android:fontFamily="@font/spoqa_han_sans_bold"

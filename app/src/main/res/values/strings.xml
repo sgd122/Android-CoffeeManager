@@ -5,6 +5,7 @@
     <string name="developer1_name">Developer : Lee Oh Hyoung</string>
     <string name="developer2_name">Developer : Won Jong Woon</string>
 
+    <string name="fragment_main_saved_my_caffeine_info_not_found">(마이카페인을 설정 해보세요)</string>
     <string name="fragment_history_today_register_search_text">검색</string>
 
     <!-- 음료량에 따라서 출력 되는 메세지 -->

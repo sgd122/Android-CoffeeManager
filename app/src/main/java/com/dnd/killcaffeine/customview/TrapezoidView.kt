@@ -2,7 +2,6 @@ package com.dnd.killcaffeine.customview
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
@@ -10,7 +9,6 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.PathShape
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.dnd.killcaffeine.R
 
 /*

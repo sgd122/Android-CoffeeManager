@@ -2,6 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/background_color_personal_save_button"/>
+    <solid android:color="#FFA36D"/>
     <corners android:radius="10dp"/>
 </shape>

@@ -153,8 +153,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
 
         mViewModel.checkPersonalCaffeineSaved() // 홈 화면 되돌아올 때 마다 마이카페인이 저장되어 있는 지 확인
 
@@ -164,8 +164,8 @@ class MainHomeFragment : BaseFragment<FragmentHomeBinding, MainHomeViewModel>() 
         startCommentService()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
 
         unregisterCommentReceiver()
         stopCommentService()
